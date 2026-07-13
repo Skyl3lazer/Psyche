@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <NeedDef>
+    <defName>Psyche_Core</defName>
+    <needClass>Psyche.Need_Psyche</needClass>
+    <label>psyche</label>
+    <description>A measure of long-term mental resilience. The lower it falls, the more easily this person breaks under stress.</description>
+    <minIntelligence>Humanlike</minIntelligence>
+    <developmentalStageFilter>Child, Adult</developmentalStageFilter>
+    <major>true</major>
+    <baseLevel>1</baseLevel>
+    <listPriority>10</listPriority>
+    <showUnitTicks>false</showUnitTicks>
+  </NeedDef>
+
+</Defs>

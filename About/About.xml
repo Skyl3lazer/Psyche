@@ -6,9 +6,8 @@
   <supportedVersions>
     <li>1.6</li>
   </supportedVersions>
-  <description>One-line summary of what Psyche does.</description>
+  <description>Expand the way your colonists handle long term emotions through psyche scars and moments of inspiring clarity!</description>
   <modVersion>1.0</modVersion>
-  <!-- Set once published on the Workshop -->
   <url></url>
   <modDependencies>
     <li>
