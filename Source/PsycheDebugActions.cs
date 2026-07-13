@@ -32,8 +32,9 @@ namespace Psyche
                 return;
             }
 
-            float modelMbt = Mathf.Clamp(need.InnateMbt + need.ThresholdOffset, 0.01f, 0.5f);
-            float statMbt = p.GetStatValue(StatDefOf.MentalBreakThreshold);
+            StatDef stat = StatDefOf.MentalBreakThreshold;
+            float modelMbt = Mathf.Clamp(need.InnateMbt + need.ThresholdOffset, stat.minValue, stat.maxValue);
+            float statMbt = p.GetStatValue(stat);
             Log.Message(string.Format(
                 "{0} psyche: M0={1:0.###} baseMax={2:0.#} cur={3:P0} max={4:P0} offset={5:+0.###;-0.###;0} modelMBT={6:0.###} statMBT={7:0.###}",
                 p.LabelShort, need.InnateMbt, need.BaseMaxHealth, need.CurLevel, need.MaxLevel, need.ThresholdOffset, modelMbt, statMbt));
