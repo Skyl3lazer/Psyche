@@ -4,7 +4,7 @@ One-line summary of what Psyche does.
 
 [h2]Dependencies[/h2]
 [list]
-[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077]Harmony[/url]
+[*]None
 [/list]
 
 [h2]Supported versions[/h2]

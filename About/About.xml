@@ -10,7 +10,6 @@
   <modVersion>1.0</modVersion>
   <!-- Set once published on the Workshop -->
   <url></url>
-  <!-- Remove the Harmony dependency (and the loadAfter line, and Source/) for an XML-only mod -->
   <modDependencies>
     <li>
       <packageId>brrainz.harmony</packageId>

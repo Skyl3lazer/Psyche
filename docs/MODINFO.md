@@ -1,6 +1,6 @@
 # Psyche
 
-The starting-point brief for the mod. Fill this out before writing code - it is the
+The starting-point brief for the mod. Fill this out before building - it is the
 single source of truth the rest of the work builds from. Delete the prompts as you go.
 
 ## One-liner
@@ -22,10 +22,18 @@ what changes in their game. Keep it concrete.
 - In scope:
 - Out of scope (at least for v1.0):
 
+## Modules needed
+
+Which parts of the template does this mod use? (Add with `render.py <dir> --add <module>`.)
+
+- [ ] xml - Defs / Patches
+- [ ] csharp - C# assembly + Harmony
+- [ ] localization - Languages
+- [ ] textures - art
+
 ## Dependencies
 
-- Harmony (remove if this is an XML-only mod)
-- (List any framework or content mods this builds on.)
+- (List any framework or content mods this builds on. The C# module adds Harmony.)
 
 ## Technical approach
 
@@ -43,6 +51,6 @@ what changes in their game. Keep it concrete.
 - [ ] Fill out this brief
 - [ ] Fill in About/About.xml (packageId, description, dependencies)
 - [ ] Replace About/Preview.png (640x360) and About/ModIcon.png (64x64)
-- [ ] First build: `dotnet build Source/Psyche.csproj -c Release`
+- [ ] Add the modules you need (see above)
 - [ ] Create the GitHub repo and push
 - [ ] Publish to the Workshop (RimWorld in-game uploader writes About/PublishedFileId.txt)

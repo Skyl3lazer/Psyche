@@ -4,12 +4,14 @@ One-line summary of what Psyche does.
 
 ## Examples
 
-<!-- Drop screenshots in docs/ and reference them here, e.g. -->
+<!-- docs/ is gitignored, so a screenshot there will not show on GitHub unless you
+     force-add it (git add -f docs/Example1.png) or keep it in a tracked folder. -->
 <!-- ![Example 1](docs/Example1.png) -->
 
 ## Dependencies
 
-- [Harmony](https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077)
+<!-- List mods this depends on, e.g. [Harmony](https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077). The C# module adds Harmony. -->
+- (none)
 
 ## Supported versions
 
