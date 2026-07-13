@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using RimWorld;
-using UnityEngine;
 using Verse;
 
 namespace Psyche
@@ -8,8 +8,6 @@ namespace Psyche
     {
         private float innateMbt;
         private bool innateCached;
-
-        private const float RegenPerDay = 0.6f;
 
         public Need_Psyche(Pawn pawn)
             : base(pawn)
@@ -22,7 +20,24 @@ namespace Psyche
 
         public float BaseMaxHealth => (1f - innateMbt) * PsycheUtility.HealthScale;
 
-        public float EffectiveMaxHealth => BaseMaxHealth;
+        public float EffectiveMaxHealth
+        {
+            get
+            {
+                float sum = BaseMaxHealth;
+                List<Hediff> hediffs = pawn.health.hediffSet.hediffs;
+                for (int i = 0; i < hediffs.Count; i++)
+                {
+                    PsycheHealthOffsetExtension? ext = hediffs[i].def.GetModExtension<PsycheHealthOffsetExtension>();
+                    if (ext != null)
+                    {
+                        sum += hediffs[i].Severity * ext.maxHealthPerSeverity;
+                    }
+                }
+
+                return sum;
+            }
+        }
 
         public float ThresholdOffset => innateCached ? (1f - CurLevel) * (1f - innateMbt) : 0f;
 
@@ -35,18 +50,33 @@ namespace Psyche
             }
         }
 
+        public void RecomputeFromHediffs()
+        {
+            float baseMax = BaseMaxHealth;
+            if (baseMax <= 0f)
+            {
+                CurLevel = 1f;
+                return;
+            }
+
+            CurLevel = (EffectiveMaxHealth - SumWoundSeverities()) / baseMax;
+        }
+
         public override void SetInitialLevel()
         {
-            CurLevel = 1f;
             CacheInnate();
+            CurLevel = MaxLevel;
         }
 
         public override void NeedInterval()
         {
-            if (CurLevel < MaxLevel)
-            {
-                CurLevel = Mathf.Min(MaxLevel, CurLevel + (RegenPerDay * 150f / 60000f));
-            }
+            RecomputeFromHediffs();
+        }
+
+        public override string GetTipString()
+        {
+            return (LabelCap + ": " + CurLevel.ToStringPercent() + " (max " + MaxLevel.ToStringPercent() + ")")
+                .Colorize(ColoredText.TipSectionTitleColor) + "\n" + def.description;
         }
 
         public override void ExposeData()
@@ -54,6 +84,21 @@ namespace Psyche
             base.ExposeData();
             Scribe_Values.Look(ref innateMbt, "innateMbt", 0f);
             Scribe_Values.Look(ref innateCached, "innateCached", false);
+        }
+
+        private float SumWoundSeverities()
+        {
+            float sum = 0f;
+            List<Hediff> hediffs = pawn.health.hediffSet.hediffs;
+            for (int i = 0; i < hediffs.Count; i++)
+            {
+                if (hediffs[i].def == PsycheDefOf.Psyche_Wound)
+                {
+                    sum += hediffs[i].Severity;
+                }
+            }
+
+            return sum;
         }
 
         private void CacheInnate()

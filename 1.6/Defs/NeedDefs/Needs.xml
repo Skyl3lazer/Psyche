@@ -12,6 +12,7 @@
     <baseLevel>1</baseLevel>
     <listPriority>10</listPriority>
     <showUnitTicks>false</showUnitTicks>
+    <scaleBar>true</scaleBar>
   </NeedDef>
 
 </Defs>

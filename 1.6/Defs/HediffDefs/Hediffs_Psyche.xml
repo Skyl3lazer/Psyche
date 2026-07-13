@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <HediffDef>
+    <defName>Psyche_Wound</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <label>psyche wound</label>
+    <description>Fresh mental trauma that is still healing. While it lasts it drains psyche health; once healed it may leave a permanent scar.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheWound" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <label>psyche scar</label>
+    <description>A permanent mark left by trauma that never fully healed. It lowers the maximum psyche health this person can hold.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheScar" />
+    </comps>
+  </HediffDef>
+
+</Defs>

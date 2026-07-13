@@ -36,4 +36,48 @@ namespace Psyche
             }
         }
     }
+
+    [HarmonyPatch(typeof(MemoryThoughtHandler), nameof(MemoryThoughtHandler.TryGainMemory), new[] { typeof(Thought_Memory), typeof(Pawn) })]
+    public static class Patch_TryGainMemory
+    {
+        public static void Postfix(MemoryThoughtHandler __instance, Thought_Memory newThought)
+        {
+            Pawn pawn = __instance.pawn;
+            if (pawn == null || !PsycheUtility.IsTracked(pawn))
+            {
+                return;
+            }
+
+            if (!__instance.Memories.Contains(newThought))
+            {
+                return;
+            }
+
+            PsycheThoughtExtension? ext = newThought.def.GetModExtension<PsycheThoughtExtension>();
+            if (ext != null && ext.exemptFromWounds)
+            {
+                return;
+            }
+
+            float mood = newThought.MoodOffset();
+            if (mood >= 0f)
+            {
+                return;
+            }
+
+            bool qualifies = -mood >= PsycheTuning.QualifyingMoodThreshold
+                || newThought.def.durationDays >= PsycheTuning.QualifyingDurationDays;
+            if (!qualifies)
+            {
+                return;
+            }
+
+            if (pawn.needs?.TryGetNeed<Need_Psyche>() == null)
+            {
+                return;
+            }
+
+            PsycheWounds.Apply(pawn, -mood * PsycheTuning.WoundScale, newThought.def.durationDays);
+        }
+    }
 }
