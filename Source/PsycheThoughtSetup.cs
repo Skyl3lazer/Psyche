@@ -14,13 +14,14 @@ namespace Psyche
                 if (ShouldConvert(def))
                 {
                     def.thoughtClass = typeof(Thought_Psyche);
+                    def.stackLimit = Mathf.Max(def.stackLimit, PsycheTuning.ConvertedStackLimit);
                 }
             }
         }
 
         private static bool ShouldConvert(ThoughtDef def)
         {
-            if (def.thoughtClass != typeof(Thought_Memory))
+            if (!def.IsMemory || def.ThoughtClass != typeof(Thought_Memory))
             {
                 return false;
             }

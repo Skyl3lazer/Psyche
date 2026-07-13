@@ -5,6 +5,7 @@ namespace Psyche
         public const float WoundScale = 1f;
         public const float QualifyingMoodThreshold = 8f;
         public const float QualifyingDurationDays = 5f;
+        public const int ConvertedStackLimit = 5;
 
         public const float ScarChanceDivisor = 40f;
         public const float MitigationStrength = 0.7f;

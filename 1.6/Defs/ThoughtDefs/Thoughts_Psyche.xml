@@ -3,7 +3,6 @@
 
   <ThoughtDef>
     <defName>Psyche_TestThought</defName>
-    <thoughtClass>Psyche.Thought_Psyche</thoughtClass>
     <durationDays>1</durationDays>
     <stages>
       <li>
