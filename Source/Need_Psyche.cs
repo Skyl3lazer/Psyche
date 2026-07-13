@@ -50,7 +50,7 @@ namespace Psyche
             }
         }
 
-        public void RecomputeFromHediffs()
+        public void Recompute()
         {
             float baseMax = BaseMaxHealth;
             if (baseMax <= 0f)
@@ -59,7 +59,7 @@ namespace Psyche
                 return;
             }
 
-            CurLevel = (EffectiveMaxHealth - SumWoundSeverities()) / baseMax;
+            CurLevel = (EffectiveMaxHealth - SumPsycheThoughtDamage()) / baseMax;
         }
 
         public override void SetInitialLevel()
@@ -70,7 +70,7 @@ namespace Psyche
 
         public override void NeedInterval()
         {
-            RecomputeFromHediffs();
+            Recompute();
         }
 
         public override string GetTipString()
@@ -86,15 +86,20 @@ namespace Psyche
             Scribe_Values.Look(ref innateCached, "innateCached", false);
         }
 
-        private float SumWoundSeverities()
+        private float SumPsycheThoughtDamage()
         {
-            float sum = 0f;
-            List<Hediff> hediffs = pawn.health.hediffSet.hediffs;
-            for (int i = 0; i < hediffs.Count; i++)
+            List<Thought_Memory>? memories = pawn.needs?.mood?.thoughts?.memories?.Memories;
+            if (memories == null)
             {
-                if (hediffs[i].def == PsycheDefOf.Psyche_Wound)
+                return 0f;
+            }
+
+            float sum = 0f;
+            for (int i = 0; i < memories.Count; i++)
+            {
+                if (memories[i] is Thought_Psyche pt)
                 {
-                    sum += hediffs[i].Severity;
+                    sum += pt.CurrentPsycheDamage;
                 }
             }
 

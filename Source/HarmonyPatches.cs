@@ -42,42 +42,26 @@ namespace Psyche
     {
         public static void Postfix(MemoryThoughtHandler __instance, Thought_Memory newThought)
         {
-            Pawn pawn = __instance.pawn;
-            if (pawn == null || !PsycheUtility.IsTracked(pawn))
+            if (!(newThought is Thought_Psyche pt) || !__instance.Memories.Contains(newThought))
             {
                 return;
             }
 
-            if (!__instance.Memories.Contains(newThought))
-            {
-                return;
-            }
+            pt.EnsureCaptured();
+            __instance.pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+        }
+    }
 
-            PsycheThoughtExtension? ext = newThought.def.GetModExtension<PsycheThoughtExtension>();
-            if (ext != null && ext.exemptFromWounds)
+    [HarmonyPatch(typeof(MemoryThoughtHandler), nameof(MemoryThoughtHandler.RemoveMemory))]
+    public static class Patch_RemoveMemory
+    {
+        public static void Postfix(MemoryThoughtHandler __instance, Thought_Memory th)
+        {
+            if (th is Thought_Psyche pt && pt.ShouldDiscard)
             {
-                return;
+                pt.RollScarOnExpiry();
+                __instance.pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
             }
-
-            float mood = newThought.MoodOffset();
-            if (mood >= 0f)
-            {
-                return;
-            }
-
-            bool qualifies = -mood >= PsycheTuning.QualifyingMoodThreshold
-                || newThought.def.durationDays >= PsycheTuning.QualifyingDurationDays;
-            if (!qualifies)
-            {
-                return;
-            }
-
-            if (pawn.needs?.TryGetNeed<Need_Psyche>() == null)
-            {
-                return;
-            }
-
-            PsycheWounds.Apply(pawn, -mood * PsycheTuning.WoundScale, newThought.def.durationDays);
         }
     }
 }

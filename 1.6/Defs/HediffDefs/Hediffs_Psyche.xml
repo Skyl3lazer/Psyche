@@ -2,19 +2,6 @@
 <Defs>
 
   <HediffDef>
-    <defName>Psyche_Wound</defName>
-    <hediffClass>HediffWithComps</hediffClass>
-    <label>psyche wound</label>
-    <description>Fresh mental trauma that is still healing. While it lasts it drains psyche health; once healed it may leave a permanent scar.</description>
-    <isBad>true</isBad>
-    <maxSeverity>1000</maxSeverity>
-    <scenarioCanAdd>false</scenarioCanAdd>
-    <comps>
-      <li Class="Psyche.HediffCompProperties_PsycheWound" />
-    </comps>
-  </HediffDef>
-
-  <HediffDef>
     <defName>Psyche_Scar</defName>
     <hediffClass>HediffWithComps</hediffClass>
     <label>psyche scar</label>
