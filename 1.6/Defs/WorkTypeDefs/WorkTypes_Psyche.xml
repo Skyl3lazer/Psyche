@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <WorkTypeDef>
+    <defName>Psyche_Care</defName>
+    <labelShort>counsel</labelShort>
+    <pawnLabel>counselor</pawnLabel>
+    <gerundLabel>counseling</gerundLabel>
+    <description>Provide psyche therapy, sitting with colonists who have mental scars to help mend them over time.</description>
+    <verb>counsel</verb>
+    <naturalPriority>190</naturalPriority>
+    <relevantSkills>
+      <li>Social</li>
+    </relevantSkills>
+    <workTags>
+      <li>Social</li>
+      <li>Caring</li>
+    </workTags>
+  </WorkTypeDef>
+
+</Defs>

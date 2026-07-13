@@ -14,5 +14,11 @@ namespace Psyche
         public const float StrongMitigationThreshold = 0.75f;
         public const float ScarShrinkChance = 0.5f;
         public const float ScarShrinkFactor = 0.5f;
+
+        public const float RepairPerSessionBase = 2f;
+        public const float RepairPerSocialLevel = 0.5f;
+        public const int TherapySessionTicks = 600;
+        public const int SeekWaitTicks = 1500;
+        public const int CounselingCooldownTicks = 60000;
     }
 }

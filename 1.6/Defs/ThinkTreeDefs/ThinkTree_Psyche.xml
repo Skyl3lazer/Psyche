@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThinkTreeDef>
+    <defName>Psyche_SeekTherapyTree</defName>
+    <insertTag>Humanlike_PostMain</insertTag>
+    <insertPriority>100</insertPriority>
+    <thinkRoot Class="Psyche.JobGiver_SeekPsycheTherapy" />
+  </ThinkTreeDef>
+
+</Defs>

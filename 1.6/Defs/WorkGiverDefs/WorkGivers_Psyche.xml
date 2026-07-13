@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <WorkGiverDef>
+    <defName>Psyche_DoTherapy</defName>
+    <label>counsel scarred colonists</label>
+    <giverClass>Psyche.WorkGiver_PsycheTherapy</giverClass>
+    <workType>Psyche_Care</workType>
+    <verb>counsel</verb>
+    <gerund>counseling</gerund>
+    <priorityInType>100</priorityInType>
+    <requiredCapacities>
+      <li>Talking</li>
+      <li>Hearing</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+
+</Defs>

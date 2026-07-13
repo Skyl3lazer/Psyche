@@ -8,10 +8,19 @@ namespace Psyche
     {
         private float innateMbt;
         private bool innateCached;
+        private int lastCounseledTick = -1;
 
         public Need_Psyche(Pawn pawn)
             : base(pawn)
         {
+        }
+
+        public bool CanReceiveCounseling =>
+            lastCounseledTick < 0 || Find.TickManager.TicksGame - lastCounseledTick >= PsycheTuning.CounselingCooldownTicks;
+
+        public void NotifyCounseled()
+        {
+            lastCounseledTick = Find.TickManager.TicksGame;
         }
 
         public float InnateMbt => innateMbt;
@@ -84,6 +93,7 @@ namespace Psyche
             base.ExposeData();
             Scribe_Values.Look(ref innateMbt, "innateMbt", 0f);
             Scribe_Values.Look(ref innateCached, "innateCached", false);
+            Scribe_Values.Look(ref lastCounseledTick, "lastCounseledTick", -1);
         }
 
         private float SumPsycheThoughtDamage()

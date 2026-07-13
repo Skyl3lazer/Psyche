@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <JobDef>
+    <defName>Psyche_SeekTherapy</defName>
+    <driverClass>Psyche.JobDriver_SeekTherapy</driverClass>
+    <reportString>waiting for counseling.</reportString>
+    <casualInterruptible>true</casualInterruptible>
+    <suspendable>true</suspendable>
+  </JobDef>
+
+  <JobDef>
+    <defName>Psyche_AdministerTherapy</defName>
+    <driverClass>Psyche.JobDriver_AdministerTherapy</driverClass>
+    <reportString>counseling TargetA.</reportString>
+  </JobDef>
+
+</Defs>
