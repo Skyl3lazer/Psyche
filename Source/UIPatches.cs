@@ -84,7 +84,9 @@ namespace Psyche
                 string body = contemplating
                     ? "The wound has faded, but has not fully settled - it may still leave a scar before it passes."
                     : "Psyche damage: -" + damage.ToString("##0");
-                string tip = leading.LabelCap.AsTipTitle() + "\n\n" + leading.Description + "\n\n" + body;
+                Need_Psyche? need = pawn.needs?.TryGetNeed<Need_Psyche>();
+                string status = need != null ? "\n\n" + need.StatusString() : "";
+                string tip = leading.LabelCap.AsTipTitle() + "\n\n" + leading.Description + "\n\n" + body + status;
                 TooltipHandler.TipRegion(rect, new TipSignal(tip, 83821));
             }
 

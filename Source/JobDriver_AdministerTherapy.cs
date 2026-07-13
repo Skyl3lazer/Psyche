@@ -16,7 +16,7 @@ namespace Psyche
         {
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
             this.FailOn(() => Patient.CurJobDef != PsycheDefOf.Psyche_SeekTherapy);
-            this.FailOn(() => !PsycheTherapy.HasRepairableScar(Patient));
+            this.FailOn(() => !PsycheTherapy.NeedsCare(Patient));
 
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
 

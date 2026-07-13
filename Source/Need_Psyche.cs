@@ -82,10 +82,15 @@ namespace Psyche
             Recompute();
         }
 
+        public string StatusString()
+        {
+            float baseMax = BaseMaxHealth;
+            return LabelCap + ": " + (CurLevel * baseMax).ToString("0") + "/" + baseMax.ToString("0") + " (" + CurLevel.ToStringPercent() + ")";
+        }
+
         public override string GetTipString()
         {
-            return (LabelCap + ": " + CurLevel.ToStringPercent() + " (max " + MaxLevel.ToStringPercent() + ")")
-                .Colorize(ColoredText.TipSectionTitleColor) + "\n" + def.description;
+            return StatusString().Colorize(ColoredText.TipSectionTitleColor) + "\n" + def.description;
         }
 
         public override void ExposeData()
