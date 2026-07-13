@@ -32,6 +32,7 @@ namespace Psyche
     {
         private static readonly List<Thought> Group = new List<Thought>();
         private static readonly Color PsycheDamageColor = new Color(0.9f, 0.55f, 0.2f);
+        private static readonly Color PsycheContemplatingColor = new Color(0.6f, 0.6f, 0.55f);
 
         public static bool Prefix(Rect rect, Thought group, Pawn pawn, ref bool __result)
         {
@@ -64,16 +65,26 @@ namespace Psyche
                 }
             }
 
+            bool contemplating = damage <= PsycheTuning.InjuryHealedEpsilon;
+
             string label = leading.LabelCap;
             if (Group.Count > 1)
             {
                 label = label + " x" + Group.Count;
             }
 
+            if (contemplating)
+            {
+                label = label + " (contemplating)";
+            }
+
             if (Mouse.IsOver(rect))
             {
                 Widgets.DrawHighlight(rect);
-                string tip = leading.LabelCap.AsTipTitle() + "\n\n" + leading.Description + "\n\n" + "Psyche damage: -" + damage.ToString("##0");
+                string body = contemplating
+                    ? "The wound has faded, but has not fully settled - it may still leave a scar before it passes."
+                    : "Psyche damage: -" + damage.ToString("##0");
+                string tip = leading.LabelCap.AsTipTitle() + "\n\n" + leading.Description + "\n\n" + body;
                 TooltipHandler.TipRegion(rect, new TipSignal(tip, 83821));
             }
 
@@ -85,8 +96,8 @@ namespace Psyche
             Widgets.Label(labelRect, label);
 
             Text.Anchor = TextAnchor.MiddleCenter;
-            GUI.color = PsycheDamageColor;
-            Widgets.Label(new Rect(rect.x + 235f, rect.y, 32f, rect.height), (-damage).ToString("##0"));
+            GUI.color = contemplating ? PsycheContemplatingColor : PsycheDamageColor;
+            Widgets.Label(new Rect(rect.x + 235f, rect.y, 32f, rect.height), contemplating ? "0" : (-damage).ToString("##0"));
             Text.Anchor = TextAnchor.UpperLeft;
             GUI.color = Color.white;
             Text.WordWrap = true;

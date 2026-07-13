@@ -52,7 +52,44 @@ namespace Psyche
         }
 
         [DebugAction("Psyche", "Repair worst scar (one session)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
-        private static void RepairSession(Pawn p) => PsycheTherapy.ApplySession(p, p);
+        private static void RepairSession(Pawn p)
+        {
+            Hediff? scar = PsycheTherapy.WorstScar(p);
+            if (scar == null)
+            {
+                return;
+            }
+
+            int social = p.skills?.GetSkill(SkillDefOf.Social)?.Level ?? 0;
+            scar.Severity -= PsycheTuning.RepairPerSessionBase + (social * PsycheTuning.RepairPerSocialLevel);
+            if (scar.Severity <= 0f)
+            {
+                p.health.RemoveHediff(scar);
+            }
+
+            p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+        }
+
+        [DebugAction("Psyche", "Treat worst injury (one session)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void TreatInjury(Pawn p)
+        {
+            Thought_Psyche? worst = null;
+            foreach (Thought_Psyche pt in PsycheThoughts(p))
+            {
+                if (pt.CurrentPsycheDamage > 0f && (worst == null || pt.CurrentPsycheDamage > worst.CurrentPsycheDamage))
+                {
+                    worst = pt;
+                }
+            }
+
+            if (worst == null)
+            {
+                return;
+            }
+
+            worst.Treat(p.skills?.GetSkill(SkillDefOf.Social)?.Level ?? 0);
+            p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+        }
 
         [DebugAction("Psyche", "Clear scars", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
         private static void ClearScars(Pawn p)

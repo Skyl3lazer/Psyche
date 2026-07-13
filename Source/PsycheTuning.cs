@@ -7,13 +7,23 @@ namespace Psyche
         public const float QualifyingDurationDays = 5f;
         public const int ConvertedStackLimit = 5;
 
-        public const float ScarChanceDivisor = 40f;
-        public const float MitigationStrength = 0.7f;
-        public const float ScarScale = 0.35f;
+        public const float ScarBaseChance = 0.50f;
+        public const float ScarFloorChance = 0.10f;
+        public const float UpkeepChanceReduction = 0.30f;
+        public const float TreatmentChanceReduction = 0.30f;
 
-        public const float StrongMitigationThreshold = 0.75f;
-        public const float ScarShrinkChance = 0.5f;
-        public const float ScarShrinkFactor = 0.5f;
+        public const float ScarScale = 0.35f;
+        public const float ScarSizeHeavy = 1.0f;
+        public const float ScarSizeLight = 0.4f;
+
+        public const float TreatmentPerSessionBase = 0.25f;
+        public const float TreatmentPerSocialLevel = 0.02f;
+        public const float HealFracBase = 0.25f;
+        public const float HealFracPerSocialLevel = 0.015f;
+
+        public const float InjuryTreatMagnitudeThreshold = 4f;
+        public const float InjuryHealedEpsilon = 0.5f;
+        public const int InjuryTreatCooldownTicks = 40000;
 
         public const float RepairPerSessionBase = 2f;
         public const float RepairPerSocialLevel = 0.5f;

@@ -5,19 +5,21 @@ namespace Psyche
 {
     public static class PsycheScars
     {
-        public static void TryForm(Pawn pawn, float magnitude, float mitigation)
+        public static void TryForm(Pawn pawn, float magnitude, float upkeep, float treatment)
         {
-            float chance = Mathf.Clamp01(magnitude / PsycheTuning.ScarChanceDivisor) * (1f - (mitigation * PsycheTuning.MitigationStrength));
+            float chance = Mathf.Clamp(
+                PsycheTuning.ScarBaseChance - (upkeep * PsycheTuning.UpkeepChanceReduction) - (treatment * PsycheTuning.TreatmentChanceReduction),
+                PsycheTuning.ScarFloorChance,
+                PsycheTuning.ScarBaseChance);
+
             if (!Rand.Chance(chance))
             {
                 return;
             }
 
-            float size = magnitude * PsycheTuning.ScarScale;
-            if (mitigation >= PsycheTuning.StrongMitigationThreshold && Rand.Chance(PsycheTuning.ScarShrinkChance))
-            {
-                size *= PsycheTuning.ScarShrinkFactor;
-            }
+            float quality = Mathf.Clamp01((upkeep + treatment) / 2f);
+            float sizeWeight = Mathf.Lerp(PsycheTuning.ScarSizeHeavy, PsycheTuning.ScarSizeLight, quality);
+            float size = magnitude * PsycheTuning.ScarScale * sizeWeight;
 
             BodyPartRecord? brain = pawn.health.hediffSet.GetBrain();
             if (brain == null)

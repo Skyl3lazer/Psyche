@@ -35,7 +35,7 @@ namespace Psyche
                 return false;
             }
 
-            if (!PsycheUtility.IsTracked(patient) || !PsycheTherapy.HasRepairableScar(patient) || !PsycheTherapy.CanReceiveCounseling(patient))
+            if (!PsycheUtility.IsTracked(patient) || !PsycheTherapy.NeedsCare(patient))
             {
                 return false;
             }
