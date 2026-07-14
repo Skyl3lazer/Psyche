@@ -51,13 +51,20 @@ namespace Psyche
                 return null;
             }
 
-            return new Command_Action
+            Command_Action command = new Command_Action
             {
                 defaultLabel = "DEV: Seek clarity (solo)",
                 defaultDesc = "Development only. Runs the solo contemplation directly, bypassing the ritual.",
                 icon = Icon,
                 action = () => BeginSolo(pawn),
             };
+
+            if (!PsycheClarityWindows.CanAfford(pawn))
+            {
+                command.Disable("Psyche_SeekClarity_NoGlitter".Translate(PsycheTuning.ClarityGlitterCost));
+            }
+
+            return command;
         }
 
         public static void Begin(Pawn pawn)

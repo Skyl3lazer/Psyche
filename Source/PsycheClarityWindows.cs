@@ -107,6 +107,44 @@ namespace Psyche
 
         public static bool CanAfford(Pawn pawn) => FindGlitterStack(pawn) != null;
 
+        public static int GlitterNear(Map map, IntVec3 cell, float radius)
+        {
+            if (map == null)
+            {
+                return 0;
+            }
+
+            int count = 0;
+            List<Thing> meds = map.listerThings.ThingsOfDef(ThingDefOf.MedicineUltratech);
+            for (int i = 0; i < meds.Count; i++)
+            {
+                if (meds[i].Position.InHorDistOf(cell, radius))
+                {
+                    count += meds[i].stackCount;
+                }
+            }
+
+            return count;
+        }
+
+        public static void ConsumeGlitterNear(Map map, IntVec3 cell, int count)
+        {
+            if (map == null)
+            {
+                return;
+            }
+
+            List<Thing> meds = new List<Thing>(map.listerThings.ThingsOfDef(ThingDefOf.MedicineUltratech));
+            meds.Sort((a, b) => a.Position.DistanceToSquared(cell).CompareTo(b.Position.DistanceToSquared(cell)));
+            int remaining = count;
+            for (int i = 0; i < meds.Count && remaining > 0; i++)
+            {
+                int take = Mathf.Min(remaining, meds[i].stackCount);
+                meds[i].SplitOff(take).Destroy();
+                remaining -= take;
+            }
+        }
+
         public static float SoloQuality(Pawn pawn)
         {
             int social = pawn.skills?.GetSkill(SkillDefOf.Social)?.Level ?? 0;

@@ -43,10 +43,16 @@
     </stages>
   </ThoughtDef>
 
+  <DutyDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>Psyche_BringClarityReagent</defName>
+    <hook>HighPriority</hook>
+    <thinkNode Class="Psyche.JobGiver_BringClarityReagent" />
+  </DutyDef>
+
   <RitualBehaviorDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>Psyche_ClarityContemplation</defName>
     <durationTicks>5000</durationTicks>
-    <spectatorsLabel>attendees</spectatorsLabel>
+    <spectatorsLabel>Attendees</spectatorsLabel>
     <spectatorGerund>attending</spectatorGerund>
     <roles>
       <li Class="RitualRoleColonist">
@@ -72,7 +78,25 @@
         <defaultDuty>Spectate</defaultDuty>
         <endTriggers>
           <li Class="StageEndTrigger_DurationPercentage">
-            <percentage>1.0</percentage>
+            <percentage>0.4</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>seeker</roleId>
+            <dutyDef>Psyche_BringClarityReagent</dutyDef>
+          </li>
+          <li>
+            <roleId>counselor</roleId>
+            <dutyDef>Spectate</dutyDef>
+          </li>
+        </roleBehaviors>
+      </li>
+      <li>
+        <defaultDuty>Spectate</defaultDuty>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>0.6</percentage>
           </li>
         </endTriggers>
         <roleBehaviors>
@@ -146,13 +170,12 @@
     <ritualOutcomeEffect>Psyche_ClarityContemplation</ritualOutcomeEffect>
     <ritualObligationTargetFilter>RitualSpotOrAltar</ritualObligationTargetFilter>
     <ritualTargetFilter>AltarOrRitualSpot</ritualTargetFilter>
-    <nameMaker>NamerRitualFestival</nameMaker>
     <canStartAnytime>true</canStartAnytime>
   </RitualPatternDef>
 
   <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>Psyche_ClarityContemplation</defName>
-    <label>clarity contemplation</label>
+    <label>Seeking clarity</label>
     <description>A gathering to help a colonist turn a fully-healed psyche scar into a lasting clarity. A counselor and a good turnout raise the odds.</description>
     <issue>Ritual</issue>
     <preceptClass>Precept_Ritual</preceptClass>

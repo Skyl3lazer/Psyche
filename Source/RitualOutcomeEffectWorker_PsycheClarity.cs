@@ -32,7 +32,12 @@ namespace Psyche
             }
 
             float quality = GetQuality(jobRitual, 1f);
-            bool success = PsycheClarityWindows.ResolveAttempt(seeker, window, quality);
+            bool success = PsycheClarityWindows.ResolveAttempt(seeker, window, quality, consumeFromMap: false);
+            if (success && seeker.Map != null)
+            {
+                PsycheClarityWindows.ConsumeGlitterNear(seeker.Map, jobRitual.selectedTarget.Cell, PsycheTuning.ClarityGlitterCost);
+            }
+
             extraOutcomeDesc = success
                 ? "Psyche_ClarityFormed".Translate(seeker.LabelShort, seeker)
                 : "Psyche_ClarityFailed".Translate(seeker.LabelShort, seeker);
