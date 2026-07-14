@@ -38,22 +38,32 @@ namespace Psyche
             }
 
             float worst = 0f;
+            float best = 0f;
             for (int i = 0; i < def.stages.Count; i++)
             {
                 ThoughtStage? stage = def.stages[i];
-                if (stage != null && stage.baseMoodEffect < worst)
+                if (stage == null)
+                {
+                    continue;
+                }
+
+                if (stage.baseMoodEffect < worst)
                 {
                     worst = stage.baseMoodEffect;
                 }
+
+                if (stage.baseMoodEffect > best)
+                {
+                    best = stage.baseMoodEffect;
+                }
             }
 
-            if (worst >= 0f)
-            {
-                return false;
-            }
+            bool qualifiesNegative = worst < 0f
+                && (def.durationDays >= PsycheTuning.QualifyingDurationDays || Mathf.Abs(worst) >= PsycheTuning.QualifyingMoodThreshold);
+            bool qualifiesPositive = best > 0f
+                && (def.durationDays >= PsycheTuning.QualifyingDurationDays || best >= PsycheTuning.QualifyingMoodThreshold);
 
-            return def.durationDays >= PsycheTuning.QualifyingDurationDays
-                || Mathf.Abs(worst) >= PsycheTuning.QualifyingMoodThreshold;
+            return qualifiesNegative || qualifiesPositive;
         }
     }
 }

@@ -15,7 +15,25 @@
       </li>
     </modExtensions>
     <comps>
-      <li Class="Psyche.HediffCompProperties_PsycheScar" />
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Clarity</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <label>psyche clarity</label>
+    <description>A lasting insight won from a profound experience. It raises the maximum psyche health this person can hold, above their natural baseline.</description>
+    <isBad>false</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
     </comps>
   </HediffDef>
 

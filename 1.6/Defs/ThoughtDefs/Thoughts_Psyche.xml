@@ -13,4 +13,16 @@
     </stages>
   </ThoughtDef>
 
+  <ThoughtDef>
+    <defName>Psyche_TestBoon</defName>
+    <durationDays>1</durationDays>
+    <stages>
+      <li>
+        <label>psyche test boon</label>
+        <description>A development-only psyche boon for testing.</description>
+        <baseMoodEffect>15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
 </Defs>

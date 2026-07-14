@@ -16,6 +16,12 @@ namespace Psyche
         public const float ScarSizeHeavy = 1.0f;
         public const float ScarSizeLight = 0.4f;
 
+        public const float BoonDecayFloor = 0.5f;
+        public const float ClarityChance = 0.15f;
+        public const float ClarityScale = 0.35f;
+        public const float ClarityCapHP = 30f;
+        public const float MaxHealthFloorFrac = 0.1f;
+
         public const float TreatmentPerSessionBase = 0.25f;
         public const float TreatmentPerSocialLevel = 0.02f;
         public const float HealFracBase = 0.25f;

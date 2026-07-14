@@ -6,7 +6,8 @@ namespace Psyche
 {
     public class Thought_Psyche : Thought_Memory
     {
-        private float capturedMagnitude = -1f;
+        private float signedMagnitude;
+        private bool captured;
         private float mitigationSum;
         private int mitigationSamples;
         private float treatmentLevel;
@@ -19,12 +20,21 @@ namespace Psyche
             return PsycheUtility.IsTracked(pawn) ? 0f : base.MoodOffset();
         }
 
+        public bool IsBoon
+        {
+            get
+            {
+                EnsureCaptured();
+                return signedMagnitude > 0f;
+            }
+        }
+
         public float RawMagnitude
         {
             get
             {
                 EnsureCaptured();
-                return capturedMagnitude;
+                return Mathf.Abs(signedMagnitude);
             }
         }
 
@@ -32,27 +42,54 @@ namespace Psyche
         {
             get
             {
+                if (IsBoon)
+                {
+                    return 0f;
+                }
+
                 int duration = DurationTicks;
                 float decayed = duration <= 0 ? RawMagnitude : RawMagnitude * Mathf.Clamp01(1f - ((float)age / duration));
                 return Mathf.Max(0f, decayed - healPulse);
             }
         }
 
+        public float CurrentBoonBonus
+        {
+            get
+            {
+                if (!IsBoon)
+                {
+                    return 0f;
+                }
+
+                int duration = DurationTicks;
+                float effectiveness = duration <= 0 ? 1f : Mathf.Lerp(1f, PsycheTuning.BoonDecayFloor, Mathf.Clamp01((float)age / duration));
+                return RawMagnitude * effectiveness;
+            }
+        }
+
         public bool CanBeTreated =>
-            RawMagnitude >= PsycheTuning.InjuryTreatMagnitudeThreshold
+            !IsBoon
+            && RawMagnitude >= PsycheTuning.InjuryTreatMagnitudeThreshold
             && CurrentPsycheDamage > PsycheTuning.InjuryHealedEpsilon
             && (lastTreatedTick < 0 || Find.TickManager.TicksGame - lastTreatedTick >= PsycheTuning.InjuryTreatCooldownTicks);
 
         public void EnsureCaptured()
         {
-            if (capturedMagnitude < 0f)
+            if (!captured)
             {
-                capturedMagnitude = Mathf.Abs(base.MoodOffset()) * PsycheTuning.WoundScale;
+                signedMagnitude = base.MoodOffset() * PsycheTuning.WoundScale;
+                captured = true;
             }
         }
 
         public void Treat(int socialLevel)
         {
+            if (IsBoon)
+            {
+                return;
+            }
+
             treatmentLevel = Mathf.Min(1f, treatmentLevel + PsycheTuning.TreatmentPerSessionBase + (socialLevel * PsycheTuning.TreatmentPerSocialLevel));
             healPulse += RawMagnitude * (PsycheTuning.HealFracBase + (socialLevel * PsycheTuning.HealFracPerSocialLevel));
             lastTreatedTick = Find.TickManager.TicksGame;
@@ -61,11 +98,14 @@ namespace Psyche
         public override void ThoughtInterval()
         {
             base.ThoughtInterval();
-            mitigationSum += SampleMitigation();
-            mitigationSamples++;
+            if (!IsBoon)
+            {
+                mitigationSum += SampleMitigation();
+                mitigationSamples++;
+            }
         }
 
-        public void RollScarOnExpiry()
+        public void RollOnExpiry()
         {
             if (rolled)
             {
@@ -73,6 +113,17 @@ namespace Psyche
             }
 
             rolled = true;
+
+            if (IsBoon)
+            {
+                if (Rand.Chance(PsycheTuning.ClarityChance))
+                {
+                    PsycheClarities.TryForm(pawn, RawMagnitude);
+                }
+
+                return;
+            }
+
             float upkeep = mitigationSamples > 0 ? mitigationSum / mitigationSamples : 0.5f;
             PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel));
         }
@@ -88,7 +139,8 @@ namespace Psyche
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look(ref capturedMagnitude, "psyche_capturedMagnitude", -1f);
+            Scribe_Values.Look(ref signedMagnitude, "psyche_signedMagnitude", 0f);
+            Scribe_Values.Look(ref captured, "psyche_captured", false);
             Scribe_Values.Look(ref mitigationSum, "psyche_mitigationSum", 0f);
             Scribe_Values.Look(ref mitigationSamples, "psyche_mitigationSamples", 0);
             Scribe_Values.Look(ref treatmentLevel, "psyche_treatmentLevel", 0f);

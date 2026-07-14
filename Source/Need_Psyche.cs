@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace Psyche
@@ -15,25 +16,21 @@ namespace Psyche
         {
         }
 
-        public bool CanReceiveCounseling =>
-            lastCounseledTick < 0 || Find.TickManager.TicksGame - lastCounseledTick >= PsycheTuning.CounselingCooldownTicks;
-
-        public void NotifyCounseled()
-        {
-            lastCounseledTick = Find.TickManager.TicksGame;
-        }
-
         public float InnateMbt => innateMbt;
 
         public bool InnateCached => innateCached;
 
         public float BaseMaxHealth => (1f - innateMbt) * PsycheUtility.HealthScale;
 
+        public bool CanReceiveCounseling =>
+            lastCounseledTick < 0 || Find.TickManager.TicksGame - lastCounseledTick >= PsycheTuning.CounselingCooldownTicks;
+
         public float EffectiveMaxHealth
         {
             get
             {
-                float sum = BaseMaxHealth;
+                float baseMax = BaseMaxHealth;
+                float sum = baseMax;
                 List<Hediff> hediffs = pawn.health.hediffSet.hediffs;
                 for (int i = 0; i < hediffs.Count; i++)
                 {
@@ -44,11 +41,34 @@ namespace Psyche
                     }
                 }
 
-                return sum;
+                return Mathf.Clamp(sum, baseMax * PsycheTuning.MaxHealthFloorFrac, baseMax + PsycheTuning.ClarityCapHP);
             }
         }
 
-        public float ThresholdOffset => innateCached ? (1f - CurLevel) * (1f - innateMbt) : 0f;
+        public float CurrentPsycheHealth
+        {
+            get
+            {
+                float sum = EffectiveMaxHealth;
+                List<Thought_Memory>? memories = pawn.needs?.mood?.thoughts?.memories?.Memories;
+                if (memories != null)
+                {
+                    for (int i = 0; i < memories.Count; i++)
+                    {
+                        if (memories[i] is Thought_Psyche pt)
+                        {
+                            sum -= pt.CurrentPsycheDamage;
+                            sum += pt.CurrentBoonBonus;
+                        }
+                    }
+                }
+
+                return Mathf.Max(0f, sum);
+            }
+        }
+
+        public float ThresholdOffset =>
+            innateCached ? (1f - (CurrentPsycheHealth / BaseMaxHealth)) * (1f - innateMbt) : 0f;
 
         public override float MaxLevel
         {
@@ -59,16 +79,15 @@ namespace Psyche
             }
         }
 
+        public void NotifyCounseled()
+        {
+            lastCounseledTick = Find.TickManager.TicksGame;
+        }
+
         public void Recompute()
         {
             float baseMax = BaseMaxHealth;
-            if (baseMax <= 0f)
-            {
-                CurLevel = 1f;
-                return;
-            }
-
-            CurLevel = (EffectiveMaxHealth - SumPsycheThoughtDamage()) / baseMax;
+            CurLevel = baseMax <= 0f ? 1f : CurrentPsycheHealth / baseMax;
         }
 
         public override void SetInitialLevel()
@@ -85,7 +104,9 @@ namespace Psyche
         public string StatusString()
         {
             float baseMax = BaseMaxHealth;
-            return LabelCap + ": " + (CurLevel * baseMax).ToString("0") + "/" + baseMax.ToString("0") + " (" + CurLevel.ToStringPercent() + ")";
+            float current = CurrentPsycheHealth;
+            float pct = baseMax > 0f ? current / baseMax : 0f;
+            return LabelCap + ": " + current.ToString("0") + "/" + baseMax.ToString("0") + " (" + pct.ToStringPercent() + ")";
         }
 
         public override string GetTipString()
@@ -99,26 +120,6 @@ namespace Psyche
             Scribe_Values.Look(ref innateMbt, "innateMbt", 0f);
             Scribe_Values.Look(ref innateCached, "innateCached", false);
             Scribe_Values.Look(ref lastCounseledTick, "lastCounseledTick", -1);
-        }
-
-        private float SumPsycheThoughtDamage()
-        {
-            List<Thought_Memory>? memories = pawn.needs?.mood?.thoughts?.memories?.Memories;
-            if (memories == null)
-            {
-                return 0f;
-            }
-
-            float sum = 0f;
-            for (int i = 0; i < memories.Count; i++)
-            {
-                if (memories[i] is Thought_Psyche pt)
-                {
-                    sum += pt.CurrentPsycheDamage;
-                }
-            }
-
-            return sum;
         }
 
         private void CacheInnate()

@@ -8,7 +8,9 @@ namespace Psyche
     {
         public static NeedDef Psyche_Core = null!;
         public static HediffDef Psyche_Scar = null!;
+        public static HediffDef Psyche_Clarity = null!;
         public static ThoughtDef Psyche_TestThought = null!;
+        public static ThoughtDef Psyche_TestBoon = null!;
         public static JobDef Psyche_SeekTherapy = null!;
         public static JobDef Psyche_AdministerTherapy = null!;
     }

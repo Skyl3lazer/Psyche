@@ -51,6 +51,32 @@ namespace Psyche
             p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
         }
 
+        [DebugAction("Psyche", "Add test boon", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void AddBoon(Pawn p)
+        {
+            if (p.needs?.TryGetNeed<Need_Psyche>() == null)
+            {
+                return;
+            }
+
+            p.needs.mood?.thoughts?.memories?.TryGainMemory(PsycheDefOf.Psyche_TestBoon);
+        }
+
+        [DebugAction("Psyche", "Add test clarity", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void AddClarity(Pawn p)
+        {
+            BodyPartRecord? brain = p.health.hediffSet.GetBrain();
+            if (brain == null)
+            {
+                return;
+            }
+
+            Hediff clarity = HediffMaker.MakeHediff(PsycheDefOf.Psyche_Clarity, p, brain);
+            clarity.Severity = 10f;
+            p.health.AddHediff(clarity, brain);
+            p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+        }
+
         [DebugAction("Psyche", "Repair worst scar (one session)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
         private static void RepairSession(Pawn p)
         {

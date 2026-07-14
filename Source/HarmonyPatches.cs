@@ -59,7 +59,7 @@ namespace Psyche
         {
             if (th is Thought_Psyche pt && pt.ShouldDiscard)
             {
-                pt.RollScarOnExpiry();
+                pt.RollOnExpiry();
                 __instance.pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
             }
         }
