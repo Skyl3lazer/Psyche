@@ -99,8 +99,13 @@ namespace Psyche
             if (cured)
             {
                 float peak = scar.PeakSeverity;
+                PsycheTraitMarkExtension? traitMark = scar.def.GetModExtension<PsycheTraitMarkExtension>();
                 patient.health.RemoveHediff(scar);
-                if (qualifiedForClarity)
+                if (traitMark != null)
+                {
+                    PsycheTraitMarks.RemoveTraitFor(patient, traitMark);
+                }
+                else if (qualifiedForClarity)
                 {
                     PsycheClarityWindows.Open(patient, peak);
                 }

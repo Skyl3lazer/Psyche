@@ -99,6 +99,12 @@ namespace Psyche
             p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
         }
 
+        [DebugAction("Psyche", "Reconcile trait marks", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void ReconcileTraitMarks(Pawn p)
+        {
+            PsycheTraitMarks.Reconcile(p);
+        }
+
         [DebugAction("Psyche", "Add clarity window (sev 6)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
         private static void AddClarityWindow(Pawn p)
         {

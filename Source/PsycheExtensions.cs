@@ -1,3 +1,4 @@
+using RimWorld;
 using Verse;
 
 namespace Psyche
@@ -10,5 +11,12 @@ namespace Psyche
     public class PsycheThoughtExtension : DefModExtension
     {
         public bool exemptFromWounds;
+    }
+
+    public class PsycheTraitMarkExtension : DefModExtension
+    {
+        public TraitDef trait = null!;
+        public int degree;
+        public float seedSeverity = 8f;
     }
 }

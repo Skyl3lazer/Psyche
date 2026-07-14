@@ -54,5 +54,7 @@ namespace Psyche
         public const float ClarityFromWindowScale = 1f;
         public const int ClarityGlitterCost = 3;
         public const int ContemplationTicks = 4000;
+
+        public static readonly float[] PyromaniaFireFactorByStage = { 0.3f, 0.7f, 1.0f };
     }
 }

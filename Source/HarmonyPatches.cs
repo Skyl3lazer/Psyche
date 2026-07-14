@@ -59,6 +59,52 @@ namespace Psyche
             {
                 __instance.needs.AddOrRemoveNeedsAsAppropriate();
             }
+
+            PsycheTraitMarks.Reconcile(__instance);
+        }
+    }
+
+    [HarmonyPatch(typeof(Pawn), nameof(Pawn.SpawnSetup))]
+    public static class Patch_SpawnSetup
+    {
+        public static void Postfix(Pawn __instance)
+        {
+            PsycheTraitMarks.Reconcile(__instance);
+        }
+    }
+
+    [HarmonyPatch(typeof(TraitMentalStateGiver), nameof(TraitMentalStateGiver.CheckGive))]
+    public static class Patch_PyromaniaFireChance
+    {
+        public static bool Prefix(TraitMentalStateGiver __instance, Pawn pawn, ref bool __result)
+        {
+            if (__instance.traitDegreeData?.randomMentalState?.defName != "FireStartingSpree")
+            {
+                return true;
+            }
+
+            float factor = PsychePyromania.FireFactor(pawn);
+            if (factor < 1f && Rand.Value >= factor)
+            {
+                __result = false;
+                return false;
+            }
+
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(TraitSet), nameof(TraitSet.GainTrait))]
+    public static class Patch_GainTrait
+    {
+        private static readonly FieldInfo PawnField = AccessTools.Field(typeof(TraitSet), "pawn");
+
+        public static void Postfix(TraitSet __instance)
+        {
+            if (PawnField?.GetValue(__instance) is Pawn pawn)
+            {
+                PsycheTraitMarks.Reconcile(pawn);
+            }
         }
     }
 

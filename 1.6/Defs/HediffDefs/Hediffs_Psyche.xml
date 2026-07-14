@@ -177,4 +177,140 @@
     </stages>
   </HediffDef>
 
+  <HediffDef>
+    <defName>Psyche_Scar_Pyromaniac</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>pyromania psyche scar</label>
+    <description>A fixation on flame worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+      </li>
+      <li Class="Psyche.PsycheTraitMarkExtension">
+        <trait>Pyromaniac</trait>
+        <degree>0</degree>
+        <seedSeverity>8</seedSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+    <stages>
+      <li>
+        <minSeverity>0</minSeverity>
+        <label>kindling</label>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+      </li>
+      <li>
+        <minSeverity>6</minSeverity>
+        <label>raging</label>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_Psychopath</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>psychopathy psyche scar</label>
+    <description>A disconnection from others that runs to the core. It shields this person from grief, but the same wall holds everyone at arm's length, weakening the bonds they can form.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+      </li>
+      <li Class="Psyche.PsycheTraitMarkExtension">
+        <trait>Psychopath</trait>
+        <degree>0</degree>
+        <seedSeverity>8</seedSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+    <stages>
+      <li>
+        <minSeverity>0</minSeverity>
+        <statOffsets>
+          <SocialImpact>-0.30</SocialImpact>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_Bloodlust</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>bloodlust psyche scar</label>
+    <description>A hunger for violence carved into the psyche. It is a lasting mark, and only the most advanced therapy can lift it entirely.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+      </li>
+      <li Class="Psyche.PsycheTraitMarkExtension">
+        <trait>Bloodlust</trait>
+        <degree>0</degree>
+        <seedSeverity>8</seedSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_ChemicalFascination</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>chemical fascination psyche scar</label>
+    <description>A pull toward chemical escape that the mind keeps returning to. It is a lasting mark, and only the most advanced therapy can lift it entirely.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+      </li>
+      <li Class="Psyche.PsycheTraitMarkExtension">
+        <trait>DrugDesire</trait>
+        <degree>2</degree>
+        <seedSeverity>8</seedSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Clarity_Sanguine</defName>
+    <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
+    <label>sanguine psyche clarity</label>
+    <description>An innate, level buoyancy of spirit. This person holds more psyche health than their nature alone would allow.</description>
+    <isBad>false</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>0.3</maxHealthPerSeverity>
+      </li>
+      <li Class="Psyche.PsycheTraitMarkExtension">
+        <trait>NaturalMood</trait>
+        <degree>2</degree>
+        <seedSeverity>8</seedSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
 </Defs>
