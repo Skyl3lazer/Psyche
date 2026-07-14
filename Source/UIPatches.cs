@@ -87,7 +87,7 @@ namespace Psyche
                 string body;
                 if (isBoon)
                 {
-                    body = "Psyche restored: +" + amount.ToString("##0");
+                    body = "Psyche restored: " + amount.ToString("##0");
                 }
                 else if (contemplating)
                 {
@@ -113,7 +113,7 @@ namespace Psyche
 
             Text.Anchor = TextAnchor.MiddleCenter;
             GUI.color = isBoon ? PsycheBoonColor : (contemplating ? PsycheContemplatingColor : PsycheDamageColor);
-            string number = isBoon ? "+" + amount.ToString("##0") : (contemplating ? "0" : "-" + amount.ToString("##0"));
+            string number = isBoon ? amount.ToString("##0") : (contemplating ? "0" : "-" + amount.ToString("##0"));
             Widgets.Label(new Rect(rect.x + 235f, rect.y, 32f, rect.height), number);
             Text.Anchor = TextAnchor.UpperLeft;
             GUI.color = Color.white;
