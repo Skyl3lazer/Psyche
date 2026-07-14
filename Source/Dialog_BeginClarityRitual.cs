@@ -42,10 +42,17 @@ namespace Psyche
             }
 
             RitualRole? role = ritualRef?.behavior?.def?.roles?.FirstOrDefault(r => r.id == "counselor");
-            if (role != null)
+            if (role == null || assignments.FirstAssignedPawn("counselor") == preferredCounselor)
             {
-                assignments.TryAssign(preferredCounselor, role, out _);
+                return;
             }
+
+            foreach (Pawn occupant in assignments.AssignedPawns(role).ToList())
+            {
+                assignments.TryUnassignAnyRole(occupant);
+            }
+
+            assignments.TryAssign(preferredCounselor, role, out _);
         }
     }
 }

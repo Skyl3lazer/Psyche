@@ -17,6 +17,6 @@
   <Psyche_ClarityFormed>{0} worked through a healed scar and found a lasting clarity.</Psyche_ClarityFormed>
   <Psyche_ClarityFailed>{0} contemplated a healed scar, but no lasting clarity took hold.</Psyche_ClarityFailed>
 
-  <Psyche_AsCounselor>as counselor: {0} ritual quality</Psyche_AsCounselor>
+  <Psyche_AsCounselor>as Counselor: {0} ritual quality</Psyche_AsCounselor>
 
 </LanguageData>
