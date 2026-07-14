@@ -12,7 +12,7 @@ namespace Psyche
 
         public static Command_Action? GizmoFor(Pawn pawn)
         {
-            if (!PsycheUtility.IsTracked(pawn) || !pawn.IsColonistPlayerControlled || !PsycheClarityWindows.CapabilityResearched)
+            if (!PsycheUtility.IsTracked(pawn) || !pawn.IsColonistPlayerControlled)
             {
                 return null;
             }

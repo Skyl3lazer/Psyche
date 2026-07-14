@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>Psyche_ClarityRitual_Unfocused</defName>
+    <thoughtClass>Thought_AttendedRitual</thoughtClass>
+    <durationDays>6</durationDays>
+    <stackLimit>3</stackLimit>
+    <stages>
+      <li>
+        <label>unfocused contemplation</label>
+        <description>The contemplation never quite came together. It was hard to stay present.</description>
+        <baseMoodEffect>-1</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>Psyche_ClarityRitual_Calming</defName>
+    <thoughtClass>Thought_AttendedRitual</thoughtClass>
+    <durationDays>6</durationDays>
+    <stackLimit>3</stackLimit>
+    <stages>
+      <li>
+        <label>calming contemplation</label>
+        <description>The contemplation was calming. It felt good to sit with someone working through their pain.</description>
+        <baseMoodEffect>4</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>Psyche_ClarityRitual_Transcendent</defName>
+    <thoughtClass>Thought_AttendedRitual</thoughtClass>
+    <durationDays>6</durationDays>
+    <stackLimit>3</stackLimit>
+    <stages>
+      <li>
+        <label>transcendent contemplation</label>
+        <description>The contemplation was transcendent. Watching a wound become wisdom moved everyone present.</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <RitualBehaviorDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>Psyche_ClarityContemplation</defName>
+    <durationTicks>5000</durationTicks>
+    <spectatorsLabel>attendees</spectatorsLabel>
+    <spectatorGerund>attending</spectatorGerund>
+    <roles>
+      <li Class="RitualRoleColonist">
+        <id>seeker</id>
+        <label>seeker</label>
+        <required>true</required>
+        <maxCount>1</maxCount>
+        <countsAsParticipant>false</countsAsParticipant>
+        <defaultForSelectedColonist>true</defaultForSelectedColonist>
+        <mustBeAbleToReachTarget>true</mustBeAbleToReachTarget>
+      </li>
+      <li Class="RitualRoleColonist">
+        <id>counselor</id>
+        <label>counselor</label>
+        <required>false</required>
+        <maxCount>1</maxCount>
+        <substitutable>true</substitutable>
+        <countsAsParticipant>false</countsAsParticipant>
+      </li>
+    </roles>
+    <stages>
+      <li>
+        <defaultDuty>Spectate</defaultDuty>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>1.0</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>seeker</roleId>
+            <dutyDef>Spectate</dutyDef>
+          </li>
+          <li>
+            <roleId>counselor</roleId>
+            <dutyDef>Spectate</dutyDef>
+          </li>
+        </roleBehaviors>
+      </li>
+    </stages>
+  </RitualBehaviorDef>
+
+  <RitualOutcomeEffectDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>Psyche_ClarityContemplation</defName>
+    <workerClass>Psyche.RitualOutcomeEffectWorker_PsycheClarity</workerClass>
+    <description>Depending on the contemplation's quality, attendees gain between {MINMOOD} and {MAXMOOD} mood for {MOODDAYS} days, and the seeker has a chance - equal to the quality - to turn their healed scar into a lasting clarity.</description>
+    <startingQuality>0.3</startingQuality>
+    <allowAttachableOutcome>false</allowAttachableOutcome>
+    <comps>
+      <li Class="RitualOutcomeComp_ParticipantCount">
+        <label>attendance</label>
+        <curve>
+          <points>
+            <li>(1, 0)</li>
+            <li>(4, 0.15)</li>
+            <li>(8, 0.3)</li>
+          </points>
+        </curve>
+      </li>
+      <li Class="RitualOutcomeComp_RolePresentNotSubstituted">
+        <roleId>counselor</roleId>
+        <label>counselor present</label>
+        <qualityOffset>0.25</qualityOffset>
+      </li>
+    </comps>
+    <outcomeChances>
+      <li>
+        <label>unfocused</label>
+        <chance>0.3</chance>
+        <positivityIndex>-1</positivityIndex>
+        <memory>Psyche_ClarityRitual_Unfocused</memory>
+        <description>The {0} was unfocused.</description>
+      </li>
+      <li>
+        <label>calming</label>
+        <chance>0.5</chance>
+        <positivityIndex>1</positivityIndex>
+        <memory>Psyche_ClarityRitual_Calming</memory>
+        <description>The {0} was calming.</description>
+      </li>
+      <li>
+        <label>transcendent</label>
+        <chance>0.2</chance>
+        <positivityIndex>2</positivityIndex>
+        <memory>Psyche_ClarityRitual_Transcendent</memory>
+        <description>The {0} was transcendent.</description>
+      </li>
+    </outcomeChances>
+  </RitualOutcomeEffectDef>
+
+  <RitualPatternDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>Psyche_ClarityContemplation</defName>
+    <ritualBehavior>Psyche_ClarityContemplation</ritualBehavior>
+    <ritualOutcomeEffect>Psyche_ClarityContemplation</ritualOutcomeEffect>
+    <ritualObligationTargetFilter>RitualSpotOrAltar</ritualObligationTargetFilter>
+    <ritualTargetFilter>AltarOrRitualSpot</ritualTargetFilter>
+    <nameMaker>NamerRitualFestival</nameMaker>
+    <canStartAnytime>true</canStartAnytime>
+  </RitualPatternDef>
+
+  <PreceptDef MayRequire="Ludeon.RimWorld.Ideology">
+    <defName>Psyche_ClarityContemplation</defName>
+    <label>clarity contemplation</label>
+    <description>A gathering to help a colonist turn a fully-healed psyche scar into a lasting clarity. A counselor and a good turnout raise the odds.</description>
+    <issue>Ritual</issue>
+    <preceptClass>Precept_Ritual</preceptClass>
+    <ritualPatternBase>Psyche_ClarityContemplation</ritualPatternBase>
+    <impact>Medium</impact>
+    <iconPath>UI/Icons/Rituals/RitualFestival</iconPath>
+    <selectionWeight>1.0</selectionWeight>
+    <classic>true</classic>
+    <visible>true</visible>
+    <receivesExpectationsQualityOffset>true</receivesExpectationsQualityOffset>
+  </PreceptDef>
+
+</Defs>

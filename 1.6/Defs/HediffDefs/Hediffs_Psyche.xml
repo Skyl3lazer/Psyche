@@ -21,7 +21,7 @@
 
   <HediffDef>
     <defName>Psyche_Clarity</defName>
-    <hediffClass>HediffWithComps</hediffClass>
+    <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
     <label>psyche clarity</label>
     <description>A lasting insight won from a profound experience. It raises the maximum psyche health this person can hold, above their natural baseline.</description>
     <isBad>false</isBad>

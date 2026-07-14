@@ -16,6 +16,8 @@ namespace Psyche
 
         public override int UIGroupKey => uiKey != 0 ? uiKey : (uiKey = ++nextUiKey);
 
+        public override bool TryMergeWith(Hediff other) => false;
+
         public void NotePeak()
         {
             if (Severity > peakSeverity)

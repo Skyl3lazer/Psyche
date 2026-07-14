@@ -11,7 +11,7 @@
   <Psyche_Alert_SeekClarity>Pawns can seek clarity</Psyche_Alert_SeekClarity>
   <Psyche_Alert_SeekClarity_Desc>These colonists have fully healed a deep psyche scar and can turn it into a lasting clarity through contemplation. It costs {0} glitterworld medicine, and the chance passes after a while.\n\nUse the "Seek clarity" command on the colonist.</Psyche_Alert_SeekClarity_Desc>
 
-  <Psyche_Reflecting_Label>reflecting on {0} scar</Psyche_Reflecting_Label>
+  <Psyche_Reflecting_Label>Reflecting on {0} scar</Psyche_Reflecting_Label>
   <Psyche_Reflecting_Desc>This scar has been fully mended. For a short while it can be turned into a lasting clarity through a guided contemplation, costing {0} glitterworld medicine. Use the "Seek clarity" command.</Psyche_Reflecting_Desc>
 
   <Psyche_ClarityFormed>{0} worked through a healed scar and found a lasting clarity.</Psyche_ClarityFormed>

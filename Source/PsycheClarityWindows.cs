@@ -17,6 +17,16 @@ namespace Psyche
             return severity < 6f ? "deep" : "severe";
         }
 
+        public static string ClarityBandLabel(float severity)
+        {
+            if (severity < 3f)
+            {
+                return "faint";
+            }
+
+            return severity < 6f ? "notable" : "profound";
+        }
+
         public static bool CapabilityResearched => PsycheDefOf.Psyche_EMDR.IsFinished;
 
         public static void Open(Pawn pawn, float healedSeverity)
@@ -75,7 +85,7 @@ namespace Psyche
         }
 
         public static bool EligibleForAlert(Pawn pawn) =>
-            PsycheUtility.IsTracked(pawn) && CapabilityResearched && HasWindow(pawn);
+            PsycheUtility.IsTracked(pawn) && HasWindow(pawn);
 
         public static int GlitterAvailable(Pawn pawn)
         {
