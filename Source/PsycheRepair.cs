@@ -63,6 +63,18 @@ namespace Psyche
                 + Rand.Range(-PsycheTuning.RepairQualityRandomSpread, PsycheTuning.RepairQualityRandomSpread);
             float quality = Mathf.Clamp01(Mathf.Max(medFloor, skillQuality));
 
+            bool cured = ApplyQuality(patient, scar, quality, tier);
+
+            if (medicine != null)
+            {
+                PsycheMedicine.ConsumeOne(medicine);
+            }
+
+            return cured;
+        }
+
+        public static bool ApplyQuality(Pawn patient, Hediff_PsycheScar scar, float quality, int tier)
+        {
             float magnitude = PsycheTuning.TierRepairMagnitude[tier - 1];
             float zero = PsycheTuning.RepairZeroPoint;
 
@@ -80,11 +92,6 @@ namespace Psyche
                 float backfire = magnitude * ((zero - quality) / zero) * PsycheTuning.RepairBackfireScale;
                 scar.Severity += backfire;
                 scar.NotePeak();
-            }
-
-            if (medicine != null)
-            {
-                PsycheMedicine.ConsumeOne(medicine);
             }
 
             bool qualifiedForClarity = scar.PeakSeverity >= PsycheTuning.ClarityWindowDeepThreshold;

@@ -52,7 +52,7 @@ namespace Psyche
             p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
         }
 
-        [DebugAction("Psyche", "Add deep test scar (sev 6)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        [DebugAction("Psyche", "Add deep test scar (sev 5)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
         private static void AddDeepScar(Pawn p)
         {
             BodyPartRecord? brain = p.health.hediffSet.GetBrain();
@@ -62,7 +62,7 @@ namespace Psyche
             }
 
             Hediff scar = HediffMaker.MakeHediff(PsycheDefOf.Psyche_Scar, p, brain);
-            scar.Severity = 6f;
+            scar.Severity = 5f;
             (scar as Hediff_PsycheScar)?.NotePeak();
             p.health.AddHediff(scar, brain);
             p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
@@ -128,6 +128,19 @@ namespace Psyche
             }
 
             PsycheRepair.ApplyRepairSession(p, p, scar);
+            p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+        }
+
+        [DebugAction("Psyche", "Successful therapy (one session)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void SuccessfulRepairSession(Pawn p)
+        {
+            Hediff_PsycheScar? scar = PsycheRepair.WorstReducibleScar(p);
+            if (scar == null)
+            {
+                return;
+            }
+
+            PsycheRepair.ApplyQuality(p, scar, 1f, PsycheRepair.BestResearchedTier());
             p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
         }
 
