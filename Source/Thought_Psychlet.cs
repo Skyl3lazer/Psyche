@@ -11,6 +11,7 @@ namespace Psyche
         private float mitigationSum;
         private int mitigationSamples;
         private float treatmentLevel;
+        private float medicationLevel;
         private float healPulse;
         private int lastTreatedTick = -1;
         private bool rolled;
@@ -95,6 +96,16 @@ namespace Psyche
             lastTreatedTick = Find.TickManager.TicksGame;
         }
 
+        public void Medicate(float potency)
+        {
+            if (IsBoon)
+            {
+                return;
+            }
+
+            medicationLevel = Mathf.Min(1f, medicationLevel + (PsycheTuning.MedicationPerDose * potency));
+        }
+
         public override void ThoughtInterval()
         {
             base.ThoughtInterval();
@@ -129,7 +140,7 @@ namespace Psyche
             }
 
             float upkeep = mitigationSamples > 0 ? mitigationSum / mitigationSamples : 0.5f;
-            PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel));
+            PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel));
         }
 
         private float SampleMitigation()
@@ -148,6 +159,7 @@ namespace Psyche
             Scribe_Values.Look(ref mitigationSum, "psyche_mitigationSum", 0f);
             Scribe_Values.Look(ref mitigationSamples, "psyche_mitigationSamples", 0);
             Scribe_Values.Look(ref treatmentLevel, "psyche_treatmentLevel", 0f);
+            Scribe_Values.Look(ref medicationLevel, "psyche_medicationLevel", 0f);
             Scribe_Values.Look(ref healPulse, "psyche_healPulse", 0f);
             Scribe_Values.Look(ref lastTreatedTick, "psyche_lastTreatedTick", -1);
             Scribe_Values.Look(ref rolled, "psyche_rolled", false);

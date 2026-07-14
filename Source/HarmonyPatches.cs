@@ -74,16 +74,18 @@ namespace Psyche
     }
 
     [HarmonyPatch(typeof(TraitMentalStateGiver), nameof(TraitMentalStateGiver.CheckGive))]
-    public static class Patch_PyromaniaFireChance
+    public static class Patch_TraitMentalStateThrottle
     {
         public static bool Prefix(TraitMentalStateGiver __instance, Pawn pawn, ref bool __result)
         {
-            if (__instance.traitDegreeData?.randomMentalState?.defName != "FireStartingSpree")
+            TraitDegreeData? data = __instance.traitDegreeData;
+            MentalStateDef? state = data?.randomMentalState ?? data?.forcedMentalState;
+            if (state == null)
             {
                 return true;
             }
 
-            float factor = PsychePyromania.FireFactor(pawn);
+            float factor = PsycheScarEffects.MentalStateChanceFactor(pawn, TraitFor(pawn, data), state);
             if (factor < 1f && Rand.Value >= factor)
             {
                 __result = false;
@@ -91,6 +93,25 @@ namespace Psyche
             }
 
             return true;
+        }
+
+        private static Trait? TraitFor(Pawn pawn, TraitDegreeData data)
+        {
+            List<Trait>? traits = pawn.story?.traits?.allTraits;
+            if (traits == null)
+            {
+                return null;
+            }
+
+            for (int i = 0; i < traits.Count; i++)
+            {
+                if (traits[i].CurrentData == data)
+                {
+                    return traits[i];
+                }
+            }
+
+            return null;
         }
     }
 
@@ -104,6 +125,27 @@ namespace Psyche
             if (PawnField?.GetValue(__instance) is Pawn pawn)
             {
                 PsycheTraitMarks.Reconcile(pawn);
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(CompDrug), nameof(CompDrug.PostIngested))]
+    public static class Patch_DrugIngested
+    {
+        public static void Postfix(CompDrug __instance, Pawn ingester)
+        {
+            PsycheMedication.OnIngested(ingester, __instance.parent.def);
+        }
+    }
+
+    [HarmonyPatch(typeof(Pawn_HealthTracker), nameof(Pawn_HealthTracker.AddHediff), new[] { typeof(Hediff), typeof(BodyPartRecord), typeof(DamageInfo?), typeof(DamageWorker.DamageResult) })]
+    public static class Patch_AddictionGained
+    {
+        public static void Postfix(Hediff hediff)
+        {
+            if (hediff is Hediff_Addiction addiction && addiction.pawn != null)
+            {
+                PsycheAddictionShortcut.OnAddictionGained(addiction.pawn, addiction);
             }
         }
     }

@@ -19,4 +19,10 @@ namespace Psyche
         public int degree;
         public float seedSeverity = 8f;
     }
+
+    public class PsycheMitigationExtension : DefModExtension
+    {
+        public bool mitigates = true;
+        public float potency = 1f;
+    }
 }

@@ -99,6 +99,21 @@ namespace Psyche
             p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
         }
 
+        [DebugAction("Psyche", "Medicate open wounds (one dose)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void MedicateWounds(Pawn p)
+        {
+            foreach (Thought_Psychlet pt in PsycheThoughts(p))
+            {
+                pt.Medicate(1f);
+            }
+        }
+
+        [DebugAction("Psyche", "Trade worst scar (addiction shortcut)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void TradeWorstScar(Pawn p)
+        {
+            PsycheAddictionShortcut.ReduceWorstScar(p);
+        }
+
         [DebugAction("Psyche", "Reconcile trait marks", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
         private static void ReconcileTraitMarks(Pawn p)
         {

@@ -29,6 +29,9 @@ namespace Psyche
         public const float HealFracBase = 0.25f;
         public const float HealFracPerSocialLevel = 0.015f;
 
+        public const float MedicationChanceReduction = 0.15f;
+        public const float MedicationPerDose = 0.35f;
+
         public const float InjuryTreatMagnitudeThreshold = 4f;
         public const float InjuryHealedEpsilon = 0.5f;
         public const int InjuryTreatCooldownTicks = 40000;
