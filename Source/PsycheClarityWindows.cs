@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 
 namespace Psyche
 {
@@ -87,28 +88,24 @@ namespace Psyche
         public static bool EligibleForAlert(Pawn pawn) =>
             PsycheUtility.IsTracked(pawn) && HasWindow(pawn);
 
-        public static int GlitterAvailable(Pawn pawn)
+        public static Thing? FindGlitterStack(Pawn pawn)
         {
             if (pawn.Map == null)
             {
-                return 0;
+                return null;
             }
 
-            int count = 0;
-            List<Thing> meds = pawn.Map.listerThings.ThingsOfDef(ThingDefOf.MedicineUltratech);
-            for (int i = 0; i < meds.Count; i++)
-            {
-                Thing med = meds[i];
-                if (!med.IsForbidden(pawn) && pawn.CanReach(med, Verse.AI.PathEndMode.ClosestTouch, Danger.Deadly))
-                {
-                    count += med.stackCount;
-                }
-            }
-
-            return count;
+            return GenClosest.ClosestThingReachable(
+                pawn.Position,
+                pawn.Map,
+                ThingRequest.ForDef(ThingDefOf.MedicineUltratech),
+                PathEndMode.ClosestTouch,
+                TraverseParms.For(pawn),
+                9999f,
+                t => t.stackCount >= PsycheTuning.ClarityGlitterCost && !t.IsForbidden(pawn) && pawn.CanReserve(t));
         }
 
-        public static bool CanAfford(Pawn pawn) => GlitterAvailable(pawn) >= PsycheTuning.ClarityGlitterCost;
+        public static bool CanAfford(Pawn pawn) => FindGlitterStack(pawn) != null;
 
         public static float SoloQuality(Pawn pawn)
         {
@@ -119,13 +116,17 @@ namespace Psyche
                 + Rand.Range(-PsycheTuning.RepairQualityRandomSpread, PsycheTuning.RepairQualityRandomSpread));
         }
 
-        public static bool ResolveAttempt(Pawn pawn, Thought_ClarityWindow window, float quality)
+        public static bool ResolveAttempt(Pawn pawn, Thought_ClarityWindow window, float quality, bool consumeFromMap = true)
         {
             float chance = Mathf.Clamp01(quality);
             bool success = Rand.Chance(chance);
             if (success)
             {
-                ConsumeGlitter(pawn, PsycheTuning.ClarityGlitterCost);
+                if (consumeFromMap)
+                {
+                    ConsumeGlitter(pawn, PsycheTuning.ClarityGlitterCost);
+                }
+
                 float size = window.healedSeverity * chance * PsycheTuning.ClarityFromWindowScale;
                 PsycheClarities.FormDirect(pawn, size);
             }
@@ -147,7 +148,7 @@ namespace Psyche
             for (int i = 0; i < meds.Count && remaining > 0; i++)
             {
                 Thing med = meds[i];
-                if (med.IsForbidden(pawn) || !pawn.CanReach(med, Verse.AI.PathEndMode.ClosestTouch, Danger.Deadly))
+                if (med.IsForbidden(pawn))
                 {
                     continue;
                 }

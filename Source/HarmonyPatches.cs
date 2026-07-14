@@ -21,6 +21,12 @@ namespace Psyche
             {
                 yield return seek;
             }
+
+            Command_Action? devSeek = PsycheClaritySeeking.DevGizmoFor(__instance);
+            if (devSeek != null)
+            {
+                yield return devSeek;
+            }
         }
     }
 

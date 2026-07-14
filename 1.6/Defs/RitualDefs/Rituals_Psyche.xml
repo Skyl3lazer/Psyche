@@ -95,6 +95,9 @@
     <description>Depending on the contemplation's quality, attendees gain between {MINMOOD} and {MAXMOOD} mood for {MOODDAYS} days, and the seeker has a chance - equal to the quality - to turn their healed scar into a lasting clarity.</description>
     <startingQuality>0.3</startingQuality>
     <allowAttachableOutcome>false</allowAttachableOutcome>
+    <extraInfoLines>
+      <li>Consumes 3 glitterworld medicine if a clarity forms.</li>
+    </extraInfoLines>
     <comps>
       <li Class="RitualOutcomeComp_ParticipantCount">
         <label>attendance</label>
@@ -156,9 +159,8 @@
     <ritualPatternBase>Psyche_ClarityContemplation</ritualPatternBase>
     <impact>Medium</impact>
     <iconPath>UI/Icons/Rituals/RitualFestival</iconPath>
-    <selectionWeight>1.0</selectionWeight>
-    <classic>true</classic>
-    <visible>true</visible>
+    <visible>false</visible>
+    <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
     <receivesExpectationsQualityOffset>true</receivesExpectationsQualityOffset>
   </PreceptDef>
 

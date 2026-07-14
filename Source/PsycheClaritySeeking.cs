@@ -39,6 +39,27 @@ namespace Psyche
             return command;
         }
 
+        public static Command_Action? DevGizmoFor(Pawn pawn)
+        {
+            if (!Prefs.DevMode || !PsycheUtility.IsTracked(pawn) || !pawn.IsColonistPlayerControlled)
+            {
+                return null;
+            }
+
+            if (PsycheClarityWindows.WorstWindow(pawn) == null)
+            {
+                return null;
+            }
+
+            return new Command_Action
+            {
+                defaultLabel = "DEV: Seek clarity (solo)",
+                defaultDesc = "Development only. Runs the solo contemplation directly, bypassing the ritual.",
+                icon = Icon,
+                action = () => BeginSolo(pawn),
+            };
+        }
+
         public static void Begin(Pawn pawn)
         {
             if (PsycheClarityRitual.TryBegin(pawn))
@@ -46,13 +67,20 @@ namespace Psyche
                 return;
             }
 
+            BeginSolo(pawn);
+        }
+
+        public static void BeginSolo(Pawn pawn)
+        {
             IntVec3 spot = PsycheTherapy.PickRendezvous(pawn);
             if (!spot.IsValid)
             {
                 spot = pawn.Position;
             }
 
-            Job job = JobMaker.MakeJob(PsycheDefOf.Psyche_ContemplateClarity, spot);
+            Thing? glitter = PsycheClarityWindows.FindGlitterStack(pawn);
+            Job job = JobMaker.MakeJob(PsycheDefOf.Psyche_ContemplateClarity, spot, glitter);
+            job.count = PsycheTuning.ClarityGlitterCost;
             pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
         }
     }
