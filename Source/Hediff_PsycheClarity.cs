@@ -8,7 +8,9 @@ namespace Psyche
 
         private int uiKey;
 
-        public override string LabelBase => PsycheClarityWindows.ClarityBandLabel(Severity) + " " + def.label;
+        public override string LabelBase => PsycheUtility.BandedLabel(this);
+
+        public override string LabelInBrackets => string.Empty;
 
         public override int UIGroupKey => uiKey != 0 ? uiKey : (uiKey = ++nextUiKey);
 

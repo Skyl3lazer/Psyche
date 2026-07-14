@@ -8,24 +8,26 @@ namespace Psyche
 {
     public static class PsycheClarityWindows
     {
-        public static string BandLabel(float severity)
+        public static string BandLabel(float severity) => StageBandLabel(PsycheDefOf.Psyche_Scar, severity);
+
+        public static string ClarityBandLabel(float severity) => StageBandLabel(PsycheDefOf.Psyche_Clarity, severity);
+
+        private static string StageBandLabel(HediffDef def, float severity)
         {
-            if (severity < 3f)
+            string label = "faint";
+            List<HediffStage>? stages = def.stages;
+            if (stages != null)
             {
-                return "faint";
+                for (int i = 0; i < stages.Count; i++)
+                {
+                    if (severity >= stages[i].minSeverity && !stages[i].label.NullOrEmpty())
+                    {
+                        label = stages[i].label;
+                    }
+                }
             }
 
-            return severity < 6f ? "deep" : "severe";
-        }
-
-        public static string ClarityBandLabel(float severity)
-        {
-            if (severity < 3f)
-            {
-                return "faint";
-            }
-
-            return severity < 6f ? "notable" : "profound";
+            return label;
         }
 
         public static bool CapabilityResearched => PsycheDefOf.Psyche_EMDR.IsFinished;

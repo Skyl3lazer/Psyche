@@ -5,16 +5,16 @@ namespace Psyche
 {
     public class Hediff_PsycheScar : HediffWithComps
     {
-        private static int nextUiKey;
-
         private float peakSeverity;
         private int uiKey;
 
         public float PeakSeverity => Mathf.Max(peakSeverity, Severity);
 
-        public override string LabelBase => PsycheClarityWindows.BandLabel(Severity) + " " + def.label;
+        public override string LabelBase => PsycheUtility.BandedLabel(this);
 
-        public override int UIGroupKey => uiKey != 0 ? uiKey : (uiKey = ++nextUiKey);
+        public override string LabelInBrackets => string.Empty;
+
+        public override int UIGroupKey => uiKey != 0 ? uiKey : (uiKey = PsycheUtility.NextUiGroupKey());
 
         public override bool TryMergeWith(Hediff other) => false;
 

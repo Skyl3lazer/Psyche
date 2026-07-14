@@ -68,6 +68,37 @@ namespace Psyche
             p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
         }
 
+        [DebugAction("Psyche", "Add haunted scar (named, sev 7)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void AddHauntedScar(Pawn p)
+        {
+            BodyPartRecord? brain = p.health.hediffSet.GetBrain();
+            if (brain == null)
+            {
+                return;
+            }
+
+            Hediff scar = HediffMaker.MakeHediff(PsycheDefOf.Psyche_Scar_Haunted, p, brain);
+            scar.Severity = 7f;
+            (scar as Hediff_PsycheScar)?.NotePeak();
+            p.health.AddHediff(scar, brain);
+            p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+        }
+
+        [DebugAction("Psyche", "Add hard-won clarity (named, sev 7)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void AddHardWonClarity(Pawn p)
+        {
+            BodyPartRecord? brain = p.health.hediffSet.GetBrain();
+            if (brain == null)
+            {
+                return;
+            }
+
+            Hediff clarity = HediffMaker.MakeHediff(PsycheDefOf.Psyche_Clarity_HardWon, p, brain);
+            clarity.Severity = 7f;
+            p.health.AddHediff(clarity, brain);
+            p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+        }
+
         [DebugAction("Psyche", "Add clarity window (sev 6)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
         private static void AddClarityWindow(Pawn p)
         {
@@ -220,6 +251,6 @@ namespace Psyche
         }
 
         private static List<Hediff> Scars(Pawn p) =>
-            p.health.hediffSet.hediffs.Where(h => h.def == PsycheDefOf.Psyche_Scar).ToList();
+            p.health.hediffSet.hediffs.Where(h => h is Hediff_PsycheScar).ToList();
     }
 }

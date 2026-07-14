@@ -24,12 +24,14 @@ namespace Psyche
                 }
 
                 float coef = parent.def.GetModExtension<PsycheHealthOffsetExtension>()?.maxHealthPerSeverity ?? 0f;
-                float deltaFraction = (parent.Severity * coef) / need.BaseMaxHealth;
-                float thresholdChange = -deltaFraction * (1f - need.InnateMbt);
-                return "Maximum psyche: " + Signed(deltaFraction) + "\nBreak threshold: " + Signed(thresholdChange);
+                float delta = parent.Severity * coef;
+                float thresholdChange = -(delta / need.BaseMaxHealth) * (1f - need.InnateMbt);
+                return "Maximum psyche: " + SignedValue(delta) + "\nBreak threshold: " + SignedPercent(thresholdChange);
             }
         }
 
-        private static string Signed(float fraction) => (fraction > 0f ? "+" : string.Empty) + fraction.ToStringPercent();
+        private static string SignedValue(float value) => (value > 0f ? "+" : string.Empty) + value.ToString("0.#");
+
+        private static string SignedPercent(float fraction) => (fraction > 0f ? "+" : string.Empty) + fraction.ToStringPercent();
     }
 }
