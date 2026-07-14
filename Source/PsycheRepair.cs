@@ -28,7 +28,7 @@ namespace Psyche
         }
 
         public static float FloorForTier(int tier, float peak) =>
-            peak > PsycheTuning.TierMaxTreatable[tier - 1] ? PsycheTuning.TierMaxTreatable[tier - 1] : 0f;
+            Mathf.Max(0f, peak - PsycheTuning.TierRepairReach[tier - 1]);
 
         public static bool IsReducible(Hediff_PsycheScar scar, int tier) =>
             scar.Severity > FloorForTier(tier, scar.PeakSeverity) + 0.001f;
@@ -68,15 +68,12 @@ namespace Psyche
 
             if (quality > zero)
             {
-                float progress = magnitude * ((quality - zero) / (1f - zero));
                 float floor = FloorForTier(tier, scar.PeakSeverity);
-                float target = scar.Severity - progress;
                 if (scar.Severity > floor)
                 {
-                    target = Mathf.Max(floor, target);
+                    float progress = magnitude * ((quality - zero) / (1f - zero));
+                    scar.Severity = Mathf.Max(floor, scar.Severity - progress);
                 }
-
-                scar.Severity = Mathf.Max(0f, Mathf.Min(scar.Severity, target));
             }
             else
             {

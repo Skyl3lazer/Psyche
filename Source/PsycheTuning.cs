@@ -37,7 +37,7 @@ namespace Psyche
         public const int SeekWaitTicks = 1500;
         public const int CounselingCooldownTicks = 60000;
 
-        public static readonly float[] TierMaxTreatable = { 2f, 5f, 9f, 99999f };
+        public static readonly float[] TierRepairReach = { 2f, 4f, 7f, 99999f };
         public static readonly float[] TierRepairMagnitude = { 1.0f, 1.5f, 2.25f, 3.0f };
         public static readonly float[] TierQualityBase = { 0.05f, 0.10f, 0.15f, 0.20f };
         public static readonly float[] TierMedicinePotencyCap = { 0f, 0.75f, 1.25f, 99999f };
