@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using RimWorld;
+using UnityEngine;
 using Verse;
+using Verse.AI.Group;
 
 namespace Psyche
 {
@@ -21,6 +23,18 @@ namespace Psyche
             resolved = true;
             preceptDef = DefDatabase<PreceptDef>.GetNamedSilentFail("Psyche_ClarityContemplation");
             patternDef = DefDatabase<RitualPatternDef>.GetNamedSilentFail("Psyche_ClarityContemplation");
+        }
+
+        public static float CounselorScore(Pawn? counselor, Pawn? seeker)
+        {
+            if (counselor == null || seeker == null)
+            {
+                return 0f;
+            }
+
+            int social = counselor.skills?.GetSkill(SkillDefOf.Social)?.Level ?? 0;
+            int opinion = counselor.relations?.OpinionOf(seeker) ?? 0;
+            return social + (Mathf.Max(0, opinion) * 0.1f);
         }
 
         public static bool TryBegin(Pawn pawn)
@@ -64,8 +78,56 @@ namespace Psyche
                 }
 
                 TargetInfo target = new TargetInfo(spot, pawn.Map);
+
+                Pawn? best = null;
+                float bestScore = 0f;
+                foreach (Pawn c in pawn.Map.mapPawns.FreeColonistsSpawned)
+                {
+                    if (c == pawn || c.Downed)
+                    {
+                        continue;
+                    }
+
+                    float s = CounselorScore(c, pawn);
+                    if (s > bestScore)
+                    {
+                        bestScore = s;
+                        best = c;
+                    }
+                }
+
                 Dictionary<string, Pawn> forced = new Dictionary<string, Pawn> { { "seeker", pawn } };
-                ritual.ShowRitualBeginWindow(target, null, pawn, forced);
+
+                Precept_Ritual ritualLocal = ritual;
+                Dialog_BeginRitual.ActionCallback action = delegate (RitualRoleAssignments assignments)
+                {
+                    ritualLocal.behavior.TryExecuteOn(target, null, ritualLocal, null, assignments, true);
+                    return true;
+                };
+
+                Dialog_BeginRitual.PawnFilter filter = delegate (Pawn p, bool voluntary, bool allowOtherIdeos)
+                {
+                    if (p == pawn || p == best)
+                    {
+                        return true;
+                    }
+
+                    if (p.GetLord() != null || !p.RaceProps.Humanlike || p.IsSubhuman)
+                    {
+                        return false;
+                    }
+
+                    return p.relations != null && p.relations.OpinionOf(pawn) > 0;
+                };
+
+                List<string> extraInfo = new List<string>();
+                if (ritual.outcomeEffect?.def?.extraInfoLines != null)
+                {
+                    extraInfo.AddRange(ritual.outcomeEffect.def.extraInfoLines);
+                }
+
+                Window dialog = new Dialog_BeginClarityRitual(best, ritual.Label.CapitalizeFirst(), ritual, target, pawn.Map, action, null, null, filter, "Begin".Translate(), null, forced, null, extraInfo, pawn);
+                Find.WindowStack.Add(dialog);
                 return true;
             }
             catch (Exception e)

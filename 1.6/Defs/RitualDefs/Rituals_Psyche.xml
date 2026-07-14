@@ -128,15 +128,20 @@
         <curve>
           <points>
             <li>(1, 0)</li>
-            <li>(4, 0.15)</li>
-            <li>(8, 0.3)</li>
+            <li>(4, 0.12)</li>
+            <li>(8, 0.2)</li>
           </points>
         </curve>
       </li>
-      <li Class="RitualOutcomeComp_RolePresentNotSubstituted">
-        <roleId>counselor</roleId>
-        <label>counselor present</label>
-        <qualityOffset>0.25</qualityOffset>
+      <li Class="Psyche.RitualOutcomeComp_PsycheCounselor">
+        <label>counselor</label>
+        <curve>
+          <points>
+            <li>(0, 0)</li>
+            <li>(15, 0.15)</li>
+            <li>(30, 0.25)</li>
+          </points>
+        </curve>
       </li>
     </comps>
     <outcomeChances>
@@ -184,7 +189,6 @@
     <iconPath>UI/Icons/Rituals/RitualFestival</iconPath>
     <visible>false</visible>
     <countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
-    <receivesExpectationsQualityOffset>true</receivesExpectationsQualityOffset>
   </PreceptDef>
 
 </Defs>
