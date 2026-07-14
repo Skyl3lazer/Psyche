@@ -55,7 +55,7 @@ namespace Psyche
                 {
                     for (int i = 0; i < memories.Count; i++)
                     {
-                        if (memories[i] is Thought_Psyche pt)
+                        if (memories[i] is Thought_Psychlet pt)
                         {
                             sum -= pt.CurrentPsycheDamage;
                             sum += pt.CurrentBoonBonus;

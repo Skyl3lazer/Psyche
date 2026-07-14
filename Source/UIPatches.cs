@@ -19,7 +19,7 @@ namespace Psyche
             List<Thought_Memory> memories = __instance.memories.Memories;
             for (int i = 0; i < memories.Count; i++)
             {
-                if (memories[i] is Thought_Psyche pt && pt.RawMagnitude > 0f && pt.VisibleInNeedsTab && !outThoughts.Contains(pt))
+                if (memories[i] is Thought_Psychlet pt && pt.RawMagnitude > 0f && pt.VisibleInNeedsTab && !outThoughts.Contains(pt))
                 {
                     outThoughts.Add(pt);
                 }
@@ -37,7 +37,7 @@ namespace Psyche
 
         public static bool Prefix(Rect rect, Thought group, Pawn pawn, ref bool __result)
         {
-            if (!(group is Thought_Psyche) || !PsycheUtility.IsTracked(pawn))
+            if (!(group is Thought_Psychlet) || !PsycheUtility.IsTracked(pawn))
             {
                 return true;
             }
@@ -57,12 +57,12 @@ namespace Psyche
                 return false;
             }
 
-            bool isBoon = leading is Thought_Psyche lead && lead.IsBoon;
+            bool isBoon = leading is Thought_Psychlet lead && lead.IsBoon;
 
             float amount = 0f;
             for (int i = 0; i < Group.Count; i++)
             {
-                if (Group[i] is Thought_Psyche pt)
+                if (Group[i] is Thought_Psychlet pt)
                 {
                     amount += isBoon ? pt.CurrentBoonBonus : pt.CurrentPsycheDamage;
                 }
@@ -91,7 +91,7 @@ namespace Psyche
                 }
                 else if (contemplating)
                 {
-                    body = "The wound has faded, but has not fully settled - it may still leave a scar before it passes.";
+                    body = "The injury has faded, but has not fully settled - it may still leave a scar before it passes.";
                 }
                 else
                 {

@@ -29,7 +29,7 @@ namespace Psyche
                 return;
             }
 
-            foreach (Thought_Psyche pt in PsycheThoughts(p))
+            foreach (Thought_Psychlet pt in PsycheThoughts(p))
             {
                 pt.age = pt.DurationTicks + 1;
                 memories.RemoveMemory(pt);
@@ -99,8 +99,8 @@ namespace Psyche
         [DebugAction("Psyche", "Treat worst injury (one session)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
         private static void TreatInjury(Pawn p)
         {
-            Thought_Psyche? worst = null;
-            foreach (Thought_Psyche pt in PsycheThoughts(p))
+            Thought_Psychlet? worst = null;
+            foreach (Thought_Psychlet pt in PsycheThoughts(p))
             {
                 if (pt.CurrentPsycheDamage > 0f && (worst == null || pt.CurrentPsycheDamage > worst.CurrentPsycheDamage))
                 {
@@ -142,7 +142,7 @@ namespace Psyche
             float modelMbt = Mathf.Clamp(need.InnateMbt + need.ThresholdOffset, stat.minValue, stat.maxValue);
             float statMbt = p.GetStatValue(stat);
 
-            List<Thought_Psyche> thoughts = PsycheThoughts(p);
+            List<Thought_Psychlet> thoughts = PsycheThoughts(p);
             List<Hediff> scars = Scars(p);
 
             Log.Message(string.Format(
@@ -151,9 +151,9 @@ namespace Psyche
                 need.ThresholdOffset, modelMbt, statMbt, thoughts.Count, thoughts.Sum(t => t.CurrentPsycheDamage), scars.Count, scars.Sum(h => h.Severity)));
         }
 
-        private static List<Thought_Psyche> PsycheThoughts(Pawn p)
+        private static List<Thought_Psychlet> PsycheThoughts(Pawn p)
         {
-            List<Thought_Psyche> result = new List<Thought_Psyche>();
+            List<Thought_Psychlet> result = new List<Thought_Psychlet>();
             List<Thought_Memory>? memories = p.needs?.mood?.thoughts?.memories?.Memories;
             if (memories == null)
             {
@@ -162,7 +162,7 @@ namespace Psyche
 
             for (int i = 0; i < memories.Count; i++)
             {
-                if (memories[i] is Thought_Psyche pt)
+                if (memories[i] is Thought_Psychlet pt)
                 {
                     result.Add(pt);
                 }

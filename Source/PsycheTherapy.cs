@@ -28,7 +28,7 @@ namespace Psyche
         public static bool CanReceiveCounseling(Pawn pawn) =>
             pawn.needs?.TryGetNeed<Need_Psyche>()?.CanReceiveCounseling ?? false;
 
-        public static Thought_Psyche? WorstTreatableInjury(Pawn pawn)
+        public static Thought_Psychlet? WorstTreatableInjury(Pawn pawn)
         {
             List<Thought_Memory>? memories = pawn.needs?.mood?.thoughts?.memories?.Memories;
             if (memories == null)
@@ -36,10 +36,10 @@ namespace Psyche
                 return null;
             }
 
-            Thought_Psyche? worst = null;
+            Thought_Psychlet? worst = null;
             for (int i = 0; i < memories.Count; i++)
             {
-                if (memories[i] is Thought_Psyche pt && pt.CanBeTreated && (worst == null || pt.CurrentPsycheDamage > worst.CurrentPsycheDamage))
+                if (memories[i] is Thought_Psychlet pt && pt.CanBeTreated && (worst == null || pt.CurrentPsycheDamage > worst.CurrentPsycheDamage))
                 {
                     worst = pt;
                 }
@@ -55,7 +55,7 @@ namespace Psyche
 
         public static void ApplySession(Pawn counselor, Pawn patient)
         {
-            Thought_Psyche? injury = WorstTreatableInjury(patient);
+            Thought_Psychlet? injury = WorstTreatableInjury(patient);
             if (injury != null)
             {
                 injury.Treat(SocialLevel(counselor));

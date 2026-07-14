@@ -13,7 +13,7 @@ namespace Psyche
             {
                 if (ShouldConvert(def))
                 {
-                    def.thoughtClass = typeof(Thought_Psyche);
+                    def.thoughtClass = typeof(Thought_Psychlet);
                     def.stackLimit = Mathf.Max(def.stackLimit, PsycheTuning.ConvertedStackLimit);
                 }
             }

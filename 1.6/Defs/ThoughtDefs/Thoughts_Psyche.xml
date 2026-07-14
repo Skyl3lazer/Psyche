@@ -15,7 +15,7 @@
 
   <ThoughtDef>
     <defName>Psyche_TestBoon</defName>
-    <durationDays>1</durationDays>
+    <durationDays>10</durationDays>
     <stages>
       <li>
         <label>psyche test boon</label>

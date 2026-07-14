@@ -42,7 +42,7 @@ namespace Psyche
     {
         public static void Postfix(MemoryThoughtHandler __instance, Thought_Memory newThought)
         {
-            if (!(newThought is Thought_Psyche pt) || !__instance.Memories.Contains(newThought))
+            if (!(newThought is Thought_Psychlet pt) || !__instance.Memories.Contains(newThought))
             {
                 return;
             }
@@ -57,7 +57,7 @@ namespace Psyche
     {
         public static void Postfix(MemoryThoughtHandler __instance, Thought_Memory th)
         {
-            if (th is Thought_Psyche pt && pt.ShouldDiscard)
+            if (th is Thought_Psychlet pt && pt.ShouldDiscard)
             {
                 pt.RollOnExpiry();
                 __instance.pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();

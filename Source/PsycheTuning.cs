@@ -17,7 +17,9 @@ namespace Psyche
         public const float ScarSizeLight = 0.4f;
 
         public const float BoonDecayFloor = 0.5f;
-        public const float ClarityChance = 0.15f;
+        public const float ClarityMinDurationDays = 10f;
+        public const float ClarityChancePerMagnitude = 0.005f;
+        public const float ClarityChanceCap = 0.5f;
         public const float ClarityScale = 0.35f;
         public const float ClarityCapHP = 30f;
         public const float MaxHealthFloorFrac = 0.1f;

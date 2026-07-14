@@ -4,7 +4,7 @@ using Verse;
 
 namespace Psyche
 {
-    public class Thought_Psyche : Thought_Memory
+    public class Thought_Psychlet : Thought_Memory
     {
         private float signedMagnitude;
         private bool captured;
@@ -116,9 +116,13 @@ namespace Psyche
 
             if (IsBoon)
             {
-                if (Rand.Chance(PsycheTuning.ClarityChance))
+                if (def.durationDays >= PsycheTuning.ClarityMinDurationDays)
                 {
-                    PsycheClarities.TryForm(pawn, RawMagnitude);
+                    float chance = Mathf.Min(RawMagnitude * PsycheTuning.ClarityChancePerMagnitude, PsycheTuning.ClarityChanceCap);
+                    if (Rand.Chance(chance))
+                    {
+                        PsycheClarities.TryForm(pawn, RawMagnitude);
+                    }
                 }
 
                 return;
