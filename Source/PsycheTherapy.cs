@@ -23,10 +23,24 @@ namespace Psyche
             return worst;
         }
 
-        public static bool HasRepairableScar(Pawn pawn) => WorstScar(pawn) != null;
+        public static bool HasRepairableScar(Pawn pawn) => PsycheRepair.HasReducibleScar(pawn);
 
         public static bool CanReceiveCounseling(Pawn pawn) =>
             pawn.needs?.TryGetNeed<Need_Psyche>()?.CanReceiveCounseling ?? false;
+
+        public static bool RepairMedicineSatisfied(Pawn patient)
+        {
+            int tier = PsycheRepair.BestResearchedTier();
+            if (!PsycheMedicine.MedicinePossible(patient, tier) || PsycheMod.Settings.attemptTherapyWithoutBestMedicine)
+            {
+                return true;
+            }
+
+            return PsycheMedicine.AnyUsableOnMap(patient, tier);
+        }
+
+        public static bool RepairAvailable(Pawn pawn) =>
+            HasRepairableScar(pawn) && CanReceiveCounseling(pawn) && RepairMedicineSatisfied(pawn);
 
         public static Thought_Psychlet? WorstTreatableInjury(Pawn pawn)
         {
@@ -51,7 +65,7 @@ namespace Psyche
         public static bool HasTreatableInjury(Pawn pawn) => WorstTreatableInjury(pawn) != null;
 
         public static bool NeedsCare(Pawn pawn) =>
-            HasTreatableInjury(pawn) || (HasRepairableScar(pawn) && CanReceiveCounseling(pawn));
+            HasTreatableInjury(pawn) || RepairAvailable(pawn);
 
         public static void ApplySession(Pawn counselor, Pawn patient)
         {
@@ -73,18 +87,13 @@ namespace Psyche
                 return;
             }
 
-            Hediff? scar = WorstScar(patient);
+            Hediff_PsycheScar? scar = PsycheRepair.WorstReducibleScar(patient);
             if (scar == null)
             {
                 return;
             }
 
-            float amount = (PsycheTuning.RepairPerSessionBase + (SocialLevel(counselor) * PsycheTuning.RepairPerSocialLevel)) * Rand.Range(0.75f, 1.25f);
-            scar.Severity -= amount;
-            if (scar.Severity <= 0f)
-            {
-                patient.health.RemoveHediff(scar);
-            }
+            PsycheRepair.ApplyRepairSession(counselor, patient, scar);
 
             Need_Psyche? need = patient.needs?.TryGetNeed<Need_Psyche>();
             need?.Recompute();

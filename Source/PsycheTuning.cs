@@ -33,10 +33,26 @@ namespace Psyche
         public const float InjuryHealedEpsilon = 0.5f;
         public const int InjuryTreatCooldownTicks = 40000;
 
-        public const float RepairPerSessionBase = 2f;
-        public const float RepairPerSocialLevel = 0.5f;
         public const int TherapySessionTicks = 600;
         public const int SeekWaitTicks = 1500;
         public const int CounselingCooldownTicks = 60000;
+
+        public static readonly float[] TierMaxTreatable = { 2f, 5f, 9f, 99999f };
+        public static readonly float[] TierRepairMagnitude = { 1.0f, 1.5f, 2.25f, 3.0f };
+        public static readonly float[] TierQualityBase = { 0.05f, 0.10f, 0.15f, 0.20f };
+        public static readonly float[] TierMedicinePotencyCap = { 0f, 0.75f, 1.25f, 99999f };
+
+        public const float RepairZeroPoint = 0.20f;
+        public const float RepairQualityPerSocial = 0.03f;
+        public const float RepairQualityRandomSpread = 0.10f;
+        public const float RepairMedicineFloorPerPotency = 0.25f;
+        public const float RepairBackfireScale = 0.5f;
+
+        public const float ClarityWindowDeepThreshold = 4f;
+        public const float ClaritySeekSoloQualityBase = 0.25f;
+        public const float ClaritySeekSoloQualityPerSocial = 0.02f;
+        public const float ClarityFromWindowScale = 1f;
+        public const int ClarityGlitterCost = 3;
+        public const int ContemplationTicks = 4000;
     }
 }

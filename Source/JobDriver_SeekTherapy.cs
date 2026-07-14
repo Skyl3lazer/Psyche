@@ -13,7 +13,7 @@ namespace Psyche
             yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.OnCell);
 
             Toil wait = Toils_General.Wait(PsycheTuning.SeekWaitTicks);
-            wait.AddFailCondition(() => !PsycheTherapy.HasRepairableScar(pawn));
+            wait.AddFailCondition(() => !PsycheTherapy.NeedsCare(pawn));
             yield return wait;
         }
     }

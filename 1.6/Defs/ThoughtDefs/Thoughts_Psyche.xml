@@ -25,4 +25,18 @@
     </stages>
   </ThoughtDef>
 
+  <ThoughtDef>
+    <defName>Psyche_ClarityWindow</defName>
+    <thoughtClass>Psyche.Thought_ClarityWindow</thoughtClass>
+    <durationDays>15</durationDays>
+    <stackLimit>10</stackLimit>
+    <stages>
+      <li>
+        <label>reflecting on healed scar</label>
+        <description>A deep psyche scar has been fully mended. For a while, the memory of it is close enough to the surface to be turned into a lasting clarity - through EMDR and a guided contemplation.</description>
+        <baseMoodEffect>0</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
 </Defs>

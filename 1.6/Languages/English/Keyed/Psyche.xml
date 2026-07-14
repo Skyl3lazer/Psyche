@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Psyche_Setting_AttemptWithoutBestMedicine>Attempt therapy without best allowed medicine</Psyche_Setting_AttemptWithoutBestMedicine>
+  <Psyche_Setting_AttemptWithoutBestMedicine_Tip>When on, counselors hold psyche therapy sessions even when the best medicine allowed for the patient is not in stock, using lesser medicine or none - which lowers quality and can risk a botched, scar-worsening session. When off, a session waits until the best allowed medicine is on hand.</Psyche_Setting_AttemptWithoutBestMedicine_Tip>
+
+  <Psyche_SeekClarity_Label>Seek clarity: {0} scar</Psyche_SeekClarity_Label>
+  <Psyche_SeekClarity_Desc>Send this colonist to contemplate a fully-healed deep psyche scar and try to turn it into a lasting clarity. Consumes {0} glitterworld medicine only if it succeeds. One attempt - the window closes afterward.</Psyche_SeekClarity_Desc>
+  <Psyche_SeekClarity_NoGlitter>Requires {0} glitterworld medicine available and unforbidden.</Psyche_SeekClarity_NoGlitter>
+
+  <Psyche_Alert_SeekClarity>Pawns can seek clarity</Psyche_Alert_SeekClarity>
+  <Psyche_Alert_SeekClarity_Desc>These colonists have fully healed a deep psyche scar and can turn it into a lasting clarity through contemplation. It costs {0} glitterworld medicine, and the chance passes after a while.\n\nUse the "Seek clarity" command on the colonist.</Psyche_Alert_SeekClarity_Desc>
+
+  <Psyche_Reflecting_Label>reflecting on {0} scar</Psyche_Reflecting_Label>
+  <Psyche_Reflecting_Desc>This scar has been fully mended. For a short while it can be turned into a lasting clarity through a guided contemplation, costing {0} glitterworld medicine. Use the "Seek clarity" command.</Psyche_Reflecting_Desc>
+
+  <Psyche_ClarityFormed>{0} worked through a healed scar and found a lasting clarity.</Psyche_ClarityFormed>
+  <Psyche_ClarityFailed>{0} contemplated a healed scar, but no lasting clarity took hold.</Psyche_ClarityFailed>
+
+</LanguageData>

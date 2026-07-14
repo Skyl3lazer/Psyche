@@ -23,6 +23,10 @@ namespace Psyche
                 {
                     outThoughts.Add(pt);
                 }
+                else if (memories[i] is Thought_ClarityWindow window && !outThoughts.Contains(window))
+                {
+                    outThoughts.Add(window);
+                }
             }
         }
     }
@@ -37,7 +41,18 @@ namespace Psyche
 
         public static bool Prefix(Rect rect, Thought group, Pawn pawn, ref bool __result)
         {
-            if (!(group is Thought_Psychlet) || !PsycheUtility.IsTracked(pawn))
+            if (!PsycheUtility.IsTracked(pawn))
+            {
+                return true;
+            }
+
+            if (group is Thought_ClarityWindow window)
+            {
+                DrawClarityWindow(rect, window, pawn, ref __result);
+                return false;
+            }
+
+            if (!(group is Thought_Psychlet))
             {
                 return true;
             }
@@ -122,6 +137,46 @@ namespace Psyche
             Group.Clear();
             __result = true;
             return false;
+        }
+
+        private static void DrawClarityWindow(Rect rect, Thought_ClarityWindow window, Pawn pawn, ref bool __result)
+        {
+            pawn.needs.mood.thoughts.GetMoodThoughts(window, Group);
+            if (Group.Count == 0)
+            {
+                __result = false;
+                return;
+            }
+
+            string label = "Psyche_Reflecting_Label".Translate(window.ScarBandLabel);
+            if (Group.Count > 1)
+            {
+                label = label + " x" + Group.Count;
+            }
+
+            if (Mouse.IsOver(rect))
+            {
+                Widgets.DrawHighlight(rect);
+                string tip = label.AsTipTitle() + "\n\n" + "Psyche_Reflecting_Desc".Translate(PsycheTuning.ClarityGlitterCost);
+                TooltipHandler.TipRegion(rect, new TipSignal(tip, 83822));
+            }
+
+            Text.WordWrap = false;
+            Text.Anchor = TextAnchor.MiddleLeft;
+            Rect labelRect = new Rect(rect.x + 10f, rect.y, 225f, rect.height);
+            labelRect.yMin -= 3f;
+            labelRect.yMax += 3f;
+            Widgets.Label(labelRect, label);
+
+            Text.Anchor = TextAnchor.MiddleCenter;
+            GUI.color = PsycheBoonColor;
+            Widgets.Label(new Rect(rect.x + 235f, rect.y, 32f, rect.height), "0");
+            Text.Anchor = TextAnchor.UpperLeft;
+            GUI.color = Color.white;
+            Text.WordWrap = true;
+
+            Group.Clear();
+            __result = true;
         }
     }
 }

@@ -47,8 +47,49 @@ namespace Psyche
 
             Hediff scar = HediffMaker.MakeHediff(PsycheDefOf.Psyche_Scar, p, brain);
             scar.Severity = 10f;
+            (scar as Hediff_PsycheScar)?.NotePeak();
             p.health.AddHediff(scar, brain);
             p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+        }
+
+        [DebugAction("Psyche", "Add deep test scar (sev 6)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void AddDeepScar(Pawn p)
+        {
+            BodyPartRecord? brain = p.health.hediffSet.GetBrain();
+            if (brain == null)
+            {
+                return;
+            }
+
+            Hediff scar = HediffMaker.MakeHediff(PsycheDefOf.Psyche_Scar, p, brain);
+            scar.Severity = 6f;
+            (scar as Hediff_PsycheScar)?.NotePeak();
+            p.health.AddHediff(scar, brain);
+            p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+        }
+
+        [DebugAction("Psyche", "Add clarity window (sev 6)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void AddClarityWindow(Pawn p)
+        {
+            MemoryThoughtHandler? memories = p.needs?.mood?.thoughts?.memories;
+            if (memories == null)
+            {
+                return;
+            }
+
+            Thought_ClarityWindow window = (Thought_ClarityWindow)ThoughtMaker.MakeThought(PsycheDefOf.Psyche_ClarityWindow);
+            window.healedSeverity = 6f;
+            memories.TryGainMemory(window);
+        }
+
+        [DebugAction("Psyche", "Resolve clarity window (quality 1)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void ResolveClarityWindow(Pawn p)
+        {
+            Thought_ClarityWindow? window = PsycheClarityWindows.WorstWindow(p);
+            if (window != null)
+            {
+                PsycheClarityWindows.ResolveAttempt(p, window, 1f);
+            }
         }
 
         [DebugAction("Psyche", "Add test boon", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
@@ -80,19 +121,13 @@ namespace Psyche
         [DebugAction("Psyche", "Repair worst scar (one session)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
         private static void RepairSession(Pawn p)
         {
-            Hediff? scar = PsycheTherapy.WorstScar(p);
+            Hediff_PsycheScar? scar = PsycheRepair.WorstReducibleScar(p);
             if (scar == null)
             {
                 return;
             }
 
-            int social = p.skills?.GetSkill(SkillDefOf.Social)?.Level ?? 0;
-            scar.Severity -= PsycheTuning.RepairPerSessionBase + (social * PsycheTuning.RepairPerSocialLevel);
-            if (scar.Severity <= 0f)
-            {
-                p.health.RemoveHediff(scar);
-            }
-
+            PsycheRepair.ApplyRepairSession(p, p, scar);
             p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
         }
 

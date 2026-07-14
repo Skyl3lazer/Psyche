@@ -3,7 +3,7 @@
 
   <HediffDef>
     <defName>Psyche_Scar</defName>
-    <hediffClass>HediffWithComps</hediffClass>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>psyche scar</label>
     <description>A permanent mark left by trauma that never fully healed. It lowers the maximum psyche health this person can hold.</description>
     <isBad>true</isBad>

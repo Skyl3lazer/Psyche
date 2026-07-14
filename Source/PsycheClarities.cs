@@ -6,7 +6,11 @@ namespace Psyche
     {
         public static void TryForm(Pawn pawn, float boonMagnitude)
         {
-            float size = boonMagnitude * PsycheTuning.ClarityScale;
+            FormDirect(pawn, boonMagnitude * PsycheTuning.ClarityScale);
+        }
+
+        public static void FormDirect(Pawn pawn, float size)
+        {
             if (size <= 0f)
             {
                 return;

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
 using RimWorld;
@@ -5,6 +6,24 @@ using Verse;
 
 namespace Psyche
 {
+    [HarmonyPatch(typeof(Pawn), nameof(Pawn.GetGizmos))]
+    public static class Patch_PawnGetGizmos
+    {
+        public static IEnumerable<Gizmo> Postfix(IEnumerable<Gizmo> __result, Pawn __instance)
+        {
+            foreach (Gizmo gizmo in __result)
+            {
+                yield return gizmo;
+            }
+
+            Command_Action? seek = PsycheClaritySeeking.GizmoFor(__instance);
+            if (seek != null)
+            {
+                yield return seek;
+            }
+        }
+    }
+
     [HarmonyPatch(typeof(Pawn_NeedsTracker), "ShouldHaveNeed")]
     public static class Patch_ShouldHaveNeed
     {

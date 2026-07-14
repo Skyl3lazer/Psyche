@@ -15,4 +15,11 @@
     <reportString>counseling TargetA.</reportString>
   </JobDef>
 
+  <JobDef>
+    <defName>Psyche_ContemplateClarity</defName>
+    <driverClass>Psyche.JobDriver_ContemplateClarity</driverClass>
+    <reportString>contemplating a healed scar.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
 </Defs>

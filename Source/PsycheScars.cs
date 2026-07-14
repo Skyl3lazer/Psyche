@@ -29,6 +29,7 @@ namespace Psyche
 
             Hediff scar = HediffMaker.MakeHediff(PsycheDefOf.Psyche_Scar, pawn, brain);
             scar.Severity = size;
+            (scar as Hediff_PsycheScar)?.NotePeak();
             pawn.health.AddHediff(scar, brain);
             pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
         }
