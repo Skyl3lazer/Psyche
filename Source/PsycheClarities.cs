@@ -4,12 +4,12 @@ namespace Psyche
 {
     public static class PsycheClarities
     {
-        public static void TryForm(Pawn pawn, float boonMagnitude)
+        public static void TryForm(Pawn pawn, float boonMagnitude, HediffDef? markDef = null)
         {
-            FormDirect(pawn, boonMagnitude * PsycheTuning.ClarityScale);
+            FormDirect(pawn, boonMagnitude * PsycheTuning.ClarityScale, markDef);
         }
 
-        public static void FormDirect(Pawn pawn, float size)
+        public static void FormDirect(Pawn pawn, float size, HediffDef? markDef = null)
         {
             if (size <= 0f)
             {
@@ -22,7 +22,7 @@ namespace Psyche
                 return;
             }
 
-            Hediff clarity = HediffMaker.MakeHediff(PsycheDefOf.Psyche_Clarity, pawn, brain);
+            Hediff clarity = HediffMaker.MakeHediff(markDef ?? PsycheDefOf.Psyche_Clarity, pawn, brain);
             clarity.Severity = size;
             pawn.health.AddHediff(clarity, brain);
             pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();

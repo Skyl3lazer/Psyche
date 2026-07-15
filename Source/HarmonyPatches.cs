@@ -205,19 +205,29 @@ namespace Psyche
     [HarmonyPatch(typeof(TendUtility), nameof(TendUtility.DoTend))]
     public static class Patch_AllySaved
     {
-        public static void Prefix(Pawn doctor, Pawn patient, out bool __state)
+        public static void Prefix(Pawn doctor, Pawn patient, out float __state)
         {
-            __state = doctor != null && patient != null && patient != doctor
+            __state = -1f;
+            if (doctor != null && patient != null && patient != doctor
                 && PsycheUtility.IsTracked(doctor) && patient.Downed && !patient.HostileTo(doctor)
-                && patient.health.hediffSet.BleedRateTotal >= PsycheTuning.LifeThreateningBleedRate;
+                && patient.health.hediffSet.BleedRateTotal >= PsycheTuning.LifeThreateningBleedRate)
+            {
+                __state = patient.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.BloodLoss)?.Severity ?? 0f;
+            }
         }
 
-        public static void Postfix(Pawn doctor, bool __state)
+        public static void Postfix(Pawn doctor, float __state)
         {
-            if (__state)
+            if (__state < 0f)
             {
-                PsycheOwnTriggers.Fire(doctor, PsycheDefOf.Psyche_OT_SavedAlly);
+                return;
             }
+
+            float bloodLoss = __state > 1f ? 1f : __state;
+            float factor = PsycheTuning.SavedAllyBloodScaleMin
+                + ((PsycheTuning.SavedAllyBloodScaleMax - PsycheTuning.SavedAllyBloodScaleMin) * bloodLoss);
+            float baseSize = PsycheDefOf.Psyche_OT_SavedAlly.stages[0].baseMoodEffect;
+            PsycheOwnTriggers.Fire(doctor, PsycheDefOf.Psyche_OT_SavedAlly, baseSize * factor * PsycheTuning.WoundScale);
         }
     }
 

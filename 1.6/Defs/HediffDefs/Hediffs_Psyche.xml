@@ -291,6 +291,114 @@
   </HediffDef>
 
   <HediffDef>
+    <defName>Psyche_Scar_Phantom</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>phantom psyche scar</label>
+    <description>The mind still reaches for a part of the body that is no longer there. The absence never quite stops aching.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_ShellShocked</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>shell-shocked psyche scar</label>
+    <description>The violence survived did not leave with the battle. It waits just beneath the surface, ready to return.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_ProtectiveDread</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>protective dread psyche scar</label>
+    <description>Having watched a loved one broken, the fear of it happening again never fully lets go.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Clarity_Artisan</defName>
+    <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
+    <label>artisan's psyche clarity</label>
+    <description>Having made something truly great, this person carries a settled certainty of their own craft.</description>
+    <isBad>false</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Clarity_Visionary</defName>
+    <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
+    <label>visionary psyche clarity</label>
+    <description>An inspired moment left a lasting clarity of thought behind it, like a light that never fully dimmed.</description>
+    <isBad>false</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Clarity_HealersResolve</defName>
+    <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
+    <label>healer's resolve psyche clarity</label>
+    <description>Having pulled someone back from death, this person holds a steadier faith in their own hands.</description>
+    <isBad>false</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
     <defName>Psyche_Clarity_Sanguine</defName>
     <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
     <label>sanguine psyche clarity</label>

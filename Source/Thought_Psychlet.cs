@@ -161,6 +161,8 @@ namespace Psyche
 
             rolled = true;
 
+            PsycheThoughtExtension? ext = def.GetModExtension<PsycheThoughtExtension>();
+
             if (IsBoon)
             {
                 if (def.durationDays >= PsycheTuning.ClarityMinDurationDays && RawMagnitude >= PsycheTuning.ClarityMinIntensity)
@@ -168,7 +170,7 @@ namespace Psyche
                     float chance = Mathf.Min(RawMagnitude * PsycheTuning.ClarityChancePerMagnitude, PsycheTuning.ClarityChanceCap);
                     if (Rand.Chance(chance))
                     {
-                        PsycheClarities.TryForm(pawn, RawMagnitude);
+                        PsycheClarities.TryForm(pawn, RawMagnitude, ext?.clarityDef);
                     }
                 }
 
@@ -176,7 +178,7 @@ namespace Psyche
             }
 
             float upkeep = mitigationSamples > 0 ? mitigationSum / mitigationSamples : 0.5f;
-            PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel), Mathf.Clamp01(closureLevel), otherPawn?.thingIDNumber ?? 0, killerId);
+            PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel), Mathf.Clamp01(closureLevel), otherPawn?.thingIDNumber ?? 0, killerId, ext?.scarDef);
         }
 
         private float SampleMitigation()

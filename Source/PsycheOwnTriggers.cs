@@ -8,6 +8,12 @@ namespace Psyche
     {
         public static void Fire(Pawn pawn, ThoughtDef def)
         {
+            float unit = (def != null && def.stages != null && def.stages.Count > 0 ? def.stages[0].baseMoodEffect : 0f) * PsycheTuning.WoundScale;
+            Fire(pawn, def, unit);
+        }
+
+        public static void Fire(Pawn pawn, ThoughtDef def, float unit)
+        {
             if (pawn == null || def == null || !PsycheUtility.IsTracked(pawn))
             {
                 return;
@@ -19,7 +25,6 @@ namespace Psyche
                 return;
             }
 
-            float unit = (def.stages != null && def.stages.Count > 0 ? def.stages[0].baseMoodEffect : 0f) * PsycheTuning.WoundScale;
             if (unit == 0f)
             {
                 return;

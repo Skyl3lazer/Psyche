@@ -4,6 +4,11 @@
   <ThoughtDef>
     <defName>Psyche_OT_Amputation</defName>
     <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
+    <modExtensions>
+      <li Class="Psyche.PsycheThoughtExtension">
+        <scarDef>Psyche_Scar_Phantom</scarDef>
+      </li>
+    </modExtensions>
     <durationDays>8</durationDays>
     <stackLimit>1</stackLimit>
     <stages>
@@ -18,6 +23,11 @@
   <ThoughtDef>
     <defName>Psyche_OT_CombatTrauma</defName>
     <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
+    <modExtensions>
+      <li Class="Psyche.PsycheThoughtExtension">
+        <scarDef>Psyche_Scar_ShellShocked</scarDef>
+      </li>
+    </modExtensions>
     <durationDays>6</durationDays>
     <stackLimit>1</stackLimit>
     <stages>
@@ -32,6 +42,11 @@
   <ThoughtDef>
     <defName>Psyche_OT_AllyWounded</defName>
     <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
+    <modExtensions>
+      <li Class="Psyche.PsycheThoughtExtension">
+        <scarDef>Psyche_Scar_ProtectiveDread</scarDef>
+      </li>
+    </modExtensions>
     <durationDays>5</durationDays>
     <stackLimit>1</stackLimit>
     <stages>
@@ -46,6 +61,11 @@
   <ThoughtDef>
     <defName>Psyche_OT_Masterwork</defName>
     <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
+    <modExtensions>
+      <li Class="Psyche.PsycheThoughtExtension">
+        <clarityDef>Psyche_Clarity_Artisan</clarityDef>
+      </li>
+    </modExtensions>
     <durationDays>2</durationDays>
     <stackLimit>1</stackLimit>
     <stages>
@@ -60,6 +80,11 @@
   <ThoughtDef>
     <defName>Psyche_OT_Legendary</defName>
     <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
+    <modExtensions>
+      <li Class="Psyche.PsycheThoughtExtension">
+        <clarityDef>Psyche_Clarity_Artisan</clarityDef>
+      </li>
+    </modExtensions>
     <durationDays>10</durationDays>
     <stackLimit>1</stackLimit>
     <stages>
@@ -74,7 +99,12 @@
   <ThoughtDef>
     <defName>Psyche_OT_Inspiration</defName>
     <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
-    <durationDays>6</durationDays>
+    <modExtensions>
+      <li Class="Psyche.PsycheThoughtExtension">
+        <clarityDef>Psyche_Clarity_Visionary</clarityDef>
+      </li>
+    </modExtensions>
+    <durationDays>10</durationDays>
     <stackLimit>1</stackLimit>
     <stages>
       <li>
@@ -88,7 +118,12 @@
   <ThoughtDef>
     <defName>Psyche_OT_SavedAlly</defName>
     <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
-    <durationDays>6</durationDays>
+    <modExtensions>
+      <li Class="Psyche.PsycheThoughtExtension">
+        <clarityDef>Psyche_Clarity_HealersResolve</clarityDef>
+      </li>
+    </modExtensions>
+    <durationDays>10</durationDays>
     <stackLimit>1</stackLimit>
     <stages>
       <li>

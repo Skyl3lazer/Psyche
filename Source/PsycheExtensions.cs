@@ -11,6 +11,8 @@ namespace Psyche
     public class PsycheThoughtExtension : DefModExtension
     {
         public bool exemptFromWounds;
+        public HediffDef? scarDef;
+        public HediffDef? clarityDef;
     }
 
     public class PsycheTraitMarkExtension : DefModExtension
