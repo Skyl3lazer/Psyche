@@ -67,6 +67,21 @@ namespace Psyche
         public static bool NeedsCare(Pawn pawn) =>
             HasTreatableInjury(pawn) || RepairAvailable(pawn);
 
+        public static bool IsTherapyCandidate(Pawn patient)
+        {
+            if (patient == null || !PsycheUtility.IsTracked(patient) || !NeedsCare(patient))
+            {
+                return false;
+            }
+
+            if (patient.CurJobDef == PsycheDefOf.Psyche_SeekTherapy)
+            {
+                return true;
+            }
+
+            return patient.InBed() && !HealthAIUtility.ShouldBeTendedNowByPlayer(patient);
+        }
+
         public static void ApplySession(Pawn counselor, Pawn patient)
         {
             Thought_Psychlet? injury = WorstTreatableInjury(patient);

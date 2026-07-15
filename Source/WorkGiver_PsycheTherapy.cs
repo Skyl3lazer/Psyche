@@ -16,7 +16,7 @@ namespace Psyche
             IReadOnlyList<Pawn> pawns = pawn.Map.mapPawns.AllPawnsSpawned;
             for (int i = 0; i < pawns.Count; i++)
             {
-                if (pawns[i].CurJobDef == PsycheDefOf.Psyche_SeekTherapy)
+                if (PsycheTherapy.IsTherapyCandidate(pawns[i]))
                 {
                     yield return pawns[i];
                 }
@@ -30,12 +30,7 @@ namespace Psyche
                 return false;
             }
 
-            if (patient.CurJobDef != PsycheDefOf.Psyche_SeekTherapy)
-            {
-                return false;
-            }
-
-            if (!PsycheUtility.IsTracked(patient) || !PsycheTherapy.NeedsCare(patient))
+            if (!PsycheTherapy.IsTherapyCandidate(patient))
             {
                 return false;
             }

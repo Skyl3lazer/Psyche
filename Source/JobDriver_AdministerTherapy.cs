@@ -15,8 +15,7 @@ namespace Psyche
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
-            this.FailOn(() => Patient.CurJobDef != PsycheDefOf.Psyche_SeekTherapy);
-            this.FailOn(() => !PsycheTherapy.NeedsCare(Patient));
+            this.FailOn(() => !PsycheTherapy.IsTherapyCandidate(Patient));
 
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);
 
