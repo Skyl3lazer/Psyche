@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using RimWorld;
 using Verse;
 
@@ -14,6 +15,22 @@ namespace Psyche
         public static bool IsTracked(Pawn pawn)
         {
             return pawn != null && (pawn.IsColonist || pawn.IsPrisonerOfColony || pawn.IsSlaveOfColony);
+        }
+
+        public static IEnumerable<Pawn> TrackedColonists()
+        {
+            List<Map> maps = Find.Maps;
+            for (int m = 0; m < maps.Count; m++)
+            {
+                IReadOnlyList<Pawn> pawns = maps[m].mapPawns.AllPawnsSpawned;
+                for (int i = 0; i < pawns.Count; i++)
+                {
+                    if (IsTracked(pawns[i]))
+                    {
+                        yield return pawns[i];
+                    }
+                }
+            }
         }
 
         public static string BandedLabel(Hediff hediff)

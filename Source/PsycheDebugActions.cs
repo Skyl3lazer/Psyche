@@ -99,6 +99,15 @@ namespace Psyche
             p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
         }
 
+        [DebugAction("Psyche", "Fire own-trigger: combat trauma", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void FireCombatTrauma(Pawn p) => PsycheOwnTriggers.Fire(p, PsycheDefOf.Psyche_OT_CombatTrauma);
+
+        [DebugAction("Psyche", "Fire own-trigger: masterwork boon", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void FireMasterwork(Pawn p) => PsycheOwnTriggers.Fire(p, PsycheDefOf.Psyche_OT_Masterwork);
+
+        [DebugAction("Psyche", "Fire own-trigger: inspiration boon", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void FireInspiration(Pawn p) => PsycheOwnTriggers.Fire(p, PsycheDefOf.Psyche_OT_Inspiration);
+
         [DebugAction("Psyche", "Apply closure to open wounds (q=1)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
         private static void ApplyClosure(Pawn p)
         {

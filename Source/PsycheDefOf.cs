@@ -16,6 +16,13 @@ namespace Psyche
         public static ThoughtDef Psyche_TestBoon = null!;
         public static ThoughtDef Psyche_ClarityWindow = null!;
         public static ThoughtDef Psyche_LongLife = null!;
+        public static ThoughtDef Psyche_OT_Amputation = null!;
+        public static ThoughtDef Psyche_OT_CombatTrauma = null!;
+        public static ThoughtDef Psyche_OT_AllyWounded = null!;
+        public static ThoughtDef Psyche_OT_Masterwork = null!;
+        public static ThoughtDef Psyche_OT_Legendary = null!;
+        public static ThoughtDef Psyche_OT_Inspiration = null!;
+        public static ThoughtDef Psyche_OT_SavedAlly = null!;
         public static JobDef Psyche_SeekTherapy = null!;
         public static JobDef Psyche_AdministerTherapy = null!;
         public static JobDef Psyche_ContemplateClarity = null!;

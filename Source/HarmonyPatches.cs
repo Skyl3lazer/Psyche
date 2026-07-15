@@ -129,6 +129,98 @@ namespace Psyche
         }
     }
 
+    [HarmonyPatch(typeof(Pawn_HealthTracker), nameof(Pawn_HealthTracker.AddHediff), new[] { typeof(Hediff), typeof(BodyPartRecord), typeof(DamageInfo?), typeof(DamageWorker.DamageResult) })]
+    public static class Patch_LimbLost
+    {
+        public static void Postfix(Hediff hediff, DamageInfo? dinfo)
+        {
+            if (hediff is Hediff_MissingPart && hediff.pawn != null && dinfo.HasValue
+                && dinfo.Value.Def != null && dinfo.Value.Def.ExternalViolenceFor(hediff.pawn))
+            {
+                PsycheOwnTriggers.Fire(hediff.pawn, PsycheDefOf.Psyche_OT_Amputation);
+                PsycheOwnTriggers.FireOnRelations(hediff.pawn, PsycheDefOf.Psyche_OT_AllyWounded);
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Pawn_HealthTracker), "MakeDowned")]
+    public static class Patch_Downed
+    {
+        private static readonly FieldInfo PawnField = AccessTools.Field(typeof(Pawn_HealthTracker), "pawn");
+
+        public static void Postfix(Pawn_HealthTracker __instance, DamageInfo? dinfo)
+        {
+            if (PawnField?.GetValue(__instance) is not Pawn pawn)
+            {
+                return;
+            }
+
+            if (dinfo.HasValue && dinfo.Value.Def != null && dinfo.Value.Def.ExternalViolenceFor(pawn))
+            {
+                PsycheOwnTriggers.Fire(pawn, PsycheDefOf.Psyche_OT_CombatTrauma);
+                PsycheOwnTriggers.FireOnRelations(pawn, PsycheDefOf.Psyche_OT_AllyWounded);
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(GenRecipe), "PostProcessProduct")]
+    public static class Patch_MasterworkCrafted
+    {
+        public static void Postfix(Thing __result, Pawn worker)
+        {
+            if (__result == null || worker == null || !PsycheUtility.IsTracked(worker))
+            {
+                return;
+            }
+
+            CompQuality? cq = __result.TryGetComp<CompQuality>();
+            if (cq == null)
+            {
+                return;
+            }
+
+            if (cq.Quality == QualityCategory.Legendary)
+            {
+                PsycheOwnTriggers.Fire(worker, PsycheDefOf.Psyche_OT_Legendary);
+            }
+            else if (cq.Quality == QualityCategory.Masterwork)
+            {
+                PsycheOwnTriggers.Fire(worker, PsycheDefOf.Psyche_OT_Masterwork);
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(InspirationHandler), nameof(InspirationHandler.TryStartInspiration))]
+    public static class Patch_InspirationGained
+    {
+        public static void Postfix(InspirationHandler __instance, bool __result)
+        {
+            if (__result)
+            {
+                PsycheOwnTriggers.Fire(__instance.pawn, PsycheDefOf.Psyche_OT_Inspiration);
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(TendUtility), nameof(TendUtility.DoTend))]
+    public static class Patch_AllySaved
+    {
+        public static void Prefix(Pawn doctor, Pawn patient, out bool __state)
+        {
+            __state = doctor != null && patient != null && patient != doctor
+                && PsycheUtility.IsTracked(doctor) && patient.Downed && !patient.HostileTo(doctor)
+                && patient.health.hediffSet.BleedRateTotal >= PsycheTuning.LifeThreateningBleedRate;
+        }
+
+        public static void Postfix(Pawn doctor, bool __state)
+        {
+            if (__state)
+            {
+                PsycheOwnTriggers.Fire(doctor, PsycheDefOf.Psyche_OT_SavedAlly);
+            }
+        }
+    }
+
     [HarmonyPatch(typeof(Pawn), nameof(Pawn.Kill))]
     public static class Patch_PawnKilled
     {

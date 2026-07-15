@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>Psyche_OT_Amputation</defName>
+    <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
+    <durationDays>8</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>maimed</label>
+        <description>Part of my body is simply gone. My mind reels at the loss.</description>
+        <baseMoodEffect>-20</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Psyche_OT_CombatTrauma</defName>
+    <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
+    <durationDays>6</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>combat trauma</label>
+        <description>I went down and lived. The violence of it stays with me.</description>
+        <baseMoodEffect>-12</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Psyche_OT_AllyWounded</defName>
+    <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
+    <durationDays>5</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>loved one gravely hurt</label>
+        <description>Someone I love was grievously wounded before my eyes.</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Psyche_OT_Masterwork</defName>
+    <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
+    <durationDays>8</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>creative fervor</label>
+        <description>I poured myself into a masterwork, and the intensity of it lingers.</description>
+        <baseMoodEffect>12</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Psyche_OT_Legendary</defName>
+    <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
+    <durationDays>10</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>transcendent craft</label>
+        <description>I made something legendary. The experience marked me, in a way that might yet become wisdom.</description>
+        <baseMoodEffect>18</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Psyche_OT_Inspiration</defName>
+    <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
+    <durationDays>6</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>inspired</label>
+        <description>An altered, luminous state has come over me. My mind runs hot.</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Psyche_OT_SavedAlly</defName>
+    <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
+    <durationDays>6</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>saved a life</label>
+        <description>I pulled someone back from the brink of death. It shakes and steadies me at once.</description>
+        <baseMoodEffect>12</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+</Defs>

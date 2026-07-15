@@ -86,6 +86,19 @@ namespace Psyche
             }
         }
 
+        public void InitMagnitude(float signed)
+        {
+            signedMagnitude = signed;
+            captured = true;
+        }
+
+        public void Intensify(float signedDelta)
+        {
+            EnsureCaptured();
+            signedMagnitude = Mathf.Clamp(signedMagnitude + signedDelta, -PsycheTuning.OwnTriggerIntensityCap, PsycheTuning.OwnTriggerIntensityCap);
+            age = 0;
+        }
+
         public void Treat(int socialLevel)
         {
             if (IsBoon)
@@ -150,7 +163,7 @@ namespace Psyche
 
             if (IsBoon)
             {
-                if (def.durationDays >= PsycheTuning.ClarityMinDurationDays)
+                if (def.durationDays >= PsycheTuning.ClarityMinDurationDays && RawMagnitude >= PsycheTuning.ClarityMinIntensity)
                 {
                     float chance = Mathf.Min(RawMagnitude * PsycheTuning.ClarityChancePerMagnitude, PsycheTuning.ClarityChanceCap);
                     if (Rand.Chance(chance))

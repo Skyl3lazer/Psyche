@@ -145,21 +145,7 @@ namespace Psyche
             }
         }
 
-        private static IEnumerable<Pawn> TrackedColonists()
-        {
-            List<Map> maps = Find.Maps;
-            for (int m = 0; m < maps.Count; m++)
-            {
-                IReadOnlyList<Pawn> pawns = maps[m].mapPawns.AllPawnsSpawned;
-                for (int i = 0; i < pawns.Count; i++)
-                {
-                    if (PsycheUtility.IsTracked(pawns[i]))
-                    {
-                        yield return pawns[i];
-                    }
-                }
-            }
-        }
+        private static IEnumerable<Pawn> TrackedColonists() => PsycheUtility.TrackedColonists();
 
         public static bool IsBittersweet(Pawn deceased) =>
             deceased.RaceProps != null && deceased.ageTracker != null
