@@ -46,13 +46,13 @@
   <ThoughtDef>
     <defName>Psyche_OT_Masterwork</defName>
     <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
-    <durationDays>8</durationDays>
+    <durationDays>2</durationDays>
     <stackLimit>1</stackLimit>
     <stages>
       <li>
         <label>creative fervor</label>
         <description>I poured myself into a masterwork, and the intensity of it lingers.</description>
-        <baseMoodEffect>12</baseMoodEffect>
+        <baseMoodEffect>6</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
