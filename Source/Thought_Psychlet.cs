@@ -15,6 +15,7 @@ namespace Psyche
         private float closureLevel;
         private float healPulse;
         private int lastTreatedTick = -1;
+        private int killerId;
         private bool rolled;
 
         public override float MoodOffset()
@@ -118,6 +119,16 @@ namespace Psyche
             healPulse += RawMagnitude * quality * PsycheTuning.ClosureHealFrac;
         }
 
+        public int KillerId => killerId;
+
+        public void StampKiller(int id)
+        {
+            if (!IsBoon)
+            {
+                killerId = id;
+            }
+        }
+
         public override void ThoughtInterval()
         {
             base.ThoughtInterval();
@@ -152,7 +163,7 @@ namespace Psyche
             }
 
             float upkeep = mitigationSamples > 0 ? mitigationSum / mitigationSamples : 0.5f;
-            PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel), Mathf.Clamp01(closureLevel));
+            PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel), Mathf.Clamp01(closureLevel), otherPawn?.thingIDNumber ?? 0, killerId);
         }
 
         private float SampleMitigation()
@@ -173,6 +184,7 @@ namespace Psyche
             Scribe_Values.Look(ref treatmentLevel, "psyche_treatmentLevel", 0f);
             Scribe_Values.Look(ref medicationLevel, "psyche_medicationLevel", 0f);
             Scribe_Values.Look(ref closureLevel, "psyche_closureLevel", 0f);
+            Scribe_Values.Look(ref killerId, "psyche_killerId", 0);
             Scribe_Values.Look(ref healPulse, "psyche_healPulse", 0f);
             Scribe_Values.Look(ref lastTreatedTick, "psyche_lastTreatedTick", -1);
             Scribe_Values.Look(ref rolled, "psyche_rolled", false);

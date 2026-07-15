@@ -5,7 +5,7 @@ namespace Psyche
 {
     public static class PsycheScars
     {
-        public static void TryForm(Pawn pawn, float magnitude, float upkeep, float treatment, float medication, float closure)
+        public static void TryForm(Pawn pawn, float magnitude, float upkeep, float treatment, float medication, float closure, int subjectId, int killerId)
         {
             float chance = Mathf.Clamp(
                 PsycheTuning.ScarBaseChance
@@ -33,7 +33,12 @@ namespace Psyche
 
             Hediff scar = HediffMaker.MakeHediff(PsycheDefOf.Psyche_Scar, pawn, brain);
             scar.Severity = size;
-            (scar as Hediff_PsycheScar)?.NotePeak();
+            if (scar is Hediff_PsycheScar psycheScar)
+            {
+                psycheScar.NotePeak();
+                psycheScar.SetOrigin(subjectId, killerId);
+            }
+
             pawn.health.AddHediff(scar, brain);
             pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
         }

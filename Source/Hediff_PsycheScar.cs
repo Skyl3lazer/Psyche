@@ -7,8 +7,20 @@ namespace Psyche
     {
         private float peakSeverity;
         private int uiKey;
+        private int subjectId;
+        private int killerId;
 
         public float PeakSeverity => Mathf.Max(peakSeverity, Severity);
+
+        public int SubjectId => subjectId;
+
+        public int KillerId => killerId;
+
+        public void SetOrigin(int subject, int killer)
+        {
+            subjectId = subject;
+            killerId = killer;
+        }
 
         public override string LabelBase => PsycheUtility.BandedLabel(this);
 
@@ -36,6 +48,8 @@ namespace Psyche
         {
             base.ExposeData();
             Scribe_Values.Look(ref peakSeverity, "psyche_peakSeverity", 0f);
+            Scribe_Values.Look(ref subjectId, "psyche_subjectId", 0);
+            Scribe_Values.Look(ref killerId, "psyche_killerId", 0);
         }
     }
 }

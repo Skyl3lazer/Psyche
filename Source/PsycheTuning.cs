@@ -40,6 +40,10 @@ namespace Psyche
         public const float ClarityPayoffChancePerQuality = 0.10f;
         public const float ClosureClaritySize = 2f;
 
+        public const float RevengeQuality = 0.8f;
+        public const float ClosureScarHeal = 3f;
+        public const float RevengeClarityChance = 0.15f;
+
         public const float InjuryTreatMagnitudeThreshold = 4f;
         public const float InjuryHealedEpsilon = 0.5f;
         public const int InjuryTreatCooldownTicks = 40000;

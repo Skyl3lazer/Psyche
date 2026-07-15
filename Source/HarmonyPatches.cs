@@ -129,6 +129,15 @@ namespace Psyche
         }
     }
 
+    [HarmonyPatch(typeof(Pawn), nameof(Pawn.Kill))]
+    public static class Patch_PawnKilled
+    {
+        public static void Postfix(Pawn __instance, DamageInfo? dinfo)
+        {
+            PsycheClosure.OnPawnDied(__instance, dinfo?.Instigator as Pawn);
+        }
+    }
+
     [HarmonyPatch(typeof(Building_Grave), nameof(Building_Grave.Notify_HauledTo))]
     public static class Patch_CorpseBuried
     {
