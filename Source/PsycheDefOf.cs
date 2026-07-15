@@ -23,6 +23,7 @@ namespace Psyche
         public static ThoughtDef Psyche_OT_Legendary = null!;
         public static ThoughtDef Psyche_OT_Inspiration = null!;
         public static ThoughtDef Psyche_OT_SavedAlly = null!;
+        public static WorkTypeDef Psyche_Care = null!;
         public static JobDef Psyche_SeekTherapy = null!;
         public static JobDef Psyche_AdministerTherapy = null!;
         public static JobDef Psyche_ContemplateClarity = null!;

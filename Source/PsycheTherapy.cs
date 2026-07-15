@@ -67,6 +67,23 @@ namespace Psyche
         public static bool NeedsCare(Pawn pawn) =>
             HasTreatableInjury(pawn) || RepairAvailable(pawn);
 
+        public static bool AnyAvailableCounselor(Pawn patient)
+        {
+            IReadOnlyList<Pawn> colonists = patient.Map.mapPawns.FreeColonistsSpawned;
+            for (int i = 0; i < colonists.Count; i++)
+            {
+                Pawn c = colonists[i];
+                if (c != patient && c.workSettings != null
+                    && c.workSettings.WorkIsActive(PsycheDefOf.Psyche_Care)
+                    && !c.WorkTypeIsDisabled(PsycheDefOf.Psyche_Care))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static bool IsTherapyCandidate(Pawn patient)
         {
             if (patient == null || !PsycheUtility.IsTracked(patient) || !NeedsCare(patient))

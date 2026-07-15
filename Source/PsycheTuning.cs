@@ -58,6 +58,9 @@ namespace Psyche
         public const int TherapySessionTicks = 600;
         public const int SeekWaitTicks = 1500;
         public const int CounselingCooldownTicks = 60000;
+        public const int SeekWanderRadius = 3;
+        public const int SeekWanderIntervalMin = 60;
+        public const int SeekWanderIntervalMax = 180;
 
         public static readonly float[] TierRepairReach = { 2f, 4f, 7f, 99999f };
         public static readonly float[] TierRepairMagnitude = { 1.0f, 1.5f, 2.25f, 3.0f };
