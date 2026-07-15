@@ -31,6 +31,56 @@ namespace Psyche
         }
     }
 
+    [HarmonyPatch(typeof(PawnNeedsUIUtility), nameof(PawnNeedsUIUtility.GetThoughtGroupsInDisplayOrder))]
+    public static class Patch_ThoughtDisplayOrder
+    {
+        private static readonly List<Thought> Group = new List<Thought>();
+
+        public static void Postfix(Need_Mood mood, List<Thought> outThoughtGroupsPresent)
+        {
+            Pawn? owner = null;
+            for (int i = 0; i < outThoughtGroupsPresent.Count; i++)
+            {
+                if (outThoughtGroupsPresent[i] is Thought_Psychlet pt)
+                {
+                    owner = pt.pawn;
+                    break;
+                }
+            }
+
+            if (owner == null || !PsycheUtility.HasPsyche(owner))
+            {
+                return;
+            }
+
+            for (int i = 0; i < outThoughtGroupsPresent.Count; i++)
+            {
+                if (outThoughtGroupsPresent[i] is Thought_Psychlet)
+                {
+                    outThoughtGroupsPresent[i].cachedMoodOffsetOfGroup = GroupSortValue(mood, outThoughtGroupsPresent[i]);
+                }
+            }
+
+            outThoughtGroupsPresent.SortByDescending((Thought t) => t.cachedMoodOffsetOfGroup, (Thought t) => t.GetHashCode());
+        }
+
+        private static float GroupSortValue(Need_Mood mood, Thought group)
+        {
+            mood.thoughts.GetMoodThoughts(group, Group);
+            float sum = 0f;
+            for (int i = 0; i < Group.Count; i++)
+            {
+                if (Group[i] is Thought_Psychlet pt)
+                {
+                    sum += pt.SortValue;
+                }
+            }
+
+            Group.Clear();
+            return sum;
+        }
+    }
+
     [HarmonyPatch(typeof(NeedsCardUtility), "DrawThoughtGroup")]
     public static class Patch_DrawThoughtGroup
     {
@@ -128,8 +178,8 @@ namespace Psyche
 
             Text.Anchor = TextAnchor.MiddleCenter;
             GUI.color = isBoon ? PsycheBoonColor : (contemplating ? PsycheContemplatingColor : PsycheDamageColor);
-            string number = isBoon ? amount.ToString("##0") : (contemplating ? "0" : "-" + amount.ToString("##0"));
-            Widgets.Label(new Rect(rect.x + 235f, rect.y, 32f, rect.height), number);
+            string number = (isBoon ? amount.ToString("##0") : (contemplating ? "0" : "-" + amount.ToString("##0"))) + "p";
+            Widgets.Label(new Rect(rect.x + 235f, rect.y, 42f, rect.height), number);
             Text.Anchor = TextAnchor.UpperLeft;
             GUI.color = Color.white;
             Text.WordWrap = true;
@@ -170,7 +220,7 @@ namespace Psyche
 
             Text.Anchor = TextAnchor.MiddleCenter;
             GUI.color = PsycheBoonColor;
-            Widgets.Label(new Rect(rect.x + 235f, rect.y, 32f, rect.height), "0");
+            Widgets.Label(new Rect(rect.x + 235f, rect.y, 42f, rect.height), "0p");
             Text.Anchor = TextAnchor.UpperLeft;
             GUI.color = Color.white;
             Text.WordWrap = true;

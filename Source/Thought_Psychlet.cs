@@ -71,6 +71,8 @@ namespace Psyche
             }
         }
 
+        public float SortValue => IsBoon ? CurrentBoonBonus : -CurrentPsycheDamage;
+
         public bool CanBeTreated =>
             !IsBoon
             && RawMagnitude >= PsycheTuning.InjuryTreatMagnitudeThreshold
