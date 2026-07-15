@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -7,21 +8,34 @@ namespace Psyche
     [StaticConstructorOnStartup]
     public static class PsycheThoughtSetup
     {
+        private static readonly HashSet<ThoughtDef> Registered = new HashSet<ThoughtDef>();
+
         static PsycheThoughtSetup()
         {
             foreach (ThoughtDef def in DefDatabase<ThoughtDef>.AllDefsListForReading)
             {
-                if (ShouldConvert(def))
+                if (QualifiesAsSource(def))
                 {
-                    def.thoughtClass = typeof(Thought_Psychlet);
-                    def.stackLimit = Mathf.Max(def.stackLimit, PsycheTuning.ConvertedStackLimit);
+                    Registered.Add(def);
                 }
             }
         }
 
-        private static bool ShouldConvert(ThoughtDef def)
+        public static bool IsRegisteredSource(ThoughtDef def)
         {
-            if (!def.IsMemory || def.ThoughtClass != typeof(Thought_Memory))
+            return def != null && Registered.Contains(def);
+        }
+
+        private static bool QualifiesAsSource(ThoughtDef def)
+        {
+            if (def == null || !def.IsMemory)
+            {
+                return false;
+            }
+
+            // Any memory or memory subclass is eligible; our own psychlet carriers (companions and
+            // own-triggers) are not sources.
+            if (!typeof(Thought_Memory).IsAssignableFrom(def.ThoughtClass) || typeof(Thought_Psychlet).IsAssignableFrom(def.ThoughtClass))
             {
                 return false;
             }

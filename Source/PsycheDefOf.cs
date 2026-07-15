@@ -12,8 +12,8 @@ namespace Psyche
         public static HediffDef Psyche_Scar_Haunted = null!;
         public static HediffDef Psyche_Clarity_HardWon = null!;
         public static HediffDef Psyche_Scar_Pyromaniac = null!;
-        public static ThoughtDef Psyche_TestThought = null!;
-        public static ThoughtDef Psyche_TestBoon = null!;
+        public static ThoughtDef Psyche_Injury = null!;
+        public static ThoughtDef Psyche_Boon = null!;
         public static ThoughtDef Psyche_ClarityWindow = null!;
         public static ThoughtDef Psyche_LongLife = null!;
         public static ThoughtDef Psyche_OT_Amputation = null!;

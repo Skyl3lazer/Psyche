@@ -17,6 +17,42 @@ namespace Psyche
         private int lastTreatedTick = -1;
         private int killerId;
         private bool rolled;
+        private ThoughtDef? sourceDef;
+        private int sourceStageIndex;
+
+        public ThoughtDef DisplayDef => sourceDef ?? def;
+
+        public void SetSource(ThoughtDef source, int stageIndex)
+        {
+            sourceDef = source;
+            sourceStageIndex = stageIndex;
+        }
+
+        private ThoughtStage DisplayStage
+        {
+            get
+            {
+                ThoughtDef d = DisplayDef;
+                int idx = sourceDef != null ? sourceStageIndex : CurStageIndex;
+                return d.stages[Mathf.Clamp(idx, 0, d.stages.Count - 1)];
+            }
+        }
+
+        public override string LabelCap => DisplayStage.label.CapitalizeFirst();
+
+        public override string Description => DisplayStage.description;
+
+        public override int DurationTicks => Mathf.RoundToInt(DisplayDef.durationDays * 60000f);
+
+        public override bool GroupsWith(Thought other)
+        {
+            if (other is Thought_Psychlet o && (sourceDef != null || o.sourceDef != null))
+            {
+                return sourceDef == o.sourceDef && base.GroupsWith(other);
+            }
+
+            return base.GroupsWith(other);
+        }
 
         public override float MoodOffset()
         {
@@ -163,7 +199,7 @@ namespace Psyche
 
             rolled = true;
 
-            PsycheThoughtExtension? ext = def.GetModExtension<PsycheThoughtExtension>();
+            PsycheThoughtExtension? ext = DisplayDef.GetModExtension<PsycheThoughtExtension>();
 
             if (IsBoon)
             {
@@ -205,6 +241,8 @@ namespace Psyche
             Scribe_Values.Look(ref healPulse, "psyche_healPulse", 0f);
             Scribe_Values.Look(ref lastTreatedTick, "psyche_lastTreatedTick", -1);
             Scribe_Values.Look(ref rolled, "psyche_rolled", false);
+            Scribe_Defs.Look(ref sourceDef, "psyche_sourceDef");
+            Scribe_Values.Look(ref sourceStageIndex, "psyche_sourceStageIndex", 0);
         }
     }
 }

@@ -273,18 +273,75 @@ namespace Psyche
         }
     }
 
+    [HarmonyPatch(typeof(Thought_Memory), nameof(Thought_Memory.MoodOffset))]
+    public static class Patch_SourceMoodZero
+    {
+        [System.ThreadStatic] public static bool BypassZero;
+
+        public static void Postfix(Thought_Memory __instance, ref float __result)
+        {
+            if (BypassZero || __instance is Thought_Psychlet)
+            {
+                return;
+            }
+
+            if (PsycheThoughtSetup.IsRegisteredSource(__instance.def) && PsycheUtility.HasPsyche(__instance.pawn))
+            {
+                __result = 0f;
+            }
+        }
+    }
+
     [HarmonyPatch(typeof(MemoryThoughtHandler), nameof(MemoryThoughtHandler.TryGainMemory), new[] { typeof(Thought_Memory), typeof(Pawn) })]
     public static class Patch_TryGainMemory
     {
         public static void Postfix(MemoryThoughtHandler __instance, Thought_Memory newThought)
         {
-            if (!(newThought is Thought_Psychlet pt) || !__instance.Memories.Contains(newThought))
+            if (newThought == null || !__instance.Memories.Contains(newThought))
             {
                 return;
             }
 
-            pt.EnsureCaptured();
-            __instance.pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+            Pawn pawn = __instance.pawn;
+
+            // Companions and own-trigger psychlets: capture + recompute; never spawn from these.
+            if (newThought is Thought_Psychlet pt)
+            {
+                pt.EnsureCaptured();
+                pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+                return;
+            }
+
+            // A registered source memory on a psyche pawn spawns a companion psychlet that carries the
+            // wound; the source memory stays but is mood-zeroed (Patch_SourceMoodZero) and thus invisible.
+            if (!PsycheThoughtSetup.IsRegisteredSource(newThought.def) || !PsycheUtility.HasPsyche(pawn))
+            {
+                return;
+            }
+
+            float signed;
+            Patch_SourceMoodZero.BypassZero = true;
+            try
+            {
+                signed = newThought.MoodOffset() * PsycheTuning.WoundScale;
+            }
+            finally
+            {
+                Patch_SourceMoodZero.BypassZero = false;
+            }
+
+            if (signed == 0f)
+            {
+                return;
+            }
+
+            ThoughtDef carrier = signed > 0f ? PsycheDefOf.Psyche_Boon : PsycheDefOf.Psyche_Injury;
+            Thought_Psychlet companion = (Thought_Psychlet)ThoughtMaker.MakeThought(carrier);
+            companion.SetSource(newThought.def, newThought.CurStageIndex);
+            companion.otherPawn = newThought.otherPawn;
+            companion.InitMagnitude(signed);
+            __instance.TryGainMemory(companion);
+            pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
         }
     }
 

@@ -2,30 +2,6 @@
 <Defs>
 
   <ThoughtDef>
-    <defName>Psyche_TestThought</defName>
-    <durationDays>1</durationDays>
-    <stages>
-      <li>
-        <label>psyche test wound</label>
-        <description>A development-only psyche wound for testing.</description>
-        <baseMoodEffect>-15</baseMoodEffect>
-      </li>
-    </stages>
-  </ThoughtDef>
-
-  <ThoughtDef>
-    <defName>Psyche_TestBoon</defName>
-    <durationDays>10</durationDays>
-    <stages>
-      <li>
-        <label>psyche test boon</label>
-        <description>A development-only psyche boon for testing.</description>
-        <baseMoodEffect>15</baseMoodEffect>
-      </li>
-    </stages>
-  </ThoughtDef>
-
-  <ThoughtDef>
     <defName>Psyche_LongLife</defName>
     <durationDays>8</durationDays>
     <modExtensions>
@@ -38,6 +14,34 @@
         <label>they lived a long life</label>
         <description>The grief is real, but so is the comfort - they lived a full, long life, and that softens the loss.</description>
         <baseMoodEffect>4</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Psyche_Injury</defName>
+    <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
+    <durationDays>1</durationDays>
+    <stackLimit>100</stackLimit>
+    <stages>
+      <li>
+        <label>psyche injury</label>
+        <description>A wound to the psyche.</description>
+        <baseMoodEffect>0</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>Psyche_Boon</defName>
+    <thoughtClass>Psyche.Thought_Psychlet</thoughtClass>
+    <durationDays>1</durationDays>
+    <stackLimit>100</stackLimit>
+    <stages>
+      <li>
+        <label>psyche boon</label>
+        <description>A lift to the psyche.</description>
+        <baseMoodEffect>0</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
