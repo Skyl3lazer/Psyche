@@ -43,7 +43,7 @@ namespace Psyche
             }
 
             Pawn? pawn = PawnField.GetValue(__instance) as Pawn;
-            if (pawn == null || !PsycheUtility.IsTracked(pawn))
+            if (pawn == null || !PsycheUtility.IsTracked(pawn) || pawn.health?.hediffSet?.GetBrain() == null)
             {
                 __result = false;
             }

@@ -17,6 +17,11 @@ namespace Psyche
             return pawn != null && (pawn.IsColonist || pawn.IsPrisonerOfColony || pawn.IsSlaveOfColony);
         }
 
+        public static bool HasPsyche(Pawn pawn)
+        {
+            return pawn?.needs?.TryGetNeed<Need_Psyche>() != null;
+        }
+
         public static IEnumerable<Pawn> TrackedColonists()
         {
             List<Map> maps = Find.Maps;

@@ -48,8 +48,8 @@ namespace Psyche
         public const float ClarityMinIntensity = 10f;
         public const int GraveWoundRelationOpinion = 20;
         public const float LifeThreateningBleedRate = 0.3f;
-        public const float SavedAllyBloodScaleMin = 0.5f;
-        public const float SavedAllyBloodScaleMax = 2.0f;
+        public const float SavedAllyBloodScaleMin = 0.2f;
+        public const float SavedAllyBloodScaleMax = 1.0f;
 
         public const float InjuryTreatMagnitudeThreshold = 4f;
         public const float InjuryHealedEpsilon = 0.5f;

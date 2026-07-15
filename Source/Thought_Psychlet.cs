@@ -20,7 +20,7 @@ namespace Psyche
 
         public override float MoodOffset()
         {
-            return PsycheUtility.IsTracked(pawn) ? 0f : base.MoodOffset();
+            return PsycheUtility.HasPsyche(pawn) ? 0f : base.MoodOffset();
         }
 
         public bool IsBoon

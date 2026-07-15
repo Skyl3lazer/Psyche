@@ -131,7 +131,7 @@
     <defName>Psyche_Clarity_HardWon</defName>
     <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
     <label>hard-won psyche clarity</label>
-    <description>An understanding paid for in pain and kept. Having sat with the worst and come through, this person learns faster and works with a steadier hand.</description>
+    <description>An understanding paid for in pain. Having sat with the worst and come through, this person learns faster and works with a steadier hand.</description>
     <isBad>false</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
