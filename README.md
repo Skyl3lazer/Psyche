@@ -30,17 +30,9 @@ Repair is a tend-like counseling job on the Social skill, under a new **Counseli
 | **Cognitive Behavioral Therapy** | 2000 | Industrial | Industrial medicine in therapy; repair deeper scars. Needs a Hi-Tech Research Bench. |
 | **EMDR** | 5000 | Spacer | Fully resolve even the deepest scars; with glitterworld medicine and a guided contemplation, carry a mind past its old limits into clarity. Needs a Hi-Tech Research Bench and Multi-Analyzer. |
 
-## Traits reinterpreted
+## Vanilla Trait Integration
 
-The vanilla trait stays, and is now tied to a Psyche scar or clarity. Fully curing a trait-derived scar with high-tier therapy also removes the trait.
-
-| Trait | Becomes |
-|---|---|
-| Pyromaniac | A staged fire-compulsion scar (the deeper it runs, the likelier the fires). |
-| Psychopath | An emotional-numbness scar. |
-| Bloodlust | A violence-craving scar. |
-| Chemical fascination | An addiction-prone scar. |
-| Sanguine | An innate resilience clarity. |
+Several vanilla traits are now tied to Psyche scars or clarities. They stay as traits, but pawns that spawn with or gain the traits will get corresponding Psyche marks that can be treated. Fully curing a trait's scar will remove the trait.
 
 ## Dependencies
 
