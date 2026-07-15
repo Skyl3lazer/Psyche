@@ -15,6 +15,7 @@ namespace Psyche
         public static ThoughtDef Psyche_TestThought = null!;
         public static ThoughtDef Psyche_TestBoon = null!;
         public static ThoughtDef Psyche_ClarityWindow = null!;
+        public static ThoughtDef Psyche_LongLife = null!;
         public static JobDef Psyche_SeekTherapy = null!;
         public static JobDef Psyche_AdministerTherapy = null!;
         public static JobDef Psyche_ContemplateClarity = null!;

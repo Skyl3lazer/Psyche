@@ -5,13 +5,14 @@ namespace Psyche
 {
     public static class PsycheScars
     {
-        public static void TryForm(Pawn pawn, float magnitude, float upkeep, float treatment, float medication)
+        public static void TryForm(Pawn pawn, float magnitude, float upkeep, float treatment, float medication, float closure)
         {
             float chance = Mathf.Clamp(
                 PsycheTuning.ScarBaseChance
                     - (upkeep * PsycheTuning.UpkeepChanceReduction)
                     - (treatment * PsycheTuning.TreatmentChanceReduction)
-                    - (medication * PsycheTuning.MedicationChanceReduction),
+                    - (medication * PsycheTuning.MedicationChanceReduction)
+                    - (closure * PsycheTuning.ClosureChanceReduction),
                 PsycheTuning.ScarFloorChance,
                 PsycheTuning.ScarBaseChance);
 
@@ -20,7 +21,7 @@ namespace Psyche
                 return;
             }
 
-            float quality = Mathf.Clamp01((upkeep + treatment) / 2f);
+            float quality = Mathf.Clamp01(((upkeep + treatment) / 2f) + (closure * PsycheTuning.ClosureSizeQualityBonus));
             float sizeWeight = Mathf.Lerp(PsycheTuning.ScarSizeHeavy, PsycheTuning.ScarSizeLight, quality);
             float size = magnitude * PsycheTuning.ScarScale * sizeWeight;
 

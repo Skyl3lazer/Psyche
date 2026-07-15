@@ -32,6 +32,14 @@ namespace Psyche
         public const float MedicationChanceReduction = 0.15f;
         public const float MedicationPerDose = 0.35f;
 
+        public const float ClosureChanceReduction = 0.40f;
+        public const float ClosureSizeQualityBonus = 0.5f;
+        public const float ClosureHealFrac = 0.5f;
+        public const float BurialBaseQuality = 0.35f;
+        public const float BittersweetAgeFrac = 0.85f;
+        public const float ClarityPayoffChancePerQuality = 0.10f;
+        public const float ClosureClaritySize = 2f;
+
         public const float InjuryTreatMagnitudeThreshold = 4f;
         public const float InjuryHealedEpsilon = 0.5f;
         public const int InjuryTreatCooldownTicks = 40000;

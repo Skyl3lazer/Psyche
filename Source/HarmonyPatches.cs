@@ -129,6 +129,18 @@ namespace Psyche
         }
     }
 
+    [HarmonyPatch(typeof(Building_Grave), nameof(Building_Grave.Notify_HauledTo))]
+    public static class Patch_CorpseBuried
+    {
+        public static void Postfix(Building_Grave __instance, Thing thing)
+        {
+            if (thing is Corpse corpse && corpse.InnerPawn != null && __instance.Map != null)
+            {
+                PsycheClosure.OnBuried(corpse.InnerPawn, __instance.Map);
+            }
+        }
+    }
+
     [HarmonyPatch(typeof(CompDrug), nameof(CompDrug.PostIngested))]
     public static class Patch_DrugIngested
     {

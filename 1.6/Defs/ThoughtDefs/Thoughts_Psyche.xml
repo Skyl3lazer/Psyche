@@ -26,6 +26,23 @@
   </ThoughtDef>
 
   <ThoughtDef>
+    <defName>Psyche_LongLife</defName>
+    <durationDays>8</durationDays>
+    <modExtensions>
+      <li Class="Psyche.PsycheThoughtExtension">
+        <exemptFromWounds>true</exemptFromWounds>
+      </li>
+    </modExtensions>
+    <stages>
+      <li>
+        <label>they lived a long life</label>
+        <description>The grief is real, but so is the comfort - they lived a full, long life, and that softens the loss.</description>
+        <baseMoodEffect>4</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
     <defName>Psyche_ClarityWindow</defName>
     <thoughtClass>Psyche.Thought_ClarityWindow</thoughtClass>
     <durationDays>15</durationDays>

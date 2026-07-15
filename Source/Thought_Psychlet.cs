@@ -12,6 +12,7 @@ namespace Psyche
         private int mitigationSamples;
         private float treatmentLevel;
         private float medicationLevel;
+        private float closureLevel;
         private float healPulse;
         private int lastTreatedTick = -1;
         private bool rolled;
@@ -106,6 +107,17 @@ namespace Psyche
             medicationLevel = Mathf.Min(1f, medicationLevel + (PsycheTuning.MedicationPerDose * potency));
         }
 
+        public void Close(float quality)
+        {
+            if (IsBoon)
+            {
+                return;
+            }
+
+            closureLevel = Mathf.Max(closureLevel, quality);
+            healPulse += RawMagnitude * quality * PsycheTuning.ClosureHealFrac;
+        }
+
         public override void ThoughtInterval()
         {
             base.ThoughtInterval();
@@ -140,7 +152,7 @@ namespace Psyche
             }
 
             float upkeep = mitigationSamples > 0 ? mitigationSum / mitigationSamples : 0.5f;
-            PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel));
+            PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel), Mathf.Clamp01(closureLevel));
         }
 
         private float SampleMitigation()
@@ -160,6 +172,7 @@ namespace Psyche
             Scribe_Values.Look(ref mitigationSamples, "psyche_mitigationSamples", 0);
             Scribe_Values.Look(ref treatmentLevel, "psyche_treatmentLevel", 0f);
             Scribe_Values.Look(ref medicationLevel, "psyche_medicationLevel", 0f);
+            Scribe_Values.Look(ref closureLevel, "psyche_closureLevel", 0f);
             Scribe_Values.Look(ref healPulse, "psyche_healPulse", 0f);
             Scribe_Values.Look(ref lastTreatedTick, "psyche_lastTreatedTick", -1);
             Scribe_Values.Look(ref rolled, "psyche_rolled", false);

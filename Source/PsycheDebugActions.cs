@@ -99,6 +99,17 @@ namespace Psyche
             p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
         }
 
+        [DebugAction("Psyche", "Apply closure to open wounds (q=1)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private static void ApplyClosure(Pawn p)
+        {
+            foreach (Thought_Psychlet pt in PsycheThoughts(p))
+            {
+                pt.Close(1f);
+            }
+
+            p.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+        }
+
         [DebugAction("Psyche", "Medicate open wounds (one dose)", actionType = DebugActionType.ToolMapForPawns, allowedGameStates = AllowedGameStates.PlayingOnMap)]
         private static void MedicateWounds(Pawn p)
         {
