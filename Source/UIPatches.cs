@@ -122,7 +122,8 @@ namespace Psyche
                 return false;
             }
 
-            bool isBoon = leading is Thought_Psychlet lead && lead.IsBoon;
+            Thought_Psychlet? lead = leading as Thought_Psychlet;
+            bool isBoon = lead != null && lead.IsBoon;
 
             float amount = 0f;
             for (int i = 0; i < Group.Count; i++)
@@ -143,7 +144,7 @@ namespace Psyche
 
             if (contemplating)
             {
-                label = label + " (contemplating)";
+                label = label + " (" + "Psyche_Label_Contemplating".Translate() + ")";
             }
 
             if (Mouse.IsOver(rect))
@@ -152,20 +153,39 @@ namespace Psyche
                 string body;
                 if (isBoon)
                 {
-                    body = "Psyche restored: " + amount.ToString("##0");
+                    body = "Psyche_Tip_PsycheRestored".Translate(amount.ToString("##0"));
                 }
                 else if (contemplating)
                 {
-                    body = "The injury has faded, but has not fully settled - it may still leave a scar before it passes.";
+                    body = "Psyche_Tip_Contemplating".Translate();
                 }
                 else
                 {
-                    body = "Psyche damage: -" + amount.ToString("##0");
+                    body = "Psyche_Tip_PsycheDamage".Translate(amount.ToString("##0"));
+                }
+
+                string details = body;
+                if (lead != null)
+                {
+                    string expiry = ExpiryLine(lead, isBoon);
+                    if (!expiry.NullOrEmpty())
+                    {
+                        details += "\n" + expiry;
+                    }
+
+                    if (!isBoon)
+                    {
+                        string treatment = TreatmentLines(lead);
+                        if (!treatment.NullOrEmpty())
+                        {
+                            details += "\n\n" + treatment;
+                        }
+                    }
                 }
 
                 Need_Psyche? need = pawn.needs?.TryGetNeed<Need_Psyche>();
                 string status = need != null ? "\n\n" + need.StatusString() : "";
-                string tip = leading.LabelCap.AsTipTitle() + "\n\n" + leading.Description + "\n\n" + body + status;
+                string tip = leading.LabelCap.AsTipTitle() + "\n\n" + leading.Description + "\n\n" + details + status;
                 TooltipHandler.TipRegion(rect, new TipSignal(tip, 83821));
             }
 
@@ -187,6 +207,41 @@ namespace Psyche
             Group.Clear();
             __result = true;
             return false;
+        }
+
+        private static string ExpiryLine(Thought_Psychlet lead, bool isBoon)
+        {
+            string period = lead.TicksUntilExpiry.ToStringTicksToPeriod();
+            if (isBoon)
+            {
+                return lead.MarkPossible ? "Psyche_Tip_FadesInClarity".Translate(period) : "Psyche_Tip_FadesIn".Translate(period);
+            }
+
+            return lead.MarkPossible ? "Psyche_Tip_PassesInScar".Translate(period) : "Psyche_Tip_PassesIn".Translate(period);
+        }
+
+        private static string TreatmentLines(Thought_Psychlet lead)
+        {
+            InjuryTreatState state = lead.TreatState;
+            string eligibility;
+            switch (state)
+            {
+                case InjuryTreatState.EligibleNow:
+                    eligibility = "Psyche_Tip_ReadyForTherapy".Translate();
+                    break;
+                case InjuryTreatState.OnCooldown:
+                    eligibility = "Psyche_Tip_TreatableAgain".Translate(lead.TicksUntilTreatable.ToStringTicksToPeriod());
+                    break;
+                case InjuryTreatState.TooMinor:
+                    return "Psyche_Tip_TooMinor".Translate();
+                case InjuryTreatState.Faded:
+                    eligibility = "Psyche_Tip_Faded".Translate();
+                    break;
+                default:
+                    return string.Empty;
+            }
+
+            return "Psyche_Tip_TherapyProgress".Translate(lead.TreatmentLevel.ToStringPercent()) + "\n" + eligibility;
         }
 
         private static void DrawClarityWindow(Rect rect, Thought_ClarityWindow window, Pawn pawn, ref bool __result)

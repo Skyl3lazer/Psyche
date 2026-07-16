@@ -15,6 +15,11 @@ namespace Psyche
         public HediffDef? clarityDef;
     }
 
+    public class PsycheScarExtension : DefModExtension
+    {
+        public HediffDef? upgradeClarityDef;
+    }
+
     public class PsycheTraitMarkExtension : DefModExtension
     {
         public TraitDef trait = null!;

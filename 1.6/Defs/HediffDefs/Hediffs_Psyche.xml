@@ -34,6 +34,39 @@
   </HediffDef>
 
   <HediffDef>
+    <defName>Psyche_Scar_Grief</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>grief psyche scar</label>
+    <description>The absence of someone loved, worn permanently into the mind. What death took does not come back, and the missing weight is always there to be felt.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+      <li Class="Psyche.HediffCompProperties_GriefOrigin" />
+    </comps>
+    <stages>
+      <li>
+        <minSeverity>0</minSeverity>
+        <label>faint</label>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>deep</label>
+      </li>
+      <li>
+        <minSeverity>6</minSeverity>
+        <label>severe</label>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
     <defName>Psyche_Clarity</defName>
     <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
     <label>psyche clarity</label>
@@ -305,6 +338,7 @@
     </modExtensions>
     <comps>
       <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+      <li Class="Psyche.HediffCompProperties_LimbLoss" />
     </comps>
   </HediffDef>
 
@@ -319,6 +353,9 @@
     <modExtensions>
       <li Class="Psyche.PsycheHealthOffsetExtension">
         <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+      <li Class="Psyche.PsycheScarExtension">
+        <upgradeClarityDef>Psyche_Clarity_HardWon</upgradeClarityDef>
       </li>
     </modExtensions>
     <comps>
@@ -403,6 +440,42 @@
     <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
     <label>made whole psyche clarity</label>
     <description>Having turned a crippling loss into a body that feels whole again, this person carries a quiet certainty that even what is taken can be reclaimed.</description>
+    <isBad>false</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Clarity_Reckoning</defName>
+    <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
+    <label>reckoning psyche clarity</label>
+    <description>The one who caused the loss is gone. It does not undo the grief, but something long clenched finally loosens - the debt is settled, and the mind can rest a little easier.</description>
+    <isBad>false</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Clarity_Peace</defName>
+    <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
+    <label>peace psyche clarity</label>
+    <description>A loss laid gently to rest. Having buried someone who lived a full life, this person carries the loss without its sharpest edge - a settled peace with the way of things.</description>
     <isBad>false</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>

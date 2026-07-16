@@ -130,14 +130,14 @@ namespace Psyche
             List<Hediff> hediffs = pawn.health.hediffSet.hediffs;
             for (int i = hediffs.Count - 1; i >= 0; i--)
             {
-                if (hediffs[i] is Hediff_PsycheScar scar && scar.HasLostPart(partIndex))
+                if (hediffs[i] is Hediff_PsycheScar scar && scar.TryGetComp<HediffComp_LimbLoss>() is { } limb && limb.HasLostPart(partIndex))
                 {
-                    int before = scar.LostPartCount;
-                    scar.RemoveLostPart(partIndex);
+                    int before = limb.LostPartCount;
+                    limb.RemoveLostPart(partIndex);
                     scar.Severity *= (float)(before - 1) / before;
                     closedAny = true;
 
-                    if (scar.LostPartCount == 0 || scar.Severity <= 0f)
+                    if (limb.LostPartCount == 0 || scar.Severity <= 0f)
                     {
                         pawn.health.RemoveHediff(scar);
                         if (Rand.Chance(PsycheTuning.LimbReplacedClarityChance))
@@ -218,7 +218,7 @@ namespace Psyche
                 List<Hediff> hediffs = griever.health.hediffSet.hediffs;
                 for (int i = hediffs.Count - 1; i >= 0; i--)
                 {
-                    if (hediffs[i] is Hediff_PsycheScar scar && scar.KillerId == killerId && scar.SubjectId != 0)
+                    if (hediffs[i] is Hediff_PsycheScar scar && scar.TryGetComp<HediffComp_GriefOrigin>() is { } origin && origin.KillerId == killerId && origin.SubjectId != 0)
                     {
                         RevengeHealScar(griever, scar);
                         griefClosed = true;
@@ -255,7 +255,7 @@ namespace Psyche
             scar.Severity = Mathf.Max(0f, scar.Severity - PsycheTuning.ClosureScarHeal);
             if (Rand.Chance(PsycheTuning.RevengeClarityChance))
             {
-                PsycheClarities.FormDirect(griever, PsycheTuning.ClosureClaritySize);
+                PsycheClarities.FormDirect(griever, PsycheTuning.ClosureClaritySize, PsycheDefOf.Psyche_Clarity_Reckoning);
             }
 
             if (scar.Severity <= 0f)
@@ -303,7 +303,7 @@ namespace Psyche
             griever.needs?.mood?.thoughts?.memories?.TryGainMemory(PsycheDefOf.Psyche_LongLife);
             if (Rand.Chance(quality * PsycheTuning.ClarityPayoffChancePerQuality))
             {
-                PsycheClarities.FormDirect(griever, PsycheTuning.ClosureClaritySize);
+                PsycheClarities.FormDirect(griever, PsycheTuning.ClosureClaritySize, PsycheDefOf.Psyche_Clarity_Peace);
             }
         }
     }

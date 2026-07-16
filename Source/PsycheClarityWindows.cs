@@ -32,7 +32,7 @@ namespace Psyche
 
         public static bool CapabilityResearched => PsycheDefOf.Psyche_EMDR.IsFinished;
 
-        public static void Open(Pawn pawn, float healedSeverity)
+        public static void Open(Pawn pawn, float healedSeverity, HediffDef? upgradeClarityDef = null)
         {
             if (!CapabilityResearched)
             {
@@ -47,6 +47,7 @@ namespace Psyche
 
             Thought_ClarityWindow window = (Thought_ClarityWindow)ThoughtMaker.MakeThought(PsycheDefOf.Psyche_ClarityWindow);
             window.healedSeverity = healedSeverity;
+            window.upgradeClarityDef = upgradeClarityDef;
             memories.TryGainMemory(window);
         }
 
@@ -168,7 +169,7 @@ namespace Psyche
                 }
 
                 float size = window.healedSeverity * chance * PsycheTuning.ClarityFromWindowScale;
-                PsycheClarities.FormDirect(pawn, size);
+                PsycheClarities.FormDirect(pawn, size, window.upgradeClarityDef);
             }
 
             pawn.needs?.mood?.thoughts?.memories?.RemoveMemory(window);

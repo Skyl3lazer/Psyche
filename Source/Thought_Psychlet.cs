@@ -5,10 +5,19 @@ using Verse;
 
 namespace Psyche
 {
+    public enum InjuryTreatState
+    {
+        NotApplicable,
+        EligibleNow,
+        OnCooldown,
+        TooMinor,
+        Faded,
+    }
+
     public class Thought_Psychlet : Thought_Memory
     {
         private float signedMagnitude;
-        private List<int> lostPartIndices = new List<int>();
+        private LimbLossData? limbLoss;
         private bool captured;
         private float mitigationSum;
         private int mitigationSamples;
@@ -117,11 +126,42 @@ namespace Psyche
 
         public float SortValue => IsBoon ? CurrentBoonBonus : -CurrentPsycheDamage;
 
-        public bool CanBeTreated =>
-            !IsBoon
-            && RawMagnitude >= PsycheTuning.InjuryTreatMagnitudeThreshold
-            && CurrentPsycheDamage > PsycheTuning.InjuryHealedEpsilon
-            && (lastTreatedTick < 0 || Find.TickManager.TicksGame - lastTreatedTick >= PsycheTuning.InjuryTreatCooldownTicks);
+        public bool CanBeTreated => TreatState == InjuryTreatState.EligibleNow;
+
+        public int TicksUntilExpiry => Mathf.Max(0, DurationTicks - age);
+
+        public bool MarkPossible =>
+            IsBoon
+                ? def.durationDays >= PsycheTuning.ClarityMinDurationDays && RawMagnitude >= PsycheTuning.ClarityMinIntensity
+                : true;
+
+        public float TreatmentLevel => Mathf.Clamp01(treatmentLevel);
+
+        public int TicksUntilTreatable =>
+            lastTreatedTick < 0 ? 0 : Mathf.Max(0, lastTreatedTick + PsycheTuning.InjuryTreatCooldownTicks - Find.TickManager.TicksGame);
+
+        public InjuryTreatState TreatState
+        {
+            get
+            {
+                if (IsBoon)
+                {
+                    return InjuryTreatState.NotApplicable;
+                }
+
+                if (RawMagnitude < PsycheTuning.InjuryTreatMagnitudeThreshold)
+                {
+                    return InjuryTreatState.TooMinor;
+                }
+
+                if (CurrentPsycheDamage <= PsycheTuning.InjuryHealedEpsilon)
+                {
+                    return InjuryTreatState.Faded;
+                }
+
+                return TicksUntilTreatable > 0 ? InjuryTreatState.OnCooldown : InjuryTreatState.EligibleNow;
+            }
+        }
 
         public void EnsureCaptured()
         {
@@ -180,19 +220,13 @@ namespace Psyche
 
         public int KillerId => killerId;
 
-        public int LostPartCount => lostPartIndices.Count;
+        public int LostPartCount => limbLoss?.Count ?? 0;
 
-        public bool HasLostPart(int partIndex) => lostPartIndices.Contains(partIndex);
+        public bool HasLostPart(int partIndex) => limbLoss?.Has(partIndex) ?? false;
 
-        public void AddLostPart(int partIndex)
-        {
-            if (partIndex >= 0 && !lostPartIndices.Contains(partIndex))
-            {
-                lostPartIndices.Add(partIndex);
-            }
-        }
+        public void AddLostPart(int partIndex) => (limbLoss ??= new LimbLossData()).Add(partIndex);
 
-        public bool RemoveLostPart(int partIndex) => lostPartIndices.Remove(partIndex);
+        public bool RemoveLostPart(int partIndex) => limbLoss?.Remove(partIndex) ?? false;
 
         public void StampKiller(int id)
         {
@@ -238,7 +272,7 @@ namespace Psyche
             }
 
             float upkeep = mitigationSamples > 0 ? mitigationSum / mitigationSamples : 0.5f;
-            PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel), Mathf.Clamp01(closureLevel), otherPawn?.thingIDNumber ?? 0, killerId, ext?.scarDef, lostPartIndices);
+            PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel), Mathf.Clamp01(closureLevel), otherPawn?.thingIDNumber ?? 0, killerId, ext?.scarDef, limbLoss?.Parts);
         }
 
         private float SampleMitigation()
@@ -265,11 +299,7 @@ namespace Psyche
             Scribe_Values.Look(ref rolled, "psyche_rolled", false);
             Scribe_Defs.Look(ref sourceDef, "psyche_sourceDef");
             Scribe_Values.Look(ref sourceStageIndex, "psyche_sourceStageIndex", 0);
-            Scribe_Collections.Look(ref lostPartIndices, "psyche_lostPartIndices", LookMode.Value);
-            if (Scribe.mode == LoadSaveMode.PostLoadInit && lostPartIndices == null)
-            {
-                lostPartIndices = new List<int>();
-            }
+            Scribe_Deep.Look(ref limbLoss, "psyche_limbLoss");
         }
     }
 }

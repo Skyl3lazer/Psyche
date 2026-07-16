@@ -25,6 +25,9 @@ namespace Psyche
         public bool CanReceiveCounseling =>
             lastCounseledTick < 0 || Find.TickManager.TicksGame - lastCounseledTick >= PsycheTuning.CounselingCooldownTicks;
 
+        public int TicksUntilCounseling =>
+            lastCounseledTick < 0 ? 0 : Mathf.Max(0, lastCounseledTick + PsycheTuning.CounselingCooldownTicks - Find.TickManager.TicksGame);
+
         public float EffectiveMaxHealth
         {
             get

@@ -32,13 +32,14 @@ namespace Psyche
                 return;
             }
 
-            Hediff scar = HediffMaker.MakeHediff(markDef ?? PsycheDefOf.Psyche_Scar, pawn, brain);
+            HediffDef def = markDef ?? (subjectId != 0 ? PsycheDefOf.Psyche_Scar_Grief : PsycheDefOf.Psyche_Scar);
+            Hediff scar = HediffMaker.MakeHediff(def, pawn, brain);
             scar.Severity = size;
             if (scar is Hediff_PsycheScar psycheScar)
             {
                 psycheScar.NotePeak();
-                psycheScar.SetOrigin(subjectId, killerId);
-                psycheScar.SetLostParts(lostParts);
+                psycheScar.TryGetComp<HediffComp_GriefOrigin>()?.SetOrigin(subjectId, killerId);
+                psycheScar.TryGetComp<HediffComp_LimbLoss>()?.SetLostParts(lostParts);
             }
 
             pawn.health.AddHediff(scar, brain);

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -8,44 +8,8 @@ namespace Psyche
     {
         private float peakSeverity;
         private int uiKey;
-        private int subjectId;
-        private int killerId;
-        private List<int> lostPartIndices = new List<int>();
 
         public float PeakSeverity => Mathf.Max(peakSeverity, Severity);
-
-        public int SubjectId => subjectId;
-
-        public int KillerId => killerId;
-
-        public void SetOrigin(int subject, int killer)
-        {
-            subjectId = subject;
-            killerId = killer;
-        }
-
-        public int LostPartCount => lostPartIndices.Count;
-
-        public bool HasLostPart(int partIndex) => lostPartIndices.Contains(partIndex);
-
-        public bool RemoveLostPart(int partIndex) => lostPartIndices.Remove(partIndex);
-
-        public void SetLostParts(IEnumerable<int> parts)
-        {
-            lostPartIndices.Clear();
-            if (parts == null)
-            {
-                return;
-            }
-
-            foreach (int part in parts)
-            {
-                if (part >= 0 && !lostPartIndices.Contains(part))
-                {
-                    lostPartIndices.Add(part);
-                }
-            }
-        }
 
         public override string LabelBase => PsycheUtility.BandedLabel(this);
 
@@ -54,6 +18,58 @@ namespace Psyche
         public override bool Visible => PsycheUtility.HasPsyche(pawn) && base.Visible;
 
         public override int UIGroupKey => uiKey != 0 ? uiKey : (uiKey = PsycheUtility.NextUiGroupKey());
+
+        public override string TipStringExtra
+        {
+            get
+            {
+                string baseTip = base.TipStringExtra ?? string.Empty;
+                string? repair = RepairTip();
+                if (repair.NullOrEmpty())
+                {
+                    return baseTip;
+                }
+
+                return baseTip.NullOrEmpty() ? repair : baseTip.TrimEnd('\n') + "\n" + repair;
+            }
+        }
+
+        private string? RepairTip()
+        {
+            if (!PsycheUtility.HasPsyche(pawn))
+            {
+                return null;
+            }
+
+            int tier = PsycheRepair.BestResearchedTier();
+            if (!PsycheRepair.IsReducible(this, tier))
+            {
+                return "Psyche_Tip_TierFloor".Translate(NextTierLabel(tier));
+            }
+
+            float repaired = PeakSeverity > 0f ? Mathf.Clamp01((PeakSeverity - Severity) / PeakSeverity) : 0f;
+            string repairedLine = "Psyche_Tip_Repaired".Translate(repaired.ToStringPercent());
+
+            Need_Psyche? need = pawn.needs?.TryGetNeed<Need_Psyche>();
+            string eligibility = need == null || need.CanReceiveCounseling
+                ? "Psyche_Tip_ReadyForRepair".Translate()
+                : "Psyche_Tip_RepairableAgain".Translate(need.TicksUntilCounseling.ToStringTicksToPeriod());
+
+            return repairedLine + "\n" + eligibility;
+        }
+
+        private static string NextTierLabel(int tier)
+        {
+            switch (tier)
+            {
+                case 1:
+                    return PsycheDefOf.Psyche_Humoralism.label;
+                case 2:
+                    return PsycheDefOf.Psyche_CognitiveBehavioralTherapy.label;
+                default:
+                    return PsycheDefOf.Psyche_EMDR.label;
+            }
+        }
 
         public override bool TryMergeWith(Hediff other) => false;
 
@@ -75,13 +91,6 @@ namespace Psyche
         {
             base.ExposeData();
             Scribe_Values.Look(ref peakSeverity, "psyche_peakSeverity", 0f);
-            Scribe_Values.Look(ref subjectId, "psyche_subjectId", 0);
-            Scribe_Values.Look(ref killerId, "psyche_killerId", 0);
-            Scribe_Collections.Look(ref lostPartIndices, "psyche_lostPartIndices", LookMode.Value);
-            if (Scribe.mode == LoadSaveMode.PostLoadInit && lostPartIndices == null)
-            {
-                lostPartIndices = new List<int>();
-            }
         }
     }
 }
