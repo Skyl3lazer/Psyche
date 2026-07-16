@@ -312,8 +312,7 @@ namespace Psyche
                 return;
             }
 
-            // A registered source memory on a psyche pawn spawns a companion psychlet that carries the
-            // wound; the source memory stays but is mood-zeroed (Patch_SourceMoodZero) and thus invisible.
+            // Registered source: spawn a companion that carries the wound. The source stays, mood-zeroed (invisible).
             if (!PsycheThoughtSetup.IsRegisteredSource(newThought.def) || !PsycheUtility.HasPsyche(pawn))
             {
                 return;

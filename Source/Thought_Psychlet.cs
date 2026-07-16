@@ -38,9 +38,15 @@ namespace Psyche
             }
         }
 
-        public override string LabelCap => DisplayStage.label.CapitalizeFirst();
+        public override string LabelCap =>
+            otherPawn != null
+                ? DisplayStage.label.Formatted(otherPawn.LabelShort, otherPawn).CapitalizeFirst()
+                : DisplayStage.label.CapitalizeFirst();
 
-        public override string Description => DisplayStage.description;
+        public override string Description =>
+            otherPawn != null
+                ? DisplayStage.description.Formatted(otherPawn.LabelShort, otherPawn).Resolve()
+                : DisplayStage.description;
 
         public override int DurationTicks => Mathf.RoundToInt(DisplayDef.durationDays * 60000f);
 

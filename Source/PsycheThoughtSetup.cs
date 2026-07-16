@@ -33,8 +33,7 @@ namespace Psyche
                 return false;
             }
 
-            // Any memory or memory subclass is eligible; our own psychlet carriers (companions and
-            // own-triggers) are not sources.
+            // Exclude our own psychlet carriers (companions, own-triggers) - they are not sources.
             if (!typeof(Thought_Memory).IsAssignableFrom(def.ThoughtClass) || typeof(Thought_Psychlet).IsAssignableFrom(def.ThoughtClass))
             {
                 return false;
