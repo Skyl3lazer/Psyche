@@ -22,8 +22,13 @@
   <Psyche_ScarTradedForAddiction>{0} buried a wound in the habit - their {1} faded, but a dependency took its place.</Psyche_ScarTradedForAddiction>
 
   <Psyche_RevengeClosure>{0} found a measure of peace at the death of {1}, who had taken someone they loved.</Psyche_RevengeClosure>
+  <Psyche_MaimRevengeClosure>{0} found a measure of peace at the death of {1}, the one who maimed them - the raw wound of it settles, though the loss remains.</Psyche_MaimRevengeClosure>
 
   <Psyche_BurialClosure>{0} found some closure laying {1} to rest, easing the grief they carried.</Psyche_BurialClosure>
   <Psyche_BurialClosureBittersweet>{0} made peace with {1}'s passing at the burial - a long life, now laid to rest.</Psyche_BurialClosureBittersweet>
+
+  <Psyche_LimbReplacedClosure>{0} has a better-than-flesh replacement for their lost {1}, and the phantom ache of the loss begins to settle.</Psyche_LimbReplacedClosure>
+  <Psyche_LimbReplacedClosure_Transhuman>{0} has replaced their lost {1} with machinery, and the augmentation soothes the trauma of the loss - flesh was only ever a starting point.</Psyche_LimbReplacedClosure_Transhuman>
+  <Psyche_LimbReplacedClosure_Purist>{0} has their {1} back in natural flesh, and being whole again lays the trauma of the loss to rest.</Psyche_LimbReplacedClosure_Purist>
 
 </LanguageData>

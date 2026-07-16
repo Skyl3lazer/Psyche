@@ -399,6 +399,24 @@
   </HediffDef>
 
   <HediffDef>
+    <defName>Psyche_Clarity_MadeWhole</defName>
+    <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
+    <label>made whole psyche clarity</label>
+    <description>Having turned a crippling loss into a body that feels whole again, this person carries a quiet certainty that even what is taken can be reclaimed.</description>
+    <isBad>false</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
     <defName>Psyche_Clarity_Sanguine</defName>
     <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
     <label>sanguine psyche clarity</label>

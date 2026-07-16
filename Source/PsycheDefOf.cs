@@ -12,6 +12,7 @@ namespace Psyche
         public static HediffDef Psyche_Scar_Haunted = null!;
         public static HediffDef Psyche_Clarity_HardWon = null!;
         public static HediffDef Psyche_Scar_Pyromaniac = null!;
+        public static HediffDef Psyche_Clarity_MadeWhole = null!;
         public static ThoughtDef Psyche_Injury = null!;
         public static ThoughtDef Psyche_Boon = null!;
         public static ThoughtDef Psyche_ClarityWindow = null!;
@@ -31,5 +32,8 @@ namespace Psyche
         public static ResearchProjectDef Psyche_Humoralism = null!;
         public static ResearchProjectDef Psyche_CognitiveBehavioralTherapy = null!;
         public static ResearchProjectDef Psyche_EMDR = null!;
+
+        public static TraitDef Transhumanist = null!;
+        public static TraitDef BodyPurist = null!;
     }
 }

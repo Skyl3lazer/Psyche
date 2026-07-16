@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -7,6 +8,7 @@ namespace Psyche
     public class Thought_Psychlet : Thought_Memory
     {
         private float signedMagnitude;
+        private List<int> lostPartIndices = new List<int>();
         private bool captured;
         private float mitigationSum;
         private int mitigationSamples;
@@ -178,6 +180,20 @@ namespace Psyche
 
         public int KillerId => killerId;
 
+        public int LostPartCount => lostPartIndices.Count;
+
+        public bool HasLostPart(int partIndex) => lostPartIndices.Contains(partIndex);
+
+        public void AddLostPart(int partIndex)
+        {
+            if (partIndex >= 0 && !lostPartIndices.Contains(partIndex))
+            {
+                lostPartIndices.Add(partIndex);
+            }
+        }
+
+        public bool RemoveLostPart(int partIndex) => lostPartIndices.Remove(partIndex);
+
         public void StampKiller(int id)
         {
             if (!IsBoon)
@@ -222,7 +238,7 @@ namespace Psyche
             }
 
             float upkeep = mitigationSamples > 0 ? mitigationSum / mitigationSamples : 0.5f;
-            PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel), Mathf.Clamp01(closureLevel), otherPawn?.thingIDNumber ?? 0, killerId, ext?.scarDef);
+            PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel), Mathf.Clamp01(closureLevel), otherPawn?.thingIDNumber ?? 0, killerId, ext?.scarDef, lostPartIndices);
         }
 
         private float SampleMitigation()
@@ -249,6 +265,11 @@ namespace Psyche
             Scribe_Values.Look(ref rolled, "psyche_rolled", false);
             Scribe_Defs.Look(ref sourceDef, "psyche_sourceDef");
             Scribe_Values.Look(ref sourceStageIndex, "psyche_sourceStageIndex", 0);
+            Scribe_Collections.Look(ref lostPartIndices, "psyche_lostPartIndices", LookMode.Value);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit && lostPartIndices == null)
+            {
+                lostPartIndices = new List<int>();
+            }
         }
     }
 }

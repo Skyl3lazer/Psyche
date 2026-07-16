@@ -44,6 +44,9 @@ namespace Psyche
         public const float ClosureScarHeal = 3f;
         public const float RevengeClarityChance = 0.15f;
 
+        public const float LimbReplacedQuality = 0.8f;
+        public const float LimbReplacedClarityChance = 0.15f;
+
         public const float OwnTriggerIntensityCap = 40f;
         public const float ClarityMinIntensity = 10f;
         public const int GraveWoundRelationOpinion = 20;

@@ -8,11 +8,20 @@ namespace Psyche
     {
         public static void Fire(Pawn pawn, ThoughtDef def)
         {
-            float unit = (def != null && def.stages != null && def.stages.Count > 0 ? def.stages[0].baseMoodEffect : 0f) * PsycheTuning.WoundScale;
-            Fire(pawn, def, unit);
+            Fire(pawn, def, DefaultUnit(def));
         }
 
-        public static void Fire(Pawn pawn, ThoughtDef def, float unit)
+        public static void FireWithPart(Pawn pawn, ThoughtDef def, int lostPartIndex, int killerId = 0)
+        {
+            Fire(pawn, def, DefaultUnit(def), lostPartIndex, killerId);
+        }
+
+        private static float DefaultUnit(ThoughtDef def)
+        {
+            return (def != null && def.stages != null && def.stages.Count > 0 ? def.stages[0].baseMoodEffect : 0f) * PsycheTuning.WoundScale;
+        }
+
+        public static void Fire(Pawn pawn, ThoughtDef def, float unit, int lostPartIndex = -1, int killerId = 0)
         {
             if (pawn == null || def == null || !PsycheUtility.IsTracked(pawn))
             {
@@ -41,15 +50,24 @@ namespace Psyche
                 }
             }
 
+            Thought_Psychlet target;
             if (existing != null)
             {
                 existing.Intensify(unit);
+                target = existing;
             }
             else
             {
                 Thought_Psychlet fresh = (Thought_Psychlet)ThoughtMaker.MakeThought(def);
                 fresh.InitMagnitude(unit);
                 handler.TryGainMemory(fresh);
+                target = fresh;
+            }
+
+            target.AddLostPart(lostPartIndex);
+            if (killerId != 0 && target.KillerId == 0)
+            {
+                target.StampKiller(killerId);
             }
 
             pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();

@@ -137,9 +137,59 @@ namespace Psyche
             if (hediff is Hediff_MissingPart && hediff.pawn != null && dinfo.HasValue
                 && dinfo.Value.Def != null && dinfo.Value.Def.ExternalViolenceFor(hediff.pawn))
             {
-                PsycheOwnTriggers.Fire(hediff.pawn, PsycheDefOf.Psyche_OT_Amputation);
+                int attackerId = (dinfo.Value.Instigator as Pawn)?.thingIDNumber ?? 0;
+                PsycheOwnTriggers.FireWithPart(hediff.pawn, PsycheDefOf.Psyche_OT_Amputation, hediff.Part?.Index ?? -1, attackerId);
                 PsycheOwnTriggers.FireOnRelations(hediff.pawn, PsycheDefOf.Psyche_OT_AllyWounded);
             }
+        }
+    }
+
+    [HarmonyPatch(typeof(Pawn_HealthTracker), nameof(Pawn_HealthTracker.AddHediff), new[] { typeof(Hediff), typeof(BodyPartRecord), typeof(DamageInfo?), typeof(DamageWorker.DamageResult) })]
+    public static class Patch_PartReplacedArtificial
+    {
+        public static void Postfix(Hediff hediff)
+        {
+            if (hediff?.pawn == null || hediff.Part == null)
+            {
+                return;
+            }
+
+            var props = hediff.def.addedPartProps;
+            if (props == null || !PsycheUtility.IsTracked(hediff.pawn))
+            {
+                return;
+            }
+
+            PsycheClosure.OnPartReplacedArtificial(hediff.pawn, hediff.Part.Index, props.betterThanNatural);
+        }
+    }
+
+    [HarmonyPatch(typeof(Recipe_InstallArtificialBodyPart), nameof(Recipe_InstallArtificialBodyPart.ApplyOnPawn))]
+    public static class Patch_ArtificialInstallGuard
+    {
+        public static void Prefix() => PsycheClosure.InstallingArtificial = true;
+
+        public static void Finalizer() => PsycheClosure.InstallingArtificial = false;
+    }
+
+    [HarmonyPatch(typeof(Pawn_HealthTracker), nameof(Pawn_HealthTracker.RestorePart))]
+    public static class Patch_PartRestoredNatural
+    {
+        private static readonly FieldInfo PawnField = AccessTools.Field(typeof(Pawn_HealthTracker), "pawn");
+
+        public static void Postfix(Pawn_HealthTracker __instance, BodyPartRecord part)
+        {
+            if (PsycheClosure.InstallingArtificial || part == null)
+            {
+                return;
+            }
+
+            if (PawnField?.GetValue(__instance) is not Pawn pawn || !PsycheUtility.IsTracked(pawn))
+            {
+                return;
+            }
+
+            PsycheClosure.OnPartRestoredNatural(pawn, part.Index);
         }
     }
 

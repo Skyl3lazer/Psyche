@@ -7,6 +7,8 @@ namespace Psyche
 {
     public static class PsycheClosure
     {
+        public static bool InstallingArtificial;
+
         public static void OnBuried(Pawn deceased, Map map)
         {
             if (deceased == null || map == null)
@@ -76,6 +78,94 @@ namespace Psyche
             RevengeClosure(dead);
         }
 
+        public static void OnPartReplacedArtificial(Pawn pawn, int partIndex, bool betterThanNatural)
+        {
+            if (pawn == null)
+            {
+                return;
+            }
+
+            TraitSet? traits = pawn.story?.traits;
+            if (traits != null && traits.HasTrait(PsycheDefOf.Transhumanist))
+            {
+                CloseForPart(pawn, partIndex, "Psyche_LimbReplacedClosure_Transhuman");
+            }
+            else if (traits != null && traits.HasTrait(PsycheDefOf.BodyPurist))
+            {
+                // A machine part is no peace for a body purist - only a return to flesh closes their loss.
+            }
+            else if (betterThanNatural)
+            {
+                CloseForPart(pawn, partIndex, "Psyche_LimbReplacedClosure");
+            }
+        }
+
+        public static void OnPartRestoredNatural(Pawn pawn, int partIndex)
+        {
+            if (pawn != null && pawn.story?.traits?.HasTrait(PsycheDefOf.BodyPurist) == true)
+            {
+                CloseForPart(pawn, partIndex, "Psyche_LimbReplacedClosure_Purist");
+            }
+        }
+
+        private static void CloseForPart(Pawn pawn, int partIndex, string messageKey)
+        {
+            bool closedAny = false;
+
+            List<Thought_Memory>? memories = pawn.needs?.mood?.thoughts?.memories?.Memories;
+            if (memories != null)
+            {
+                for (int i = 0; i < memories.Count; i++)
+                {
+                    if (memories[i] is Thought_Psychlet pt && pt.HasLostPart(partIndex))
+                    {
+                        int before = pt.LostPartCount;
+                        pt.RemoveLostPart(partIndex);
+                        pt.Close(PsycheTuning.LimbReplacedQuality / Mathf.Max(1, before));
+                        closedAny = true;
+                    }
+                }
+            }
+
+            List<Hediff> hediffs = pawn.health.hediffSet.hediffs;
+            for (int i = hediffs.Count - 1; i >= 0; i--)
+            {
+                if (hediffs[i] is Hediff_PsycheScar scar && scar.HasLostPart(partIndex))
+                {
+                    int before = scar.LostPartCount;
+                    scar.RemoveLostPart(partIndex);
+                    scar.Severity *= (float)(before - 1) / before;
+                    closedAny = true;
+
+                    if (scar.LostPartCount == 0 || scar.Severity <= 0f)
+                    {
+                        pawn.health.RemoveHediff(scar);
+                        if (Rand.Chance(PsycheTuning.LimbReplacedClarityChance))
+                        {
+                            PsycheClarities.FormDirect(pawn, PsycheTuning.ClosureClaritySize, PsycheDefOf.Psyche_Clarity_MadeWhole);
+                        }
+                    }
+                }
+            }
+
+            if (!closedAny)
+            {
+                return;
+            }
+
+            pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+
+            BodyPartRecord part = pawn.RaceProps.body.GetPartAtIndex(partIndex);
+            if (part != null)
+            {
+                Messages.Message(
+                    messageKey.Translate(pawn.LabelShort, part.LabelShort).CapitalizeFirst(),
+                    pawn,
+                    MessageTypeDefOf.PositiveEvent,
+                    false);
+            }
+        }
+
         private static void StampKiller(Pawn deceased, int killerId)
         {
             foreach (Pawn griever in TrackedColonists())
@@ -101,7 +191,8 @@ namespace Psyche
             int killerId = killer.thingIDNumber;
             foreach (Pawn griever in TrackedColonists())
             {
-                bool any = false;
+                bool griefClosed = false;
+                bool maimClosed = false;
 
                 List<Thought_Memory>? memories = griever.needs?.mood?.thoughts?.memories?.Memories;
                 if (memories != null)
@@ -111,26 +202,47 @@ namespace Psyche
                         if (memories[i] is Thought_Psychlet pt && !pt.IsBoon && pt.KillerId == killerId)
                         {
                             pt.Close(PsycheTuning.RevengeQuality);
-                            any = true;
+                            if (pt.otherPawn != null)
+                            {
+                                griefClosed = true;
+                            }
+                            else
+                            {
+                                maimClosed = true;
+                            }
                         }
                     }
                 }
 
+                // Grief scars heal on revenge; a maiming's phantom scar does not - killing them never regrew the limb.
                 List<Hediff> hediffs = griever.health.hediffSet.hediffs;
                 for (int i = hediffs.Count - 1; i >= 0; i--)
                 {
-                    if (hediffs[i] is Hediff_PsycheScar scar && scar.KillerId == killerId)
+                    if (hediffs[i] is Hediff_PsycheScar scar && scar.KillerId == killerId && scar.SubjectId != 0)
                     {
                         RevengeHealScar(griever, scar);
-                        any = true;
+                        griefClosed = true;
                     }
                 }
 
-                if (any)
+                if (griefClosed || maimClosed)
                 {
                     griever.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+                }
+
+                if (griefClosed)
+                {
                     Messages.Message(
                         "Psyche_RevengeClosure".Translate(griever.LabelShort, killer.LabelShort).CapitalizeFirst(),
+                        griever,
+                        MessageTypeDefOf.PositiveEvent,
+                        false);
+                }
+
+                if (maimClosed)
+                {
+                    Messages.Message(
+                        "Psyche_MaimRevengeClosure".Translate(griever.LabelShort, killer.LabelShort).CapitalizeFirst(),
                         griever,
                         MessageTypeDefOf.PositiveEvent,
                         false);

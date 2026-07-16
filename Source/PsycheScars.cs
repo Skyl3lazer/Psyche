@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -5,7 +6,7 @@ namespace Psyche
 {
     public static class PsycheScars
     {
-        public static void TryForm(Pawn pawn, float magnitude, float upkeep, float treatment, float medication, float closure, int subjectId, int killerId, HediffDef? markDef = null)
+        public static void TryForm(Pawn pawn, float magnitude, float upkeep, float treatment, float medication, float closure, int subjectId, int killerId, HediffDef? markDef = null, IEnumerable<int>? lostParts = null)
         {
             float chance = Mathf.Clamp(
                 PsycheTuning.ScarBaseChance
@@ -37,6 +38,7 @@ namespace Psyche
             {
                 psycheScar.NotePeak();
                 psycheScar.SetOrigin(subjectId, killerId);
+                psycheScar.SetLostParts(lostParts);
             }
 
             pawn.health.AddHediff(scar, brain);
