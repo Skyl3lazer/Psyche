@@ -387,9 +387,9 @@ namespace Psyche
             ThoughtDef carrier = signed > 0f ? PsycheDefOf.Psyche_Boon : PsycheDefOf.Psyche_Injury;
             Thought_Psychlet companion = (Thought_Psychlet)ThoughtMaker.MakeThought(carrier);
             companion.SetSource(newThought.def, newThought.CurStageIndex);
-            companion.otherPawn = newThought.otherPawn;
             companion.InitMagnitude(signed);
-            __instance.TryGainMemory(companion);
+            // TryGainMemory overwrites otherPawn from its arg, so it must be passed or the companion loses the pawn it is about.
+            __instance.TryGainMemory(companion, newThought.otherPawn);
             pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
         }
     }
