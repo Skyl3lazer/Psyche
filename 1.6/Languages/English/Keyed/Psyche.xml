@@ -23,4 +23,7 @@
 
   <Psyche_RevengeClosure>{0} found a measure of peace at the death of {1}, who had taken someone they loved.</Psyche_RevengeClosure>
 
+  <Psyche_BurialClosure>{0} found some closure laying {1} to rest, easing the grief they carried.</Psyche_BurialClosure>
+  <Psyche_BurialClosureBittersweet>{0} made peace with {1}'s passing at the burial - a long life, now laid to rest.</Psyche_BurialClosureBittersweet>
+
 </LanguageData>

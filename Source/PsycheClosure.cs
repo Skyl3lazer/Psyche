@@ -51,6 +51,13 @@ namespace Psyche
                 {
                     GrantBittersweetPayoff(griever, quality);
                 }
+
+                Messages.Message(
+                    (bittersweet ? "Psyche_BurialClosureBittersweet" : "Psyche_BurialClosure")
+                        .Translate(griever.LabelShort, deceased.LabelShort).CapitalizeFirst(),
+                    griever,
+                    MessageTypeDefOf.PositiveEvent,
+                    false);
             }
         }
 
