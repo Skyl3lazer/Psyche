@@ -45,7 +45,7 @@ namespace Psyche
                 return false;
             }
 
-            if (PsycheIdeologyClassification.IsDenylisted(def))
+            if (PsycheThoughtClassification.IsDenylisted(def))
             {
                 return false;
             }

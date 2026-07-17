@@ -195,6 +195,190 @@
   </HediffDef>
 
   <HediffDef>
+    <defName>Psyche_Scar_Bereavement</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>bereavement psyche scar</label>
+    <description>The loss of one's own child, worn permanently into the mind. A grief a parent never truly sets down.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+    <stages>
+      <li><minSeverity>0</minSeverity><label>faint</label></li>
+      <li><minSeverity>3</minSeverity><label>deep</label></li>
+      <li><minSeverity>6</minSeverity><label>severe</label></li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_SeveredBond</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>severed bond psyche scar</label>
+    <description>A bond to another living thing, cut and left raw. The connection is gone, but the shape of it remains.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+    <stages>
+      <li><minSeverity>0</minSeverity><label>faint</label></li>
+      <li><minSeverity>3</minSeverity><label>deep</label></li>
+      <li><minSeverity>6</minSeverity><label>severe</label></li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_UnresolvedLoss</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>unresolved loss psyche scar</label>
+    <description>Someone gone without an ending - not dead, just lost. The mind keeps a place set for a return that may never come.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+    <stages>
+      <li><minSeverity>0</minSeverity><label>faint</label></li>
+      <li><minSeverity>3</minSeverity><label>deep</label></li>
+      <li><minSeverity>6</minSeverity><label>severe</label></li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_Violation</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>violation psyche scar</label>
+    <description>The body was used against its owner's will. The breach of it settles permanently into the mind.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+    <stages>
+      <li><minSeverity>0</minSeverity><label>faint</label></li>
+      <li><minSeverity>3</minSeverity><label>deep</label></li>
+      <li><minSeverity>6</minSeverity><label>severe</label></li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_Captivity</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>captivity psyche scar</label>
+    <description>Time spent caged or owned, worn permanently into the mind. Freedom returned, but the mark of the cage remains.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+    <stages>
+      <li><minSeverity>0</minSeverity><label>faint</label></li>
+      <li><minSeverity>3</minSeverity><label>deep</label></li>
+      <li><minSeverity>6</minSeverity><label>severe</label></li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_Defilement</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>defilement psyche scar</label>
+    <description>A taboo broken and not undone - flesh consumed, a horror committed. The mind keeps the stain.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+    <stages>
+      <li><minSeverity>0</minSeverity><label>faint</label></li>
+      <li><minSeverity>3</minSeverity><label>deep</label></li>
+      <li><minSeverity>6</minSeverity><label>severe</label></li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_Identity</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>fractured identity psyche scar</label>
+    <description>The self, made uncertain - a copied mind, a borrowed body, memories that may not be one's own. The question of who one is does not fully close.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+    <stages>
+      <li><minSeverity>0</minSeverity><label>faint</label></li>
+      <li><minSeverity>3</minSeverity><label>deep</label></li>
+      <li><minSeverity>6</minSeverity><label>severe</label></li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_Dishonor</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>dishonor psyche scar</label>
+    <description>A disgrace that clings - a defeat or failure that stained one's standing. The shame settles permanently into the mind.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+    <stages>
+      <li><minSeverity>0</minSeverity><label>faint</label></li>
+      <li><minSeverity>3</minSeverity><label>deep</label></li>
+      <li><minSeverity>6</minSeverity><label>severe</label></li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
     <defName>Psyche_Clarity</defName>
     <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
     <label>psyche clarity</label>

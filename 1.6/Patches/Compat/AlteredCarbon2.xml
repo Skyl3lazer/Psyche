@@ -19,6 +19,12 @@
           </value>
         </li>
         <li Class="PatchOperationAddModExtension">
+          <xpath>/Defs/ThoughtDef[defName="AC_StackDegradationThought" or defName="AC_JustCopy" or starts-with(defName, "AC_Wrong") or starts-with(defName, "VFEU_Wrong") or starts-with(defName, "AC_New") or starts-with(defName, "VFEU_New") or defName="AC_WantsShell" or defName="VFEU_WantsShell"]</xpath>
+          <value>
+            <li Class="Psyche.PsycheThoughtExtension"><scarDef>Psyche_Scar_Identity</scarDef></li>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
           <xpath>/Defs/ThoughtDef[defName="AC_CharityFulfilled_Essential_IntroResearcher" or defName="AC_CharityFulfilled_Important_IntroResearcher" or defName="AC_CharityFulfilled_Worthwhile_IntroResearcher" or defName="AC_CharityFulfilled_Researcher"]</xpath>
           <value>
             <li Class="Psyche.PsycheThoughtExtension"><closesScar>Psyche_Scar_Callousness</closesScar></li>

@@ -272,7 +272,7 @@ namespace Psyche
             }
 
             float upkeep = mitigationSamples > 0 ? mitigationSum / mitigationSamples : 0.5f;
-            HediffDef? scarDef = PsycheIdeologyClassification.ResolveScarDef(DisplayDef);
+            HediffDef? scarDef = PsycheThoughtClassification.ResolveScarDef(DisplayDef);
             PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel), Mathf.Clamp01(closureLevel), otherPawn?.thingIDNumber ?? 0, killerId, scarDef, limbLoss?.Parts);
         }
 

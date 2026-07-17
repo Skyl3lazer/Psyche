@@ -266,6 +266,8 @@ namespace Psyche
 
         public static bool IsCharityFulfilled(ThoughtDef def) => def != null && def.defName.StartsWith("CharityFulfilled_", System.StringComparison.Ordinal);
 
+        public static bool IsCaptivityCloser(ThoughtDef def) => def != null && (def.defName == "FreedFromSlavery" || def.defName == "Rescued");
+
         public static void OnCharityFulfilled(Pawn pawn, ThoughtDef fulfilledDef)
         {
             CloseScarFamily(pawn, PsycheDefOf.Psyche_Scar_Callousness, CharityClosureQuality(fulfilledDef), "Psyche_CharityClosure");
@@ -286,7 +288,7 @@ namespace Psyche
                 for (int i = 0; i < memories.Count; i++)
                 {
                     if (memories[i] is Thought_Psychlet pt && !pt.IsBoon
-                        && PsycheIdeologyClassification.ResolveScarDef(pt.DisplayDef) == scarDef)
+                        && PsycheThoughtClassification.ResolveScarDef(pt.DisplayDef) == scarDef)
                     {
                         pt.Close(quality);
                         closedAny = true;

@@ -19,6 +19,12 @@
           </value>
         </li>
         <li Class="PatchOperationAddModExtension">
+          <xpath>/Defs/ThoughtDef[defName="VME_Defeat_Dishonorable" or defName="VME_SecondDefeat_Dishonorable"]</xpath>
+          <value>
+            <li Class="Psyche.PsycheThoughtExtension"><scarDef>Psyche_Scar_Dishonor</scarDef></li>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
           <xpath>/Defs/ThoughtDef[defName="VME_DumbLabor_Horrible" or defName="VME_CheapTradingFair"]</xpath>
           <value>
             <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>

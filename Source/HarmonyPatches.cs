@@ -368,6 +368,11 @@ namespace Psyche
                 PsycheClosure.OnCharityFulfilled(pawn, newThought.def);
             }
 
+            if (PsycheClosure.IsCaptivityCloser(newThought.def) && PsycheUtility.HasPsyche(pawn))
+            {
+                PsycheClosure.CloseScarFamily(pawn, PsycheDefOf.Psyche_Scar_Captivity, PsycheTuning.CaptivityClosureQuality, "Psyche_CaptivityClosure");
+            }
+
             PsycheThoughtExtension? closerExt = newThought.def.GetModExtension<PsycheThoughtExtension>();
             if (closerExt?.closesScar != null && PsycheUtility.HasPsyche(pawn))
             {
