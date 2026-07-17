@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Vehicles Expanded</li>
+    </mods>
+    <match Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThoughtDef[defName="VVE_Driving_Horrible" or defName="VVE_Flying_Horrible" or defName="VVE_Sailing_Horrible"]</xpath>
+      <value>
+        <li Class="Psyche.PsycheThoughtExtension"><scarDef>Psyche_Scar_Apostasy</scarDef></li>
+      </value>
+    </match>
+  </Operation>
+</Patch>

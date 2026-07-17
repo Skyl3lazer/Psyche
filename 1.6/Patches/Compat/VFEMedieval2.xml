@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Factions Expanded - Medieval 2</li>
+    </mods>
+    <match Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThoughtDef[defName="VFEM2_TorturerDraught"]</xpath>
+      <value>
+        <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+      </value>
+    </match>
+  </Operation>
+</Patch>

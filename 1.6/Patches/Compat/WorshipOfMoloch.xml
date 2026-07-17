@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Worship of Moloch</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>/Defs/ThoughtDef[defName="ChildSacrificeHorrible_Observed" or defName="WoM_WitnessedSacrifice_Nonbeliever" or defName="WoM_BoundToPillar_Dread"]</xpath>
+          <value>
+            <li Class="Psyche.PsycheThoughtExtension"><scarDef>Psyche_Scar_Haunted</scarDef></li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

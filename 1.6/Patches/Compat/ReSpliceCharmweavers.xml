@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>ReSplice: Charmweavers</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>/Defs/ThoughtDef[defName="RS_Divorce_Abhorrent_BrokeUp" or defName="RS_Divorce_Horrible_BrokeUp"]</xpath>
+          <value>
+            <li Class="Psyche.PsycheThoughtExtension"><scarDef>Psyche_Scar_Apostasy</scarDef></li>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>/Defs/ThoughtDef[defName="RS_EnthralledColonist"]</xpath>
+          <value>
+            <li Class="Psyche.PsycheThoughtExtension"><scarDef>Psyche_Scar_Bloodguilt</scarDef></li>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>/Defs/ThoughtDef[defName="RS_SoldMyThrall"]</xpath>
+          <value>
+            <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

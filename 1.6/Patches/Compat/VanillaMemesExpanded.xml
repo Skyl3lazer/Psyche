@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Ideology Expanded - Memes and Structures</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>/Defs/ThoughtDef[defName="VME_InstalledProsthetic_OnlyBiological" or defName="VME_AteInsectMeat_Sacrilegious" or defName="VME_AteInsectMeatAsIngredient_Sacrilegious" or defName="VME_Firefighting_Abhorrent" or defName="VME_BookWriting_Disliked"]</xpath>
+          <value>
+            <li Class="Psyche.PsycheThoughtExtension"><scarDef>Psyche_Scar_Apostasy</scarDef></li>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>/Defs/ThoughtDef[defName="VME_Violence_Abhorrent" or defName="VME_Violence_Disapproved" or defName="VME_ParticipatedInRaid_Abhorrent" or defName="VME_SoldSlave_Know_Forbidden_Mood" or defName="VME_KillingWithFire_Abhorrent" or defName="VME_Insectoids_Exalted" or defName="VME_Mechanoids_Exalted"]</xpath>
+          <value>
+            <li Class="Psyche.PsycheThoughtExtension"><scarDef>Psyche_Scar_Bloodguilt</scarDef></li>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>/Defs/ThoughtDef[defName="VME_DumbLabor_Horrible" or defName="VME_CheapTradingFair"]</xpath>
+          <value>
+            <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

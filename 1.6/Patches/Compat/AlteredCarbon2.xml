@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Altered Carbon 2: ReSleeved</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>/Defs/ThoughtDef[defName="AC_CharityRefused_Essential_IntroResearcher"]</xpath>
+          <value>
+            <li Class="Psyche.PsycheThoughtExtension"><scarDef>Psyche_Scar_Callousness</scarDef></li>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>/Defs/ThoughtDef[defName="AC_ErasedStack"]</xpath>
+          <value>
+            <li Class="Psyche.PsycheThoughtExtension"><scarDef>Psyche_Scar_Bloodguilt</scarDef></li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

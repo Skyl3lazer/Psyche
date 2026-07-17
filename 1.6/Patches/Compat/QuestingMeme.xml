@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Questing Meme</li>
+    </mods>
+    <match Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThoughtDef[defName="QuesterMeme_QuestComplete_Fail" or defName="QuesterMeme_QuestComplete_FailAutoAccept" or defName="QuesterMeme_QuestExpired"]</xpath>
+      <value>
+        <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+      </value>
+    </match>
+  </Operation>
+</Patch>

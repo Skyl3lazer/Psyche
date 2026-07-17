@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Conservationist and Polluter - Mort's Ideologies: Memes and Precepts</li>
+    </mods>
+    <match Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThoughtDef[defName="MI_ToxicWasteDumpingBad"]</xpath>
+      <value>
+        <li Class="Psyche.PsycheThoughtExtension"><scarDef>Psyche_Scar_Apostasy</scarDef></li>
+      </value>
+    </match>
+  </Operation>
+</Patch>
