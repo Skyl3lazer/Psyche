@@ -57,4 +57,146 @@
   <Psyche_Tip_RepairableAgain>Can be repaired again in {0}.</Psyche_Tip_RepairableAgain>
   <Psyche_Tip_TierFloor>Mended as deep as current therapy allows. Research {0} to repair it deeper.</Psyche_Tip_TierFloor>
 
+  <!-- Mod options page -->
+  <Psyche_Setting_ResetAll>Reset all to defaults</Psyche_Setting_ResetAll>
+  <Psyche_Setting_ResetAllConfirm>Reset every Psyche tuning value to its default? This clears all of your changes.</Psyche_Setting_ResetAllConfirm>
+  <Psyche_Setting_ResetField>Reset this value to its default.</Psyche_Setting_ResetField>
+  <Psyche_Setting_AdvancedShow>Show advanced settings</Psyche_Setting_AdvancedShow>
+  <Psyche_Setting_AdvancedHide>Hide advanced settings</Psyche_Setting_AdvancedHide>
+  <Psyche_Setting_RestartNote>Takes effect after a game restart.</Psyche_Setting_RestartNote>
+
+  <Psyche_Group_WoundConversion>Wound conversion</Psyche_Group_WoundConversion>
+  <Psyche_Group_ScarChance>Scar formation chance</Psyche_Group_ScarChance>
+  <Psyche_Group_ScarSeverity>Scar severity</Psyche_Group_ScarSeverity>
+  <Psyche_Group_Clarity>Clarity (positive)</Psyche_Group_Clarity>
+  <Psyche_Group_Therapy>Therapy</Psyche_Group_Therapy>
+  <Psyche_Group_Medication>Medication mitigation</Psyche_Group_Medication>
+  <Psyche_Group_Closure>Closure</Psyche_Group_Closure>
+  <Psyche_Group_Revenge>Revenge closure</Psyche_Group_Revenge>
+  <Psyche_Group_LimbReplaced>Limb-replaced closure</Psyche_Group_LimbReplaced>
+  <Psyche_Group_IdeologyClosures>Ideology closures</Psyche_Group_IdeologyClosures>
+  <Psyche_Group_OwnTriggers>Own-triggers and signature events</Psyche_Group_OwnTriggers>
+  <Psyche_Group_InjuryTreatment>Injury treatment</Psyche_Group_InjuryTreatment>
+  <Psyche_Group_TherapyTiming>Therapy job timing</Psyche_Group_TherapyTiming>
+  <Psyche_Group_RepairTiers>Repair tiers</Psyche_Group_RepairTiers>
+  <Psyche_Group_ClaritySeeking>Clarity seeking</Psyche_Group_ClaritySeeking>
+  <Psyche_Group_Pyromania>Pyromania</Psyche_Group_Pyromania>
+
+  <Psyche_Tune_WoundScale>Wound magnitude scale</Psyche_Tune_WoundScale>
+  <Psyche_Tune_WoundScale_Tip>Global multiplier on the size of every psyche injury and boon. Higher means events hit harder.</Psyche_Tune_WoundScale_Tip>
+  <Psyche_Tune_QualifyingMoodThreshold>Qualifying mood threshold</Psyche_Tune_QualifyingMoodThreshold>
+  <Psyche_Tune_QualifyingMoodThreshold_Tip>A mood memory qualifies to become a psychlet if its mood effect is at least this large.</Psyche_Tune_QualifyingMoodThreshold_Tip>
+  <Psyche_Tune_QualifyingDurationDays>Qualifying duration (days)</Psyche_Tune_QualifyingDurationDays>
+  <Psyche_Tune_QualifyingDurationDays_Tip>A mood memory also qualifies if it lasts at least this many days, regardless of its size.</Psyche_Tune_QualifyingDurationDays_Tip>
+  <Psyche_Tune_ConvertedStackLimit>Converted stack limit</Psyche_Tune_ConvertedStackLimit>
+  <Psyche_Tune_ConvertedStackLimit_Tip>Most copies of one converted memory that can stack into a single psychlet.</Psyche_Tune_ConvertedStackLimit_Tip>
+
+  <Psyche_Tune_ScarBaseChance>Base scar chance</Psyche_Tune_ScarBaseChance>
+  <Psyche_Tune_ScarFloorChance>Minimum scar chance</Psyche_Tune_ScarFloorChance>
+  <Psyche_Tune_ScarFloorChance_Tip>The scar chance can never be reduced below this floor, no matter how much treatment or medication is applied.</Psyche_Tune_ScarFloorChance_Tip>
+  <Psyche_Tune_UpkeepChanceReduction>Upkeep chance reduction</Psyche_Tune_UpkeepChanceReduction>
+  <Psyche_Tune_UpkeepChanceReduction_Tip>How much keeping up therapy on an open injury lowers the chance it scars.</Psyche_Tune_UpkeepChanceReduction_Tip>
+  <Psyche_Tune_TreatmentChanceReduction>Treatment chance reduction</Psyche_Tune_TreatmentChanceReduction>
+  <Psyche_Tune_TreatmentChanceReduction_Tip>How much a completed treatment lowers the chance an injury scars.</Psyche_Tune_TreatmentChanceReduction_Tip>
+
+  <Psyche_Tune_ScarScale>Scar size scale</Psyche_Tune_ScarScale>
+  <Psyche_Tune_ScarScale_Tip>Multiplier converting an injury's magnitude into the size of the scar it leaves.</Psyche_Tune_ScarScale_Tip>
+  <Psyche_Tune_ScarSizeHeavy>Heavy scar size</Psyche_Tune_ScarSizeHeavy>
+  <Psyche_Tune_ScarSizeLight>Light scar size</Psyche_Tune_ScarSizeLight>
+
+  <Psyche_Tune_BoonDecayFloor>Boon decay floor</Psyche_Tune_BoonDecayFloor>
+  <Psyche_Tune_ClarityChanceCap>Clarity chance cap</Psyche_Tune_ClarityChanceCap>
+  <Psyche_Tune_ClarityScale>Clarity size scale</Psyche_Tune_ClarityScale>
+  <Psyche_Tune_ClarityScale_Tip>Multiplier converting a boon's magnitude into the size of the clarity it leaves.</Psyche_Tune_ClarityScale_Tip>
+  <Psyche_Tune_MaxHealthFloorFrac>Max health floor fraction</Psyche_Tune_MaxHealthFloorFrac>
+  <Psyche_Tune_MaxHealthFloorFrac_Tip>Scars can never pull a pawn's maximum psyche health below this fraction of baseline.</Psyche_Tune_MaxHealthFloorFrac_Tip>
+  <Psyche_Tune_ClarityMinDurationDays>Clarity minimum duration (days)</Psyche_Tune_ClarityMinDurationDays>
+  <Psyche_Tune_ClarityChancePerMagnitude>Clarity chance per magnitude</Psyche_Tune_ClarityChancePerMagnitude>
+  <Psyche_Tune_ClarityChancePerMagnitude_Tip>Chance per point of boon magnitude that it matures into a lasting clarity.</Psyche_Tune_ClarityChancePerMagnitude_Tip>
+  <Psyche_Tune_ClarityCapHP>Clarity cap (HP)</Psyche_Tune_ClarityCapHP>
+  <Psyche_Tune_ClarityMinIntensity>Clarity minimum intensity</Psyche_Tune_ClarityMinIntensity>
+
+  <Psyche_Tune_TreatmentPerSessionBase>Treatment per session (base)</Psyche_Tune_TreatmentPerSessionBase>
+  <Psyche_Tune_TreatmentPerSocialLevel>Treatment per Social level</Psyche_Tune_TreatmentPerSocialLevel>
+  <Psyche_Tune_HealFracBase>Heal fraction (base)</Psyche_Tune_HealFracBase>
+  <Psyche_Tune_HealFracPerSocialLevel>Heal fraction per Social level</Psyche_Tune_HealFracPerSocialLevel>
+
+  <Psyche_Tune_MedicationChanceReduction>Medication chance reduction</Psyche_Tune_MedicationChanceReduction>
+  <Psyche_Tune_MedicationChanceReduction_Tip>How much each dose of soothing medication lowers the chance an injury scars.</Psyche_Tune_MedicationChanceReduction_Tip>
+  <Psyche_Tune_MedicationPerDose>Medication per dose</Psyche_Tune_MedicationPerDose>
+
+  <Psyche_Tune_ClosureChanceReduction>Closure chance reduction</Psyche_Tune_ClosureChanceReduction>
+  <Psyche_Tune_ClosureChanceReduction_Tip>How much a matching closure event lowers the chance an open injury scars.</Psyche_Tune_ClosureChanceReduction_Tip>
+  <Psyche_Tune_ClosureSizeQualityBonus>Closure size quality bonus</Psyche_Tune_ClosureSizeQualityBonus>
+  <Psyche_Tune_ClosureHealFrac>Closure heal fraction</Psyche_Tune_ClosureHealFrac>
+  <Psyche_Tune_BurialBaseQuality>Burial base quality</Psyche_Tune_BurialBaseQuality>
+  <Psyche_Tune_BittersweetAgeFrac>Bittersweet age fraction</Psyche_Tune_BittersweetAgeFrac>
+  <Psyche_Tune_BittersweetAgeFrac_Tip>Fraction of full life expectancy past which a death counts as bittersweet rather than purely tragic.</Psyche_Tune_BittersweetAgeFrac_Tip>
+  <Psyche_Tune_ClarityPayoffChancePerQuality>Clarity payoff chance per quality</Psyche_Tune_ClarityPayoffChancePerQuality>
+  <Psyche_Tune_ClosureClaritySize>Closure clarity size</Psyche_Tune_ClosureClaritySize>
+
+  <Psyche_Tune_RevengeQuality>Revenge quality</Psyche_Tune_RevengeQuality>
+  <Psyche_Tune_RevengeClarityChance>Revenge clarity chance</Psyche_Tune_RevengeClarityChance>
+  <Psyche_Tune_ClosureScarHeal>Closure scar heal (HP)</Psyche_Tune_ClosureScarHeal>
+
+  <Psyche_Tune_LimbReplacedQuality>Limb-replaced quality</Psyche_Tune_LimbReplacedQuality>
+  <Psyche_Tune_LimbReplacedClarityChance>Limb-replaced clarity chance</Psyche_Tune_LimbReplacedClarityChance>
+
+  <Psyche_Tune_CharityClosureQualityEssential>Charity closure quality (essential)</Psyche_Tune_CharityClosureQualityEssential>
+  <Psyche_Tune_CharityClosureQualityImportant>Charity closure quality (important)</Psyche_Tune_CharityClosureQualityImportant>
+  <Psyche_Tune_CharityClosureQualityWorthwhile>Charity closure quality (worthwhile)</Psyche_Tune_CharityClosureQualityWorthwhile>
+  <Psyche_Tune_CaptivityClosureQuality>Captivity closure quality</Psyche_Tune_CaptivityClosureQuality>
+
+  <Psyche_Tune_OwnTriggerIntensityCap>Own-trigger intensity cap</Psyche_Tune_OwnTriggerIntensityCap>
+  <Psyche_Tune_GraveWoundRelationOpinion>Grave-wound relation opinion</Psyche_Tune_GraveWoundRelationOpinion>
+  <Psyche_Tune_GraveWoundRelationOpinion_Tip>Minimum opinion of the victim for a bystander to take a grave-wound injury from their death.</Psyche_Tune_GraveWoundRelationOpinion_Tip>
+  <Psyche_Tune_LifeThreateningBleedRate>Life-threatening bleed rate</Psyche_Tune_LifeThreateningBleedRate>
+  <Psyche_Tune_LifeThreateningBleedRate_Tip>Total bleed rate at or above which surviving combat counts as a life-threatening own-trigger.</Psyche_Tune_LifeThreateningBleedRate_Tip>
+  <Psyche_Tune_SavedAllyBloodScaleMin>Saved-ally blood scale (min)</Psyche_Tune_SavedAllyBloodScaleMin>
+  <Psyche_Tune_SavedAllyBloodScaleMax>Saved-ally blood scale (max)</Psyche_Tune_SavedAllyBloodScaleMax>
+
+  <Psyche_Tune_InjuryTreatMagnitudeThreshold>Injury treat magnitude threshold</Psyche_Tune_InjuryTreatMagnitudeThreshold>
+  <Psyche_Tune_InjuryTreatMagnitudeThreshold_Tip>An injury smaller than this is too minor to be worth a therapy session.</Psyche_Tune_InjuryTreatMagnitudeThreshold_Tip>
+  <Psyche_Tune_InjuryHealedEpsilon>Injury healed epsilon</Psyche_Tune_InjuryHealedEpsilon>
+  <Psyche_Tune_InjuryHealedEpsilon_Tip>Remaining damage below this counts as fully healed.</Psyche_Tune_InjuryHealedEpsilon_Tip>
+  <Psyche_Tune_InjuryTreatCooldownTicks>Injury treat cooldown (ticks)</Psyche_Tune_InjuryTreatCooldownTicks>
+  <Psyche_Tune_InjuryTreatCooldownTicks_Tip>In game ticks (60 ticks = 1 second, 60000 = 1 day).</Psyche_Tune_InjuryTreatCooldownTicks_Tip>
+
+  <Psyche_Tune_TherapySessionTicks>Therapy session length (ticks)</Psyche_Tune_TherapySessionTicks>
+  <Psyche_Tune_TherapySessionTicks_Tip>In game ticks (60 ticks = 1 second, 60000 = 1 day).</Psyche_Tune_TherapySessionTicks_Tip>
+  <Psyche_Tune_SeekWaitTicks>Seek wait (ticks)</Psyche_Tune_SeekWaitTicks>
+  <Psyche_Tune_SeekWaitTicks_Tip>In game ticks (60 ticks = 1 second, 60000 = 1 day).</Psyche_Tune_SeekWaitTicks_Tip>
+  <Psyche_Tune_CounselingCooldownTicks>Counseling cooldown (ticks)</Psyche_Tune_CounselingCooldownTicks>
+  <Psyche_Tune_CounselingCooldownTicks_Tip>In game ticks (60 ticks = 1 second, 60000 = 1 day).</Psyche_Tune_CounselingCooldownTicks_Tip>
+  <Psyche_Tune_SeekWanderRadius>Seek wander radius</Psyche_Tune_SeekWanderRadius>
+  <Psyche_Tune_SeekWanderIntervalMin>Seek wander interval (min ticks)</Psyche_Tune_SeekWanderIntervalMin>
+  <Psyche_Tune_SeekWanderIntervalMin_Tip>In game ticks (60 ticks = 1 second).</Psyche_Tune_SeekWanderIntervalMin_Tip>
+  <Psyche_Tune_SeekWanderIntervalMax>Seek wander interval (max ticks)</Psyche_Tune_SeekWanderIntervalMax>
+  <Psyche_Tune_SeekWanderIntervalMax_Tip>In game ticks (60 ticks = 1 second).</Psyche_Tune_SeekWanderIntervalMax_Tip>
+
+  <Psyche_Tune_TierRepairReach>Tier repair reach</Psyche_Tune_TierRepairReach>
+  <Psyche_Tune_TierRepairReach_Tip>Deepest scar each therapy tier can mend to, one value per tier (counseling, CBT, EMDR, and beyond).</Psyche_Tune_TierRepairReach_Tip>
+  <Psyche_Tune_TierRepairMagnitude>Tier repair magnitude</Psyche_Tune_TierRepairMagnitude>
+  <Psyche_Tune_TierRepairMagnitude_Tip>How much scar each therapy tier removes per session, one value per tier.</Psyche_Tune_TierRepairMagnitude_Tip>
+  <Psyche_Tune_TierQualityBase>Tier quality base</Psyche_Tune_TierQualityBase>
+  <Psyche_Tune_TierQualityBase_Tip>Base repair quality granted by each therapy tier, one value per tier.</Psyche_Tune_TierQualityBase_Tip>
+  <Psyche_Tune_TierMedicinePotencyCap>Tier medicine potency cap</Psyche_Tune_TierMedicinePotencyCap>
+  <Psyche_Tune_TierMedicinePotencyCap_Tip>Highest medicine potency each therapy tier can make use of, one value per tier.</Psyche_Tune_TierMedicinePotencyCap_Tip>
+  <Psyche_Tune_RepairZeroPoint>Repair zero point</Psyche_Tune_RepairZeroPoint>
+  <Psyche_Tune_RepairQualityPerSocial>Repair quality per Social level</Psyche_Tune_RepairQualityPerSocial>
+  <Psyche_Tune_RepairQualityRandomSpread>Repair quality random spread</Psyche_Tune_RepairQualityRandomSpread>
+  <Psyche_Tune_RepairMedicineFloorPerPotency>Repair medicine floor per potency</Psyche_Tune_RepairMedicineFloorPerPotency>
+  <Psyche_Tune_RepairBackfireScale>Repair backfire scale</Psyche_Tune_RepairBackfireScale>
+
+  <Psyche_Tune_ClarityWindowDeepThreshold>Clarity window deep threshold</Psyche_Tune_ClarityWindowDeepThreshold>
+  <Psyche_Tune_ClaritySeekSoloQualityBase>Solo clarity-seek quality (base)</Psyche_Tune_ClaritySeekSoloQualityBase>
+  <Psyche_Tune_ClaritySeekSoloQualityPerSocial>Solo clarity-seek quality per Social level</Psyche_Tune_ClaritySeekSoloQualityPerSocial>
+  <Psyche_Tune_ClarityFromWindowScale>Clarity from window scale</Psyche_Tune_ClarityFromWindowScale>
+  <Psyche_Tune_ClarityGlitterCost>Clarity glitterworld medicine cost</Psyche_Tune_ClarityGlitterCost>
+  <Psyche_Tune_ContemplationTicks>Contemplation length (ticks)</Psyche_Tune_ContemplationTicks>
+  <Psyche_Tune_ContemplationTicks_Tip>In game ticks (60 ticks = 1 second, 60000 = 1 day).</Psyche_Tune_ContemplationTicks_Tip>
+
+  <Psyche_Tune_PyromaniaFireFactorByStage>Pyromania fire factor by stage</Psyche_Tune_PyromaniaFireFactorByStage>
+  <Psyche_Tune_PyromaniaFireFactorByStage_Tip>Fire-setting drive multiplier at each pyromania mark stage.</Psyche_Tune_PyromaniaFireFactorByStage_Tip>
+
 </LanguageData>
