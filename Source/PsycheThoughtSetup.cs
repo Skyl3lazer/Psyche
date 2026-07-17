@@ -39,6 +39,17 @@ namespace Psyche
                 return false;
             }
 
+            // Worker-driven thoughts are situational, never gained as memories, so no companion forms.
+            if (def.workerClass != null)
+            {
+                return false;
+            }
+
+            if (PsycheIdeologyClassification.IsDenylisted(def))
+            {
+                return false;
+            }
+
             PsycheThoughtExtension? ext = def.GetModExtension<PsycheThoughtExtension>();
             if (ext != null && ext.exemptFromWounds)
             {

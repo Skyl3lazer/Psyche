@@ -272,7 +272,8 @@ namespace Psyche
             }
 
             float upkeep = mitigationSamples > 0 ? mitigationSum / mitigationSamples : 0.5f;
-            PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel), Mathf.Clamp01(closureLevel), otherPawn?.thingIDNumber ?? 0, killerId, ext?.scarDef, limbLoss?.Parts);
+            HediffDef? scarDef = ext?.scarDef ?? PsycheIdeologyClassification.ScarDefFor(DisplayDef);
+            PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel), Mathf.Clamp01(closureLevel), otherPawn?.thingIDNumber ?? 0, killerId, scarDef, limbLoss?.Parts);
         }
 
         private float SampleMitigation()

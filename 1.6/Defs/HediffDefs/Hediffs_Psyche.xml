@@ -67,10 +67,138 @@
   </HediffDef>
 
   <HediffDef>
+    <defName>Psyche_Scar_Apostasy</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>apostasy psyche scar</label>
+    <description>A belief broken by one's own hand. The act cannot be unmade, and the memory of betraying what one holds sacred settles permanently into the mind.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+    <stages>
+      <li>
+        <minSeverity>0</minSeverity>
+        <label>faint</label>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>deep</label>
+      </li>
+      <li>
+        <minSeverity>6</minSeverity>
+        <label>severe</label>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_Bloodguilt</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>bloodguilt psyche scar</label>
+    <description>Harm done to another living being, against everything one believes. The weight of it never fully lifts.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+    <stages>
+      <li>
+        <minSeverity>0</minSeverity>
+        <label>faint</label>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>deep</label>
+      </li>
+      <li>
+        <minSeverity>6</minSeverity>
+        <label>severe</label>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_Callousness</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>callousness psyche scar</label>
+    <description>Someone in need was turned away. The guilt of the refusal lingers, a permanent doubt about one's own humanity.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+    <stages>
+      <li>
+        <minSeverity>0</minSeverity>
+        <label>faint</label>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>deep</label>
+      </li>
+      <li>
+        <minSeverity>6</minSeverity>
+        <label>severe</label>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_SacredLoss</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>sacred loss psyche scar</label>
+    <description>Something sacred or central to who one is has been taken away. Its absence is a permanent hollow.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-1</maxHealthPerSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+    <stages>
+      <li>
+        <minSeverity>0</minSeverity>
+        <label>faint</label>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>deep</label>
+      </li>
+      <li>
+        <minSeverity>6</minSeverity>
+        <label>severe</label>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
     <defName>Psyche_Clarity</defName>
     <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
     <label>psyche clarity</label>
-    <description>A lasting insight won from a profound experience. It raises the maximum psyche health this person can hold, above their natural baseline.</description>
+    <description>A lasting insight won from a profound experience.</description>
     <isBad>false</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -102,7 +230,7 @@
     <defName>Psyche_Scar_Haunted</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>haunted psyche scar</label>
-    <description>A wound that keeps its grip. The memory intrudes unbidden, dulling the drive to work and pulling this person away from others - and at its worst it sends them wandering, lost in it.</description>
+    <description>A wound that keeps its grip. The memory intrudes unbidden, dulling the drive to work and pulling this person away from others. At its worst it sends them wandering, lost in the past.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -475,7 +603,7 @@
     <defName>Psyche_Clarity_Peace</defName>
     <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
     <label>peace psyche clarity</label>
-    <description>A loss laid gently to rest. Having buried someone who lived a full life, this person carries the loss without its sharpest edge - a settled peace with the way of things.</description>
+    <description>A loss laid gently to rest. Having buried someone who lived a full life, this person carries the loss without its edge - a settled peace with the way of things.</description>
     <isBad>false</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -493,7 +621,7 @@
     <defName>Psyche_Clarity_Sanguine</defName>
     <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
     <label>sanguine psyche clarity</label>
-    <description>An innate, level buoyancy of spirit. This person holds more psyche health than their nature alone would allow.</description>
+    <description>An innate, level buoyancy of spirit.</description>
     <isBad>false</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
