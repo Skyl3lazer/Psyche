@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Anomaly Expanded - Insanity</li>
+    </mods>
+    <match Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThoughtDef[defName="VAEI_MockedMood" or defName="VAEI_VileSlanderMood"]</xpath>
+      <value>
+        <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+      </value>
+    </match>
+  </Operation>
+</Patch>
