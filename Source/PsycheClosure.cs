@@ -264,6 +264,85 @@ namespace Psyche
             }
         }
 
+        public static bool IsCharityFulfilled(ThoughtDef def) => def != null && def.defName.StartsWith("CharityFulfilled_");
+
+        public static void OnCharityFulfilled(Pawn pawn, ThoughtDef fulfilledDef)
+        {
+            float quality = CharityClosureQuality(fulfilledDef);
+            if (pawn == null || quality <= 0f)
+            {
+                return;
+            }
+
+            bool closedAny = false;
+
+            List<Thought_Memory>? memories = pawn.needs?.mood?.thoughts?.memories?.Memories;
+            if (memories != null)
+            {
+                for (int i = 0; i < memories.Count; i++)
+                {
+                    if (memories[i] is Thought_Psychlet pt && !pt.IsBoon
+                        && PsycheIdeologyClassification.ScarDefFor(pt.DisplayDef) == PsycheDefOf.Psyche_Scar_Callousness)
+                    {
+                        pt.Close(quality);
+                        closedAny = true;
+                    }
+                }
+            }
+
+            List<Hediff> hediffs = pawn.health.hediffSet.hediffs;
+            for (int i = hediffs.Count - 1; i >= 0; i--)
+            {
+                if (hediffs[i] is Hediff_PsycheScar scar && scar.def == PsycheDefOf.Psyche_Scar_Callousness)
+                {
+                    scar.Severity = Mathf.Max(0f, scar.Severity - (PsycheTuning.ClosureScarHeal * quality));
+                    if (scar.Severity <= 0f)
+                    {
+                        pawn.health.RemoveHediff(scar);
+                    }
+
+                    closedAny = true;
+                }
+            }
+
+            if (!closedAny)
+            {
+                return;
+            }
+
+            pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+            Messages.Message(
+                "Psyche_CharityClosure".Translate(pawn.LabelShort).CapitalizeFirst(),
+                pawn,
+                MessageTypeDefOf.PositiveEvent,
+                false);
+        }
+
+        private static float CharityClosureQuality(ThoughtDef def)
+        {
+            if (def == null)
+            {
+                return 0f;
+            }
+
+            if (def.defName.StartsWith("CharityFulfilled_Essential"))
+            {
+                return PsycheTuning.CharityClosureQualityEssential;
+            }
+
+            if (def.defName.StartsWith("CharityFulfilled_Important"))
+            {
+                return PsycheTuning.CharityClosureQualityImportant;
+            }
+
+            if (def.defName.StartsWith("CharityFulfilled_Worthwhile"))
+            {
+                return PsycheTuning.CharityClosureQualityWorthwhile;
+            }
+
+            return 0f;
+        }
+
         private static IEnumerable<Pawn> TrackedColonists() => PsycheUtility.TrackedColonists();
 
         public static bool IsBittersweet(Pawn deceased) =>

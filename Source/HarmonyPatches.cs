@@ -362,6 +362,12 @@ namespace Psyche
                 return;
             }
 
+            // A fulfilled charity closes callousness, and then falls through to spawn its own boon companion.
+            if (PsycheClosure.IsCharityFulfilled(newThought.def) && PsycheUtility.HasPsyche(pawn))
+            {
+                PsycheClosure.OnCharityFulfilled(pawn, newThought.def);
+            }
+
             // Registered source: spawn a companion that carries the wound. The source stays, mood-zeroed (invisible).
             if (!PsycheThoughtSetup.IsRegisteredSource(newThought.def) || !PsycheUtility.HasPsyche(pawn))
             {

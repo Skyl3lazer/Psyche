@@ -11,6 +11,7 @@ namespace Psyche
         public static HediffDef Psyche_Scar_Grief = null!;
         public static HediffDef Psyche_Clarity = null!;
         public static HediffDef Psyche_Scar_Haunted = null!;
+        public static HediffDef Psyche_Scar_Callousness = null!;
         public static HediffDef Psyche_Scar_ShellShocked = null!;
         public static HediffDef Psyche_Clarity_HardWon = null!;
         public static HediffDef Psyche_Clarity_Reckoning = null!;
