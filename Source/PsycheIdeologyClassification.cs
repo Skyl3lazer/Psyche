@@ -55,7 +55,7 @@ namespace Psyche
             {
                 for (int i = 0; i < ScarFamilyPrefixes.Length; i++)
                 {
-                    if (!def.defName.StartsWith(ScarFamilyPrefixes[i].prefix))
+                    if (!def.defName.StartsWith(ScarFamilyPrefixes[i].prefix, System.StringComparison.Ordinal))
                     {
                         continue;
                     }
@@ -74,6 +74,11 @@ namespace Psyche
         public static HediffDef? ScarDefFor(ThoughtDef def)
         {
             return def != null && ScarByDef.TryGetValue(def, out HediffDef scar) ? scar : null;
+        }
+
+        public static HediffDef? ResolveScarDef(ThoughtDef def)
+        {
+            return def == null ? null : (def.GetModExtension<PsycheThoughtExtension>()?.scarDef ?? ScarDefFor(def));
         }
 
         // A good or bad ceremony is an event reaction, not a lasting wound or growth.

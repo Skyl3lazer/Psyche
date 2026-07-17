@@ -362,10 +362,16 @@ namespace Psyche
                 return;
             }
 
-            // A fulfilled charity closes callousness, and then falls through to spawn its own boon companion.
+            // Do not return - a closer is also a boon source and must fall through to spawn its companion.
             if (PsycheClosure.IsCharityFulfilled(newThought.def) && PsycheUtility.HasPsyche(pawn))
             {
                 PsycheClosure.OnCharityFulfilled(pawn, newThought.def);
+            }
+
+            PsycheThoughtExtension? closerExt = newThought.def.GetModExtension<PsycheThoughtExtension>();
+            if (closerExt?.closesScar != null && PsycheUtility.HasPsyche(pawn))
+            {
+                PsycheClosure.CloseScarFamily(pawn, closerExt.closesScar, closerExt.closureQuality, "Psyche_ClosureGeneric");
             }
 
             // Registered source: spawn a companion that carries the wound. The source stays, mood-zeroed (invisible).

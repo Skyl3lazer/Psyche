@@ -18,6 +18,12 @@
             <li Class="Psyche.PsycheThoughtExtension"><scarDef>Psyche_Scar_Bloodguilt</scarDef></li>
           </value>
         </li>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>/Defs/ThoughtDef[defName="AC_CharityFulfilled_Essential_IntroResearcher" or defName="AC_CharityFulfilled_Important_IntroResearcher" or defName="AC_CharityFulfilled_Worthwhile_IntroResearcher" or defName="AC_CharityFulfilled_Researcher"]</xpath>
+          <value>
+            <li Class="Psyche.PsycheThoughtExtension"><closesScar>Psyche_Scar_Callousness</closesScar></li>
+          </value>
+        </li>
       </operations>
     </match>
   </Operation>

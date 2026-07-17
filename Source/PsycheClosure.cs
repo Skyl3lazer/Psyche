@@ -264,12 +264,16 @@ namespace Psyche
             }
         }
 
-        public static bool IsCharityFulfilled(ThoughtDef def) => def != null && def.defName.StartsWith("CharityFulfilled_");
+        public static bool IsCharityFulfilled(ThoughtDef def) => def != null && def.defName.StartsWith("CharityFulfilled_", System.StringComparison.Ordinal);
 
         public static void OnCharityFulfilled(Pawn pawn, ThoughtDef fulfilledDef)
         {
-            float quality = CharityClosureQuality(fulfilledDef);
-            if (pawn == null || quality <= 0f)
+            CloseScarFamily(pawn, PsycheDefOf.Psyche_Scar_Callousness, CharityClosureQuality(fulfilledDef), "Psyche_CharityClosure");
+        }
+
+        public static void CloseScarFamily(Pawn pawn, HediffDef scarDef, float quality, string messageKey)
+        {
+            if (pawn == null || scarDef == null || quality <= 0f)
             {
                 return;
             }
@@ -282,7 +286,7 @@ namespace Psyche
                 for (int i = 0; i < memories.Count; i++)
                 {
                     if (memories[i] is Thought_Psychlet pt && !pt.IsBoon
-                        && PsycheIdeologyClassification.ScarDefFor(pt.DisplayDef) == PsycheDefOf.Psyche_Scar_Callousness)
+                        && PsycheIdeologyClassification.ResolveScarDef(pt.DisplayDef) == scarDef)
                     {
                         pt.Close(quality);
                         closedAny = true;
@@ -293,7 +297,7 @@ namespace Psyche
             List<Hediff> hediffs = pawn.health.hediffSet.hediffs;
             for (int i = hediffs.Count - 1; i >= 0; i--)
             {
-                if (hediffs[i] is Hediff_PsycheScar scar && scar.def == PsycheDefOf.Psyche_Scar_Callousness)
+                if (hediffs[i] is Hediff_PsycheScar scar && scar.def == scarDef)
                 {
                     scar.Severity = Mathf.Max(0f, scar.Severity - (PsycheTuning.ClosureScarHeal * quality));
                     if (scar.Severity <= 0f)
@@ -312,7 +316,7 @@ namespace Psyche
 
             pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
             Messages.Message(
-                "Psyche_CharityClosure".Translate(pawn.LabelShort).CapitalizeFirst(),
+                messageKey.Translate(pawn.LabelShort).CapitalizeFirst(),
                 pawn,
                 MessageTypeDefOf.PositiveEvent,
                 false);
@@ -325,17 +329,17 @@ namespace Psyche
                 return 0f;
             }
 
-            if (def.defName.StartsWith("CharityFulfilled_Essential"))
+            if (def.defName.StartsWith("CharityFulfilled_Essential", System.StringComparison.Ordinal))
             {
                 return PsycheTuning.CharityClosureQualityEssential;
             }
 
-            if (def.defName.StartsWith("CharityFulfilled_Important"))
+            if (def.defName.StartsWith("CharityFulfilled_Important", System.StringComparison.Ordinal))
             {
                 return PsycheTuning.CharityClosureQualityImportant;
             }
 
-            if (def.defName.StartsWith("CharityFulfilled_Worthwhile"))
+            if (def.defName.StartsWith("CharityFulfilled_Worthwhile", System.StringComparison.Ordinal))
             {
                 return PsycheTuning.CharityClosureQualityWorthwhile;
             }
