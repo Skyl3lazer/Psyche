@@ -11,6 +11,10 @@ namespace Psyche
 
         public override ThingRequest PotentialWorkThingRequest => ThingRequest.ForGroup(ThingRequestGroup.Pawn);
 
+        public override bool Prioritized => true;
+
+        public override float GetPriority(Pawn pawn, TargetInfo t) => PsycheTherapy.SeverityScore((Pawn)t.Thing);
+
         public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
         {
             IReadOnlyList<Pawn> pawns = pawn.Map.mapPawns.AllPawnsSpawned;

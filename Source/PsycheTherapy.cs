@@ -67,15 +67,13 @@ namespace Psyche
         public static bool NeedsCare(Pawn pawn) =>
             HasTreatableInjury(pawn) || RepairAvailable(pawn);
 
-        public static bool AnyAvailableCounselor(Pawn patient)
+        public static bool IsClaimed(Pawn patient)
         {
-            IReadOnlyList<Pawn> colonists = patient.Map.mapPawns.FreeColonistsSpawned;
-            for (int i = 0; i < colonists.Count; i++)
+            List<ReservationManager.Reservation> reservations = patient.Map.reservationManager.ReservationsReadOnly;
+            for (int i = 0; i < reservations.Count; i++)
             {
-                Pawn c = colonists[i];
-                if (c != patient && c.workSettings != null
-                    && c.workSettings.WorkIsActive(PsycheDefOf.Psyche_Care)
-                    && !c.WorkTypeIsDisabled(PsycheDefOf.Psyche_Care))
+                ReservationManager.Reservation reservation = reservations[i];
+                if (reservation.Job?.def == PsycheDefOf.Psyche_AdministerTherapy && reservation.Target.Thing == patient)
                 {
                     return true;
                 }
@@ -91,12 +89,18 @@ namespace Psyche
                 return false;
             }
 
-            if (patient.CurJobDef == PsycheDefOf.Psyche_SeekTherapy)
+            return patient.CurJob == null || patient.CurJob.def.suspendable;
+        }
+
+        public static float SeverityScore(Pawn patient)
+        {
+            Thought_Psychlet? injury = WorstTreatableInjury(patient);
+            if (injury != null)
             {
-                return true;
+                return 1000f + injury.CurrentPsycheDamage;
             }
 
-            return patient.InBed() && !HealthAIUtility.ShouldBeTendedNowByPlayer(patient);
+            return PsycheRepair.WorstReducibleScar(patient)?.Severity ?? 0f;
         }
 
         public static void ApplySession(Pawn counselor, Pawn patient)

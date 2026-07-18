@@ -68,7 +68,7 @@ namespace Psyche
             List<Hediff> hediffs = pawn.health.hediffSet.hediffs;
             for (int i = 0; i < hediffs.Count; i++)
             {
-                if (hediffs[i] is Hediff_PsycheScar scar && scar.Severity > ceiling
+                if (hediffs[i] is Hediff_PsycheScar scar && !scar.untreatable && scar.Severity > ceiling
                     && (worst == null || scar.Severity > worst.Severity))
                 {
                     worst = scar;

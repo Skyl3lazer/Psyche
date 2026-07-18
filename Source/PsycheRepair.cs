@@ -31,7 +31,7 @@ namespace Psyche
             Mathf.Max(0f, peak - PsycheTuning.TierRepairReach[tier - 1]);
 
         public static bool IsReducible(Hediff_PsycheScar scar, int tier) =>
-            scar.Severity > FloorForTier(tier, scar.PeakSeverity) + 0.001f;
+            !scar.untreatable && scar.Severity > FloorForTier(tier, scar.PeakSeverity) + 0.001f;
 
         public static Hediff_PsycheScar? WorstReducibleScar(Pawn pawn)
         {

@@ -56,6 +56,7 @@
   <Psyche_Tip_ReadyForRepair>Ready for repair.</Psyche_Tip_ReadyForRepair>
   <Psyche_Tip_RepairableAgain>Can be repaired again in {0}.</Psyche_Tip_RepairableAgain>
   <Psyche_Tip_TierFloor>Mended as deep as current therapy allows. Research {0} to repair it deeper.</Psyche_Tip_TierFloor>
+  <Psyche_Tip_Untreatable>No therapy, however advanced, can repair this.</Psyche_Tip_Untreatable>
 
   <!-- Mod options page -->
   <Psyche_Setting_ResetAll>Reset all to defaults</Psyche_Setting_ResetAll>

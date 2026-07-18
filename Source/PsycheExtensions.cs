@@ -20,6 +20,7 @@ namespace Psyche
     public class PsycheScarExtension : DefModExtension
     {
         public HediffDef? upgradeClarityDef;
+        public bool alwaysUntreatable;
     }
 
     public class PsycheTraitMarkExtension : DefModExtension

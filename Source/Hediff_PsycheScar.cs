@@ -9,6 +9,8 @@ namespace Psyche
         private float peakSeverity;
         private int uiKey;
 
+        public bool untreatable;
+
         public float PeakSeverity => Mathf.Max(peakSeverity, Severity);
 
         public override string LabelBase => PsycheUtility.BandedLabel(this);
@@ -39,6 +41,11 @@ namespace Psyche
             if (!PsycheUtility.HasPsyche(pawn))
             {
                 return null;
+            }
+
+            if (untreatable)
+            {
+                return "Psyche_Tip_Untreatable".Translate();
             }
 
             int tier = PsycheRepair.BestResearchedTier();
@@ -91,6 +98,7 @@ namespace Psyche
         {
             base.ExposeData();
             Scribe_Values.Look(ref peakSeverity, "psyche_peakSeverity", 0f);
+            Scribe_Values.Look(ref untreatable, "psyche_untreatable", false);
         }
     }
 }

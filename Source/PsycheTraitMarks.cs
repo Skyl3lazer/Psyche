@@ -54,7 +54,13 @@ namespace Psyche
 
                 Hediff mark = HediffMaker.MakeHediff(def, pawn, brain);
                 mark.Severity = ext.seedSeverity;
-                (mark as Hediff_PsycheScar)?.NotePeak();
+                if (mark is Hediff_PsycheScar scar)
+                {
+                    scar.NotePeak();
+                    bool alwaysUntreatable = def.GetModExtension<PsycheScarExtension>()?.alwaysUntreatable ?? false;
+                    scar.untreatable = alwaysUntreatable || IsTraitFromGene(pawn, ext.trait, ext.degree);
+                }
+
                 pawn.health.AddHediff(mark, brain);
                 seeded = true;
             }
@@ -78,6 +84,35 @@ namespace Psyche
         {
             Trait? trait = pawn.story.traits.GetTrait(ext.trait);
             return trait != null && trait.Degree == ext.degree;
+        }
+
+        private static bool IsTraitFromGene(Pawn pawn, TraitDef trait, int degree)
+        {
+            List<Gene>? genes = pawn.genes?.GenesListForReading;
+            if (genes == null)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < genes.Count; i++)
+            {
+                Gene gene = genes[i];
+                List<GeneticTraitData>? forced = gene.def.forcedTraits;
+                if (!gene.Active || forced == null)
+                {
+                    continue;
+                }
+
+                for (int j = 0; j < forced.Count; j++)
+                {
+                    if (forced[j].def == trait && forced[j].degree == degree)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

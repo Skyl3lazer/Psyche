@@ -18,7 +18,7 @@ namespace Psyche
             Toil wait = ToilMaker.MakeToil();
             wait.defaultCompleteMode = ToilCompleteMode.Delay;
             wait.defaultDuration = PsycheTuning.SeekWaitTicks;
-            wait.AddFailCondition(() => !PsycheTherapy.NeedsCare(pawn));
+            wait.AddFailCondition(() => !PsycheTherapy.NeedsCare(pawn) || !PsycheTherapy.IsClaimed(pawn));
             wait.tickAction = () =>
             {
                 if (CounselorInSession())
