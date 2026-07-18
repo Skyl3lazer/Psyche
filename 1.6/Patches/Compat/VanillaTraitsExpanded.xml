@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Traits Expanded</li>
+    </mods>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs</xpath>
+      <value>
+
+        <HediffDef>
+          <defName>Psyche_Scar_AbsentMinded</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>absent-mindedness psyche scar</label>
+          <description>A tendency to drift off mid-task worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>VTE_AbsentMinded</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_Coward</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>cowardice psyche scar</label>
+          <description>A fight-or-flight bent toward flight worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>VTE_Coward</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_Vengeful</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>vengefulness psyche scar</label>
+          <description>A spite that lingers until settled, worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>VTE_Vengeful</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_WorldWeary</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>world-weariness psyche scar</label>
+          <description>A bleak outlook worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>VTE_WorldWeary</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_Desensitized</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>desensitization psyche scar</label>
+          <description>A numbness to death and loss worn into the mind by old trauma. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>VTE_Desensitized</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_Insatiable</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>insatiability psyche scar</label>
+          <description>A compulsive intimacy-seeking worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>VTE_Insatiable</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_Prude</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>rigidity psyche scar</label>
+          <description>A rigid self-restraint worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>VTE_Prude</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_Stoner</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>stoner psyche scar</label>
+          <description>A dependence on smoke worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>VTE_Stoner</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_Lush</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>lush psyche scar</label>
+          <description>A dependence on drink worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>VTE_Lush</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_Anxious</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>anxiety psyche scar</label>
+          <description>A social anxiety worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>VTE_Anxious</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+          <stages>
+            <li>
+              <minSeverity>0</minSeverity>
+              <label>on edge</label>
+            </li>
+            <li>
+              <minSeverity>3</minSeverity>
+            </li>
+            <li>
+              <minSeverity>6</minSeverity>
+              <label>panicked</label>
+            </li>
+          </stages>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_Technophobe</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>technophobia psyche scar</label>
+          <description>A trauma-driven aversion to technology worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>VTE_Technophobe</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+          <stages>
+            <li>
+              <minSeverity>0</minSeverity>
+              <label>uneasy</label>
+            </li>
+            <li>
+              <minSeverity>3</minSeverity>
+            </li>
+            <li>
+              <minSeverity>6</minSeverity>
+              <label>tormented</label>
+            </li>
+          </stages>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_Kleptomaniac</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>kleptomania psyche scar</label>
+          <description>A compulsion to steal worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>VTE_Kleptomaniac</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+          <stages>
+            <li>
+              <minSeverity>0</minSeverity>
+              <label>light-fingered</label>
+            </li>
+            <li>
+              <minSeverity>3</minSeverity>
+            </li>
+            <li>
+              <minSeverity>6</minSeverity>
+              <label>compulsive</label>
+            </li>
+          </stages>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_Schizoid</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>schizoid psyche scar</label>
+          <description>A bottling-up of feeling worn into the mind, until it breaks loose all at once. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>VTE_Schizoid</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+          <stages>
+            <li>
+              <minSeverity>0</minSeverity>
+              <label>bottled</label>
+            </li>
+            <li>
+              <minSeverity>3</minSeverity>
+            </li>
+            <li>
+              <minSeverity>6</minSeverity>
+              <label>breaking</label>
+            </li>
+          </stages>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_Insomniac</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>insomnia psyche scar</label>
+          <description>A sleep dysregulation worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>VTE_Insomniac</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+          <stages>
+            <li>
+              <minSeverity>0</minSeverity>
+              <label>restless</label>
+            </li>
+            <li>
+              <minSeverity>3</minSeverity>
+            </li>
+            <li>
+              <minSeverity>6</minSeverity>
+              <label>sleepless</label>
+            </li>
+          </stages>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_Workaholic</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>workaholism psyche scar</label>
+          <description>A compulsive overwork worn into the mind, heedless of its cost. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>VTE_Workaholic</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+          <stages>
+            <li>
+              <minSeverity>0</minSeverity>
+              <label>driven</label>
+            </li>
+            <li>
+              <minSeverity>3</minSeverity>
+            </li>
+            <li>
+              <minSeverity>6</minSeverity>
+              <label>consumed</label>
+            </li>
+          </stages>
+        </HediffDef>
+
+      </value>
+    </match>
+  </Operation>
+</Patch>

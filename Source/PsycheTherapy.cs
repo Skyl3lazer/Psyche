@@ -67,20 +67,8 @@ namespace Psyche
         public static bool NeedsCare(Pawn pawn) =>
             HasTreatableInjury(pawn) || RepairAvailable(pawn);
 
-        public static bool IsClaimed(Pawn patient)
-        {
-            List<ReservationManager.Reservation> reservations = patient.Map.reservationManager.ReservationsReadOnly;
-            for (int i = 0; i < reservations.Count; i++)
-            {
-                ReservationManager.Reservation reservation = reservations[i];
-                if (reservation.Job?.def == PsycheDefOf.Psyche_AdministerTherapy && reservation.Target.Thing == patient)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
+        public static bool IsClaimed(Pawn patient) =>
+            patient.Map.reservationManager.OnlyReservationsForJobDef(patient, PsycheDefOf.Psyche_AdministerTherapy, requireAtLeastOne: true);
 
         public static bool IsTherapyCandidate(Pawn patient)
         {

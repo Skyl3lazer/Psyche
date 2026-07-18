@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Dubs Bad Hygiene</li>
+    </mods>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs</xpath>
+      <value>
+
+        <HediffDef>
+          <defName>Psyche_Scar_HygieneGermaphobia</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>germaphobia psyche scar</label>
+          <description>A compulsive cleanliness worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>Hygienic</trait>
+              <degree>2</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_Unhygienic</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>uncleanliness psyche scar</label>
+          <description>A neglect of hygiene worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.2</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>Hygienic</trait>
+              <degree>-1</degree>
+              <seedSeverity>6</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+        </HediffDef>
+
+        <HediffDef>
+          <defName>Psyche_Scar_Slob</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>slovenliness psyche scar</label>
+          <description>A deep neglect of hygiene worn into the mind, past simple uncleanliness. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>Hygienic</trait>
+              <degree>-2</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+        </HediffDef>
+
+      </value>
+    </match>
+  </Operation>
+</Patch>

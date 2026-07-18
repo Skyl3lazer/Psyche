@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- First-party only - third-party trait marks ship as compat patches under Patches/Compat. -->
+
+  <HediffDef>
+    <defName>Psyche_Scar_Wimp</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>wimp psyche scar</label>
+    <description>A collapse under pain worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+      </li>
+      <li Class="Psyche.PsycheTraitMarkExtension">
+        <trait>Wimp</trait>
+        <degree>0</degree>
+        <seedSeverity>8</seedSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_Pessimist</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>pessimism psyche scar</label>
+    <description>A tendency to see the bad side of things worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-0.2</maxHealthPerSeverity>
+      </li>
+      <li Class="Psyche.PsycheTraitMarkExtension">
+        <trait>NaturalMood</trait>
+        <degree>-1</degree>
+        <seedSeverity>6</seedSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>Psyche_Scar_Depressive</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>depressive psyche scar</label>
+    <description>A perennial unhappiness worn into the mind, deeper than simple pessimism. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+      </li>
+      <li Class="Psyche.PsycheTraitMarkExtension">
+        <trait>NaturalMood</trait>
+        <degree>-2</degree>
+        <seedSeverity>8</seedSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef MayRequire="Ludeon.RimWorld.Biotech">
+    <defName>Psyche_Scar_Recluse</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>reclusiveness psyche scar</label>
+    <description>A discomfort around others worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+      </li>
+      <li Class="Psyche.PsycheTraitMarkExtension">
+        <trait>Recluse</trait>
+        <degree>0</degree>
+        <seedSeverity>8</seedSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef MayRequire="Ludeon.RimWorld.Anomaly">
+    <defName>Psyche_Scar_Disturbing</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>disturbing psyche scar</label>
+    <description>A fixation on horrendous ideas worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+      </li>
+      <li Class="Psyche.PsycheTraitMarkExtension">
+        <trait>Disturbing</trait>
+        <degree>0</degree>
+        <seedSeverity>8</seedSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+  </HediffDef>
+
+  <HediffDef MayRequire="Ludeon.RimWorld.Anomaly">
+    <defName>Psyche_Scar_VoidFascination</defName>
+    <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+    <label>void fascination psyche scar</label>
+    <description>A pull toward unnatural entities worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+    <isBad>true</isBad>
+    <maxSeverity>1000</maxSeverity>
+    <scenarioCanAdd>false</scenarioCanAdd>
+    <modExtensions>
+      <li Class="Psyche.PsycheHealthOffsetExtension">
+        <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+      </li>
+      <li Class="Psyche.PsycheTraitMarkExtension">
+        <trait>VoidFascination</trait>
+        <degree>0</degree>
+        <seedSeverity>8</seedSeverity>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+    </comps>
+    <stages>
+      <li>
+        <minSeverity>0</minSeverity>
+        <label>curious</label>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+      </li>
+      <li>
+        <minSeverity>6</minSeverity>
+        <label>enthralled</label>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

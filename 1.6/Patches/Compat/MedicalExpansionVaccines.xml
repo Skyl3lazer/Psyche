@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Medical Expansion - Vaccines</li>
+    </mods>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs</xpath>
+      <value>
+
+        <HediffDef>
+          <defName>Psyche_Scar_AntiVaccinator</defName>
+          <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
+          <label>anti-vaccinator psyche scar</label>
+          <description>A conspiracy-driven distress worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <isBad>true</isBad>
+          <maxSeverity>1000</maxSeverity>
+          <scenarioCanAdd>false</scenarioCanAdd>
+          <modExtensions>
+            <li Class="Psyche.PsycheHealthOffsetExtension">
+              <maxHealthPerSeverity>-0.3</maxHealthPerSeverity>
+            </li>
+            <li Class="Psyche.PsycheTraitMarkExtension">
+              <trait>AntiVaccinator</trait>
+              <degree>0</degree>
+              <seedSeverity>8</seedSeverity>
+            </li>
+          </modExtensions>
+          <comps>
+            <li Class="Psyche.HediffCompProperties_PsycheOffset" />
+          </comps>
+        </HediffDef>
+
+      </value>
+    </match>
+  </Operation>
+</Patch>
