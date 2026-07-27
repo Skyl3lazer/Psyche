@@ -8,7 +8,9 @@ namespace Psyche
     {
         static Bootstrap()
         {
-            new Harmony("Skyl3lazer.Psyche").PatchAll();
+            Harmony harmony = new Harmony("Skyl3lazer.Psyche");
+            harmony.PatchAll();
+            PsycheDubsBreakCompat.Apply(harmony);
         }
     }
 }

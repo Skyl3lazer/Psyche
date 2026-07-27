@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- Android drones cannot mentally break and have no psychology, so they get no Psyche; both genes are
+       removed on awakening (removeWhenAwakened), so an awakened android becomes eligible on its own. -->
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Races Expanded - Android</li>
+    </mods>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs/VREAndroids.AndroidGeneDef[defName="VREA_MentalBreaksDisabled" or defName="VREA_PsychologyDisabled"]</xpath>
+      <value>
+        <disablesNeeds>
+          <li>Psyche_Core</li>
+        </disablesNeeds>
+      </value>
+    </match>
+  </Operation>
+</Patch>
