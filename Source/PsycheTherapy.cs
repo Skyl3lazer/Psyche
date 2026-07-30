@@ -126,6 +126,11 @@ namespace Psyche
 
         public static IntVec3 PickRendezvous(Pawn pawn)
         {
+            if (pawn?.Map == null)
+            {
+                return IntVec3.Invalid;
+            }
+
             List<IntVec3> candidates = new List<IntVec3>();
 
             Building_Bed? ownedBed = pawn.ownership?.OwnedBed;
