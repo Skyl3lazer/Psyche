@@ -68,7 +68,7 @@ namespace Psyche
             HasTreatableInjury(pawn) || RepairAvailable(pawn);
 
         public static bool IsClaimed(Pawn patient) =>
-            patient.Map.reservationManager.OnlyReservationsForJobDef(patient, PsycheDefOf.Psyche_AdministerTherapy, requireAtLeastOne: true);
+            patient?.Map != null && patient.Map.reservationManager.OnlyReservationsForJobDef(patient, PsycheDefOf.Psyche_AdministerTherapy, requireAtLeastOne: true);
 
         public static bool IsTherapyCandidate(Pawn patient)
         {
