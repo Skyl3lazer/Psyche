@@ -132,7 +132,7 @@ namespace Psyche
 
         public bool MarkPossible =>
             IsBoon
-                ? def.durationDays >= PsycheTuning.ClarityMinDurationDays && RawMagnitude >= PsycheTuning.ClarityMinIntensity
+                ? DisplayDef.durationDays >= PsycheTuning.ClarityMinDurationDays && RawMagnitude >= PsycheTuning.ClarityMinIntensity
                 : true;
 
         public float TreatmentLevel => Mathf.Clamp01(treatmentLevel);
@@ -259,7 +259,7 @@ namespace Psyche
 
             if (IsBoon)
             {
-                if (def.durationDays >= PsycheTuning.ClarityMinDurationDays && RawMagnitude >= PsycheTuning.ClarityMinIntensity)
+                if (DisplayDef.durationDays >= PsycheTuning.ClarityMinDurationDays && RawMagnitude >= PsycheTuning.ClarityMinIntensity)
                 {
                     float chance = Mathf.Min(RawMagnitude * PsycheTuning.ClarityChancePerMagnitude, PsycheTuning.ClarityChanceCap);
                     if (Rand.Chance(chance))
