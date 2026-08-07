@@ -92,7 +92,7 @@ namespace Psyche
             }
             else if (traits != null && traits.HasTrait(PsycheDefOf.BodyPurist))
             {
-                // A machine part is no peace for a body purist - only a return to flesh closes their loss.
+                // A machine part is no peace for a body purist. Only a return to flesh closes their loss.
             }
             else if (betterThanNatural)
             {
@@ -214,7 +214,7 @@ namespace Psyche
                     }
                 }
 
-                // Grief scars heal on revenge; a maiming's phantom scar does not - killing them never regrew the limb.
+                // Grief scars heal on revenge. A maiming's phantom scar does not, since killing them never regrew the limb.
                 List<Hediff> hediffs = griever.health.hediffSet.hediffs;
                 for (int i = hediffs.Count - 1; i >= 0; i--)
                 {

@@ -13,7 +13,7 @@
           <defName>Psyche_Scar_Distressed</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>hyperempathy psyche scar</label>
-          <description>A haunting by others' suffering worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely - unless it was carried in the blood from birth, in which case no therapy ever will.</description>
+          <description>A haunting by others' suffering worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely. If it was carried in the blood from birth, no therapy ever will.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>

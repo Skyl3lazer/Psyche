@@ -12,7 +12,7 @@
     </match>
   </Operation>
 
-  <!-- Inhumanized and VoidTouched are alwaysUntreatable - too total a corruption to undo. -->
+  <!-- Too total a corruption for any therapy to undo. -->
   <Operation Class="PatchOperationFindMod">
     <mods>
       <li>Vanilla Anomaly Expanded - Insanity</li>

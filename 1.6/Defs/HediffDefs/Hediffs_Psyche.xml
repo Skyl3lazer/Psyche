@@ -244,7 +244,7 @@
     <defName>Psyche_Scar_UnresolvedLoss</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>unresolved loss psyche scar</label>
-    <description>Someone gone without an ending - not dead, just lost. The mind keeps a place set for a return that may never come.</description>
+    <description>Someone gone without an ending. Not dead, just lost. The mind keeps a place set for a return that may never come.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -313,7 +313,7 @@
     <defName>Psyche_Scar_Defilement</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>defilement psyche scar</label>
-    <description>A taboo broken and not undone - flesh consumed, a horror committed. The mind keeps the stain.</description>
+    <description>A taboo broken and not undone. Flesh consumed, a horror committed. The mind keeps the stain.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -336,7 +336,7 @@
     <defName>Psyche_Scar_Identity</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>fractured identity psyche scar</label>
-    <description>The self, made uncertain - a copied mind, a borrowed body, memories that may not be one's own. The question of who one is does not fully close.</description>
+    <description>The self, made uncertain. A copied mind, a borrowed body, memories that may not be one's own. The question of who one is does not fully close.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -359,7 +359,7 @@
     <defName>Psyche_Scar_Dishonor</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>dishonor psyche scar</label>
-    <description>A disgrace that clings - a defeat or failure that stained one's standing. The shame settles permanently into the mind.</description>
+    <description>A disgrace that clings. A defeat or failure that stained one's standing. The shame settles permanently into the mind.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -769,7 +769,7 @@
     <defName>Psyche_Clarity_Reckoning</defName>
     <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
     <label>reckoning psyche clarity</label>
-    <description>The one who caused the loss is gone. It does not undo the grief, but something long clenched finally loosens - the debt is settled, and the mind can rest a little easier.</description>
+    <description>The one who caused the loss is gone. It does not undo the grief, but something long clenched finally loosens. The debt is settled, and the mind can rest a little easier.</description>
     <isBad>false</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -787,7 +787,7 @@
     <defName>Psyche_Clarity_Peace</defName>
     <hediffClass>Psyche.Hediff_PsycheClarity</hediffClass>
     <label>peace psyche clarity</label>
-    <description>A loss laid gently to rest. Having buried someone who lived a full life, this person carries the loss without its edge - a settled peace with the way of things.</description>
+    <description>A loss laid gently to rest. Having buried someone who lived a full life, this person carries the loss without its edge. A settled peace with the way of things.</description>
     <isBad>false</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>

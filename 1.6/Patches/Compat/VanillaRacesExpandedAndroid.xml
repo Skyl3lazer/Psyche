@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
-  <!-- Android drones cannot mentally break and have no psychology, so they get no Psyche; both genes are
-       removed on awakening (removeWhenAwakened), so an awakened android becomes eligible on its own. -->
+  <!-- Android drones have no psychology to wound. removeWhenAwakened drops both genes, restoring eligibility on awakening. -->
   <Operation Class="PatchOperationFindMod">
     <mods>
       <li>Vanilla Races Expanded - Android</li>

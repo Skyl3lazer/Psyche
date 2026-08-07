@@ -116,7 +116,7 @@
   <RitualOutcomeEffectDef MayRequire="Ludeon.RimWorld.Ideology">
     <defName>Psyche_ClarityContemplation</defName>
     <workerClass>Psyche.RitualOutcomeEffectWorker_PsycheClarity</workerClass>
-    <description>Depending on the contemplation's quality, attendees gain between {MINMOOD} and {MAXMOOD} mood for {MOODDAYS} days, and the seeker has a chance - equal to the quality - to turn their healed scar into a lasting clarity.</description>
+    <description>Depending on the contemplation's quality, attendees gain between {MINMOOD} and {MAXMOOD} mood for {MOODDAYS} days, and the seeker has a chance (equal to the quality) to turn their healed scar into a lasting clarity.</description>
     <startingQuality>0.3</startingQuality>
     <allowAttachableOutcome>false</allowAttachableOutcome>
     <extraInfoLines>

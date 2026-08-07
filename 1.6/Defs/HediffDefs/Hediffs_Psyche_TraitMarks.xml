@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-  <!-- First-party only - third-party trait marks ship as compat patches under Patches/Compat. -->
+  <!-- First-party only. Third-party trait marks ship as compat patches under Patches/Compat. -->
 
   <HediffDef>
     <defName>Psyche_Scar_Wimp</defName>

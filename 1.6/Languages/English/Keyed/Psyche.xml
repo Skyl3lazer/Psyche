@@ -2,10 +2,10 @@
 <LanguageData>
 
   <Psyche_Setting_AttemptWithoutBestMedicine>Attempt therapy without best allowed medicine</Psyche_Setting_AttemptWithoutBestMedicine>
-  <Psyche_Setting_AttemptWithoutBestMedicine_Tip>When on, counselors hold psyche therapy sessions even when the best medicine allowed for the patient is not in stock, using lesser medicine or none - which lowers quality and can risk a botched, scar-worsening session. When off, a session waits until the best allowed medicine is on hand.</Psyche_Setting_AttemptWithoutBestMedicine_Tip>
+  <Psyche_Setting_AttemptWithoutBestMedicine_Tip>When on, counselors hold psyche therapy sessions even when the best medicine allowed for the patient is not in stock, using lesser medicine or none. That lowers quality and can risk a botched, scar-worsening session. When off, a session waits until the best allowed medicine is on hand.</Psyche_Setting_AttemptWithoutBestMedicine_Tip>
 
   <Psyche_SeekClarity_Label>Seek clarity: {0} scar</Psyche_SeekClarity_Label>
-  <Psyche_SeekClarity_Desc>Send this colonist to contemplate a fully-healed deep psyche scar and try to turn it into a lasting clarity. Consumes {0} glitterworld medicine only if it succeeds. One attempt - the window closes afterward.</Psyche_SeekClarity_Desc>
+  <Psyche_SeekClarity_Desc>Send this colonist to contemplate a fully-healed deep psyche scar and try to turn it into a lasting clarity. Consumes {0} glitterworld medicine only if it succeeds. One attempt only. The window closes afterward.</Psyche_SeekClarity_Desc>
   <Psyche_SeekClarity_NoGlitter>Requires {0} glitterworld medicine available and unforbidden.</Psyche_SeekClarity_NoGlitter>
 
   <Psyche_Alert_SeekClarity>Pawns can seek clarity</Psyche_Alert_SeekClarity>
@@ -19,16 +19,16 @@
 
   <Psyche_AsCounselor>as Counselor: {0} ritual quality</Psyche_AsCounselor>
 
-  <Psyche_ScarTradedForAddiction>{0} buried a wound in the habit - their {1} faded, but a dependency took its place.</Psyche_ScarTradedForAddiction>
+  <Psyche_ScarTradedForAddiction>{0} buried a wound in the habit. Their {1} faded, but a dependency took its place.</Psyche_ScarTradedForAddiction>
 
   <Psyche_RevengeClosure>{0} found a measure of peace at the death of {1}, who had taken someone they loved.</Psyche_RevengeClosure>
-  <Psyche_MaimRevengeClosure>{0} found a measure of peace at the death of {1}, the one who maimed them - the raw wound of it settles, though the loss remains.</Psyche_MaimRevengeClosure>
+  <Psyche_MaimRevengeClosure>{0} found a measure of peace at the death of {1}, the one who maimed them. The raw wound of it settles, though the loss remains.</Psyche_MaimRevengeClosure>
 
   <Psyche_BurialClosure>{0} found some closure laying {1} to rest, easing the grief they carried.</Psyche_BurialClosure>
-  <Psyche_BurialClosureBittersweet>{0} made peace with {1}'s passing at the burial - a long life, now laid to rest.</Psyche_BurialClosureBittersweet>
+  <Psyche_BurialClosureBittersweet>{0} made peace with {1}'s passing at the burial. A long life, now laid to rest.</Psyche_BurialClosureBittersweet>
 
   <Psyche_LimbReplacedClosure>{0} has a better-than-flesh replacement for their lost {1}, and the phantom ache of the loss begins to settle.</Psyche_LimbReplacedClosure>
-  <Psyche_LimbReplacedClosure_Transhuman>{0} has replaced their lost {1} with machinery, and the augmentation soothes the trauma of the loss - flesh was only ever a starting point.</Psyche_LimbReplacedClosure_Transhuman>
+  <Psyche_LimbReplacedClosure_Transhuman>{0} has replaced their lost {1} with machinery, and the augmentation soothes the trauma of the loss. Flesh was only ever a starting point.</Psyche_LimbReplacedClosure_Transhuman>
   <Psyche_LimbReplacedClosure_Purist>{0} has their {1} back in natural flesh, and being whole again lays the trauma of the loss to rest.</Psyche_LimbReplacedClosure_Purist>
 
   <Psyche_CharityClosure>{0} eased the guilt of past callousness by helping someone in need.</Psyche_CharityClosure>
@@ -39,18 +39,18 @@
 
   <Psyche_Tip_PsycheDamage>Psyche damage: -{0}</Psyche_Tip_PsycheDamage>
   <Psyche_Tip_PsycheRestored>Psyche restored: {0}</Psyche_Tip_PsycheRestored>
-  <Psyche_Tip_Contemplating>The injury has faded but not fully settled - it may still leave a scar before it passes.</Psyche_Tip_Contemplating>
+  <Psyche_Tip_Contemplating>The injury has faded but not fully settled. It may still leave a scar before it passes.</Psyche_Tip_Contemplating>
 
   <Psyche_Tip_PassesIn>Passes in {0}</Psyche_Tip_PassesIn>
-  <Psyche_Tip_PassesInScar>Passes in {0} - may leave a scar</Psyche_Tip_PassesInScar>
+  <Psyche_Tip_PassesInScar>Passes in {0} (may leave a scar)</Psyche_Tip_PassesInScar>
   <Psyche_Tip_FadesIn>Fades in {0}</Psyche_Tip_FadesIn>
-  <Psyche_Tip_FadesInClarity>Fades in {0} - may mature into a clarity</Psyche_Tip_FadesInClarity>
+  <Psyche_Tip_FadesInClarity>Fades in {0} (may mature into a clarity)</Psyche_Tip_FadesInClarity>
 
   <Psyche_Tip_TherapyProgress>Therapy: {0}</Psyche_Tip_TherapyProgress>
   <Psyche_Tip_ReadyForTherapy>Ready for therapy</Psyche_Tip_ReadyForTherapy>
   <Psyche_Tip_TreatableAgain>Treatable again in {0}</Psyche_Tip_TreatableAgain>
   <Psyche_Tip_TooMinor>Too minor for therapy</Psyche_Tip_TooMinor>
-  <Psyche_Tip_Faded>Faded - waiting to pass</Psyche_Tip_Faded>
+  <Psyche_Tip_Faded>Faded (waiting to pass)</Psyche_Tip_Faded>
 
   <Psyche_Tip_Repaired>Repaired {0} from its worst.</Psyche_Tip_Repaired>
   <Psyche_Tip_ReadyForRepair>Ready for repair.</Psyche_Tip_ReadyForRepair>
@@ -58,7 +58,6 @@
   <Psyche_Tip_TierFloor>Mended as deep as current therapy allows. Research {0} to repair it deeper.</Psyche_Tip_TierFloor>
   <Psyche_Tip_Untreatable>No therapy, however advanced, can repair this.</Psyche_Tip_Untreatable>
 
-  <!-- Mod options page -->
   <Psyche_Setting_ResetAll>Reset all to defaults</Psyche_Setting_ResetAll>
   <Psyche_Setting_ResetAllConfirm>Reset every Psyche tuning value to its default? This clears all of your changes.</Psyche_Setting_ResetAllConfirm>
   <Psyche_Setting_ResetField>Reset this value to its default.</Psyche_Setting_ResetField>

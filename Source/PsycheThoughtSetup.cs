@@ -33,13 +33,13 @@ namespace Psyche
                 return false;
             }
 
-            // Exclude our own psychlet carriers (companions, own-triggers) - they are not sources.
+            // Our own psychlet carriers are never sources for another companion.
             if (!typeof(Thought_Memory).IsAssignableFrom(def.ThoughtClass) || typeof(Thought_Psychlet).IsAssignableFrom(def.ThoughtClass))
             {
                 return false;
             }
 
-            // Worker-driven thoughts are situational, never gained as memories, so no companion forms.
+            // Worker-driven thoughts are situational and never gained as memories.
             if (def.workerClass != null)
             {
                 return false;

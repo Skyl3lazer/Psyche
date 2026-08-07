@@ -2,7 +2,7 @@
 
 Inspired by mods like Progression: Therapy and Vanilla Anomaly Expanded, Psyche is here to enhance what life on the Rim does to your colonists. It adds a long-term mental resilience layer that sits alongside vanilla mood: trauma marks the mind over a long game, but a colony that manages it well can prevent, heal, and even transcend those marks.
 
-Psyche rides vanilla's own mood memories, so modded and DLC events - happy or traumatic - are covered automatically with no per-mod patches, and modded Humanlike races are handled for free. Nothing new is forced onto other mods.
+Psyche rides vanilla's own mood memories, so modded and DLC events, happy or traumatic, are covered automatically with no per-mod patches, and modded Humanlike races are handled for free. Nothing new is forced onto other mods.
 
 ## The core loop
 
@@ -12,17 +12,17 @@ Powerful positive memories can also leave lasting clarity on a pawn's mind, remi
 
 ## What it adds
 
-- **A Psyche need** on every eligible colonist. Psyche represents your colonist's break threshhold, and powerful or longlasting moodlets become **psychlets** that can shift it around. It heals on its own but takes lasting damage from trauma. 
+- **A Psyche need** on every eligible colonist. Psyche represents your colonist's break threshold, and powerful or longlasting moodlets become **psychlets** that can shift it around. It heals on its own but takes lasting damage from trauma.
 - **Scars** - permanent marks left by trauma that went unhealed. Some events and traits leave *named* scars (phantom, shell-shocked, protective dread, and more) instead of a generic one.
 - **Clarities** - permanent positive marks from major joyful events or from healing a scar, raising resilience above baseline.
 - **Mitigation** - good mood, rest, and recreation during recovery lower the chance a wound scars, as does active counseling and soothing (social-category) drugs taken while a wound heals. Drugs numb rather than process, lowering how long the injury affects your Psyche, but doing nothing to mitigate the scars they leave behind. Bad therapists can be a downside, as a session gone wrong can increase an injury rather than healing.
 - **Closure** - burying the dead settles grief on those who loved them, as does taking revenge on their killer. Having a lost limb replaced can soothe the loss.
-- **Own-triggers** - intense experiences that leave no lasting vanilla memory still touch the psyche. Traumatic amputation, surviving a violent downing, and watching a loved one be grievously wounded can hurt your soul; crafting a masterwork or legendary, gaining an inspiration, and pulling a bleeding-out ally back from death strengthen it.
+- **Own-triggers** - intense experiences that leave no lasting vanilla memory still touch the psyche. Traumatic amputation, surviving a violent downing, and watching a loved one be grievously wounded can hurt your soul. Crafting a masterwork or legendary, gaining an inspiration, and pulling a bleeding-out ally back from death strengthen it.
 - **Trait reinterpretation** - a few behavioral traits become curable scars you can therapy away, or an innate clarity. This can also affect the strength of the downside! Therapy can help your pyromaniacs control their impulses better, and potentially remove the impulse entirely.
 
 ## Therapy and research
 
-Repair is a tend-like counseling job on the Social skill, under a new **Counseling** work type. A counselor sits with a scarred pawn over repeated sessions; bedridden pawns who do not need a medic get counseled where they lie. Research raises how much a session can mend and how deep a scar it can reach.
+Repair is a tend-like counseling job on the Social skill, under a new **Counseling** work type. A counselor sits with a scarred pawn over repeated sessions. Bedridden pawns who do not need a medic get counseled where they lie. Research raises how much a session can mend and how deep a scar it can reach.
 
 | Project | Cost | Tech | What it enables |
 |---|---|---|---|

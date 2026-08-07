@@ -7,7 +7,7 @@ namespace Psyche
     [StaticConstructorOnStartup]
     public static class PsycheThoughtClassification
     {
-        // Precept thoughts are named <Act><Tier> and <Act>_Know_<Tier>_Mood, so one act prefix maps every tier and witness variant to its family.
+        // Precept thoughts are named <Act><Tier> and <Act>_Know_<Tier>_Mood. One act prefix therefore covers every tier and witness variant.
         private static readonly (string prefix, string scarDefName)[] ScarFamilyPrefixes =
         {
             ("AteMeat_", "Psyche_Scar_Apostasy"),

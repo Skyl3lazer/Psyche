@@ -354,7 +354,7 @@ namespace Psyche
 
             Pawn pawn = __instance.pawn;
 
-            // Companions and own-trigger psychlets: capture + recompute; never spawn from these.
+            // Psychlets are our own carriers, so they never spawn companions of their own.
             if (newThought is Thought_Psychlet pt)
             {
                 pt.EnsureCaptured();
@@ -362,7 +362,7 @@ namespace Psyche
                 return;
             }
 
-            // Do not return - a closer is also a boon source and must fall through to spawn its companion.
+            // A closer is also a boon source, so no early return here.
             if (PsycheClosure.IsCharityFulfilled(newThought.def) && PsycheUtility.HasPsyche(pawn))
             {
                 PsycheClosure.OnCharityFulfilled(pawn, newThought.def);
@@ -379,7 +379,7 @@ namespace Psyche
                 PsycheClosure.CloseScarFamily(pawn, closerExt.closesScar, closerExt.closureQuality, "Psyche_ClosureGeneric");
             }
 
-            // Registered source: spawn a companion that carries the wound. The source stays, mood-zeroed (invisible).
+            // The source memory stays, mood-zeroed elsewhere, so the companion does not double-count it.
             if (!PsycheThoughtSetup.IsRegisteredSource(newThought.def) || !PsycheUtility.HasPsyche(pawn))
             {
                 return;
@@ -405,7 +405,7 @@ namespace Psyche
             Thought_Psychlet companion = (Thought_Psychlet)ThoughtMaker.MakeThought(carrier);
             companion.SetSource(newThought.def, newThought.CurStageIndex);
             companion.InitMagnitude(signed);
-            // TryGainMemory overwrites otherPawn from its arg, so it must be passed or the companion loses the pawn it is about.
+            // TryGainMemory overwrites otherPawn from its arg. Omit it and the companion loses the pawn it is about.
             __instance.TryGainMemory(companion, newThought.otherPawn);
             pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
         }

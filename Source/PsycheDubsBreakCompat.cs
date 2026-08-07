@@ -14,7 +14,7 @@ namespace Psyche
         private static FieldInfo? majorLimitField;
         private static FieldInfo? extremeLimitField;
 
-        // True once the postfix is wired into Dubs Break Mod; the test kit gates its checks on this.
+        // Exists so the test kit can gate its Dubs Break checks.
         public static bool Patched { get; private set; }
 
         public static void Apply(Harmony harmony)
@@ -35,7 +35,7 @@ namespace Psyche
 
             if (settingsField == null || minorLimitField == null || majorLimitField == null || extremeLimitField == null)
             {
-                Log.Warning("[Psyche] Dubs Break Mod detected but its break-tier limits could not be read; psychlets will not raise break severity.");
+                Log.Warning("[Psyche] Dubs Break Mod detected but its break-tier limits could not be read. Psychlets will not raise break severity.");
                 return;
             }
 
@@ -43,7 +43,7 @@ namespace Psyche
             Patched = true;
         }
 
-        // Dubs Break Mod caps severity at the worst single mood thought; a psychlet carries zero mood, so an active injury must raise the tier itself.
+        // Dubs Break Mod caps severity at the worst single mood thought. A zero-mood psychlet never raises that cap on its own.
         public static void RaiseForPsychlets(ThoughtHandler __1, ref MentalBreakIntensity __result)
         {
             Pawn? pawn = __1?.pawn;

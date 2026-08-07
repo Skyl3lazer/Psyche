@@ -12,7 +12,7 @@
     <stages>
       <li>
         <label>they lived a long life</label>
-        <description>The grief is real, but so is the comfort - they lived a full, long life, and that softens the loss.</description>
+        <description>The grief is real, but so is the comfort. They lived a full, long life, and that softens the loss.</description>
         <baseMoodEffect>4</baseMoodEffect>
       </li>
     </stages>
@@ -54,7 +54,7 @@
     <stages>
       <li>
         <label>Reflecting on healed scar</label>
-        <description>A deep psyche scar has been fully mended. For a while, the memory of it is close enough to the surface to be turned into a lasting clarity - through EMDR and a guided contemplation.</description>
+        <description>A deep psyche scar has been fully mended. For a while, the memory of it is close enough to the surface to be turned into a lasting clarity through EMDR and a guided contemplation.</description>
         <baseMoodEffect>0</baseMoodEffect>
       </li>
     </stages>
