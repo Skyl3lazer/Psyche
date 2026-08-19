@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>/Defs/ThoughtDef[defName="AttendedParty"]</xpath>
+    <value>
+      <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>/Defs/ThoughtDef[defName="AttendedConcert"]</xpath>
+    <value>
+      <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>/Defs/ThoughtDef[defName="HeldConcert"]</xpath>
+    <value>
+      <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>/Defs/ThoughtDef[defName="AttendedWedding"]</xpath>
+    <value>
+      <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>/Defs/ThoughtDef[defName="TerribleSpeech"]</xpath>
+    <value>
+      <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>/Defs/ThoughtDef[defName="UninspiringSpeech"]</xpath>
+    <value>
+      <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>/Defs/ThoughtDef[defName="EncouragingSpeech"]</xpath>
+    <value>
+      <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>/Defs/ThoughtDef[defName="InspirationalSpeech"]</xpath>
+    <value>
+      <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+    </value>
+  </Operation>
+
+</Patch>
