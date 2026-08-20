@@ -7,7 +7,7 @@ namespace Psyche
     {
         protected override Job? TryGiveJob(Pawn pawn)
         {
-            if (!PsycheUtility.IsTracked(pawn) || !PsycheTherapy.NeedsCare(pawn) || !PsycheTherapy.IsClaimed(pawn))
+            if (pawn.Map == null || !PsycheUtility.IsTracked(pawn) || !PsycheTherapy.NeedsCare(pawn) || !PsycheTherapy.IsClaimed(pawn))
             {
                 return null;
             }
