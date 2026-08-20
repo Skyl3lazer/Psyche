@@ -17,6 +17,11 @@ namespace Psyche
 
         public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
         {
+            if (pawn?.Map == null)
+            {
+                yield break;
+            }
+
             IReadOnlyList<Pawn> pawns = pawn.Map.mapPawns.AllPawnsSpawned;
             for (int i = 0; i < pawns.Count; i++)
             {

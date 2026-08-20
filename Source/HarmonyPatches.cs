@@ -138,7 +138,7 @@ namespace Psyche
                 && dinfo.Value.Def != null && dinfo.Value.Def.ExternalViolenceFor(hediff.pawn))
             {
                 int attackerId = (dinfo.Value.Instigator as Pawn)?.thingIDNumber ?? 0;
-                PsycheOwnTriggers.FireWithPart(hediff.pawn, PsycheDefOf.Psyche_OT_Amputation, hediff.Part?.Index ?? -1, attackerId);
+                PsycheOwnTriggers.FireWithPart(hediff.pawn, PsycheDefOf.Psyche_OT_Amputation, hediff.Part != null ? hediff.pawn.RaceProps.body.GetIndexOfPart(hediff.Part) : -1, attackerId);
                 PsycheOwnTriggers.FireOnRelations(hediff.pawn, PsycheDefOf.Psyche_OT_AllyWounded);
             }
         }
@@ -160,7 +160,7 @@ namespace Psyche
                 return;
             }
 
-            PsycheClosure.OnPartReplacedArtificial(hediff.pawn, hediff.Part.Index, props.betterThanNatural);
+            PsycheClosure.OnPartReplacedArtificial(hediff.pawn, hediff.pawn.RaceProps.body.GetIndexOfPart(hediff.Part), props.betterThanNatural);
         }
     }
 
@@ -189,7 +189,7 @@ namespace Psyche
                 return;
             }
 
-            PsycheClosure.OnPartRestoredNatural(pawn, part.Index);
+            PsycheClosure.OnPartRestoredNatural(pawn, pawn.RaceProps.body.GetIndexOfPart(part));
         }
     }
 
