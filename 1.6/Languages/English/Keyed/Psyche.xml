@@ -6,6 +6,7 @@
 
   <Psyche_SeekClarity_Label>Seek clarity: {0} scar</Psyche_SeekClarity_Label>
   <Psyche_SeekClarity_Desc>Send this colonist to contemplate a fully-healed deep psyche scar and try to turn it into a lasting clarity. Consumes {0} glitterworld medicine only if it succeeds. One attempt only. The window closes afterward.</Psyche_SeekClarity_Desc>
+  <Psyche_SeekClarity_RoleNoWindow>{0} has no fully-healed psyche scar ready to become a clarity.</Psyche_SeekClarity_RoleNoWindow>
   <Psyche_SeekClarity_NoGlitter>Requires {0} glitterworld medicine available and unforbidden.</Psyche_SeekClarity_NoGlitter>
 
   <Psyche_Alert_SeekClarity>Pawns can seek clarity</Psyche_Alert_SeekClarity>

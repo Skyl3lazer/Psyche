@@ -55,7 +55,7 @@
     <spectatorsLabel>Attendees</spectatorsLabel>
     <spectatorGerund>attending</spectatorGerund>
     <roles>
-      <li Class="RitualRoleColonist">
+      <li Class="Psyche.RitualRoleClaritySeeker">
         <id>seeker</id>
         <label>seeker</label>
         <required>true</required>
@@ -63,6 +63,8 @@
         <countsAsParticipant>false</countsAsParticipant>
         <defaultForSelectedColonist>true</defaultForSelectedColonist>
         <mustBeAbleToReachTarget>true</mustBeAbleToReachTarget>
+        <missingDesc>colonist with a healed scar ready to become a clarity</missingDesc>
+        <noCandidatesGizmoDesc>no colonist has a fully-healed psyche scar ready to become a clarity</noCandidatesGizmoDesc>
       </li>
       <li Class="RitualRoleColonist">
         <id>counselor</id>
