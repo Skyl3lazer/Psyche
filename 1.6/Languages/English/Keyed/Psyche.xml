@@ -47,6 +47,7 @@
   <Psyche_Tip_FadesIn>Fades in {0}</Psyche_Tip_FadesIn>
   <Psyche_Tip_FadesInClarity>Fades in {0} (may mature into a clarity)</Psyche_Tip_FadesInClarity>
 
+  <Psyche_Tip_ClosureHeal>Closure: +{0}</Psyche_Tip_ClosureHeal>
   <Psyche_Tip_TherapyProgress>Therapy: {0}</Psyche_Tip_TherapyProgress>
   <Psyche_Tip_ReadyForTherapy>Ready for therapy</Psyche_Tip_ReadyForTherapy>
   <Psyche_Tip_TreatableAgain>Treatable again in {0}</Psyche_Tip_TreatableAgain>
@@ -149,12 +150,16 @@
   <Psyche_Tune_CaptivityClosureQuality>Captivity closure quality</Psyche_Tune_CaptivityClosureQuality>
 
   <Psyche_Tune_OwnTriggerIntensityCap>Own-trigger intensity cap</Psyche_Tune_OwnTriggerIntensityCap>
+  <Psyche_Tune_StackCapFactor>Repeat-stack cap factor</Psyche_Tune_StackCapFactor>
+  <Psyche_Tune_StackCapFactor_Tip>How far repeated events of the same kind can push one psychlet, as a multiple of one firing. At 1.5, two inspirations are worth at most 150% of one. Does not apply to triggers that size their own events, such as amputation and saving a life.</Psyche_Tune_StackCapFactor_Tip>
   <Psyche_Tune_GraveWoundRelationOpinion>Grave-wound relation opinion</Psyche_Tune_GraveWoundRelationOpinion>
   <Psyche_Tune_GraveWoundRelationOpinion_Tip>Minimum opinion of the victim for a bystander to take a grave-wound injury from their death.</Psyche_Tune_GraveWoundRelationOpinion_Tip>
   <Psyche_Tune_LifeThreateningBleedRate>Life-threatening bleed rate</Psyche_Tune_LifeThreateningBleedRate>
   <Psyche_Tune_LifeThreateningBleedRate_Tip>Total bleed rate at or above which surviving combat counts as a life-threatening own-trigger.</Psyche_Tune_LifeThreateningBleedRate_Tip>
   <Psyche_Tune_SavedAllyBloodScaleMin>Saved-ally blood scale (min)</Psyche_Tune_SavedAllyBloodScaleMin>
   <Psyche_Tune_SavedAllyBloodScaleMax>Saved-ally blood scale (max)</Psyche_Tune_SavedAllyBloodScaleMax>
+  <Psyche_Tune_SavedPrisonerFactor>Saved-prisoner factor</Psyche_Tune_SavedPrisonerFactor>
+  <Psyche_Tune_SavedPrisonerFactor_Tip>Multiplier on the saved-a-life boon when the pawn pulled back from death was a prisoner. Set to 0 to suppress the boon for prisoners entirely.</Psyche_Tune_SavedPrisonerFactor_Tip>
 
   <Psyche_Tune_InjuryTreatMagnitudeThreshold>Injury treat magnitude threshold</Psyche_Tune_InjuryTreatMagnitudeThreshold>
   <Psyche_Tune_InjuryTreatMagnitudeThreshold_Tip>An injury smaller than this is too minor to be worth a therapy session.</Psyche_Tune_InjuryTreatMagnitudeThreshold_Tip>

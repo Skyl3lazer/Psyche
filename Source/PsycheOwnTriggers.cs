@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace Psyche
@@ -8,12 +9,12 @@ namespace Psyche
     {
         public static void Fire(Pawn pawn, ThoughtDef def)
         {
-            Fire(pawn, def, DefaultUnit(def));
+            Stamp(pawn, def, DefaultUnit(def), scaling: false);
         }
 
-        public static void FireWithPart(Pawn pawn, ThoughtDef def, int lostPartIndex, int killerId = 0)
+        public static void FireScaled(Pawn pawn, ThoughtDef def, float unit, int lostPartIndex = -1, int killerId = 0)
         {
-            Fire(pawn, def, DefaultUnit(def), lostPartIndex, killerId);
+            Stamp(pawn, def, unit, scaling: true, lostPartIndex, killerId);
         }
 
         private static float DefaultUnit(ThoughtDef def)
@@ -21,7 +22,52 @@ namespace Psyche
             return (def != null && def.stages != null && def.stages.Count > 0 ? def.stages[0].baseMoodEffect : 0f) * PsycheTuning.WoundScale;
         }
 
-        public static void Fire(Pawn pawn, ThoughtDef def, float unit, int lostPartIndex = -1, int killerId = 0)
+        // Body-part importance priced by what the pawn actually lost the use of, so no per-part table
+        // is needed and modded bodies and races price themselves.
+        public static float[] CapacitySnapshot(Pawn pawn)
+        {
+            List<PawnCapacityDef> caps = DefDatabase<PawnCapacityDef>.AllDefsListForReading;
+            float[] levels = new float[caps.Count];
+            for (int i = 0; i < caps.Count; i++)
+            {
+                levels[i] = pawn.health.capacities.GetLevel(caps[i]);
+            }
+
+            return levels;
+        }
+
+        // The authored size is what a total functional loss is worth; a part is worth the share of
+        // function it took with it.
+        public static float AmputationUnit(Pawn pawn, float[] before)
+        {
+            List<PawnCapacityDef> caps = DefDatabase<PawnCapacityDef>.AllDefsListForReading;
+            float worst = 0f;
+            for (int i = 0; i < caps.Count && i < before.Length; i++)
+            {
+                float drop = before[i] - pawn.health.capacities.GetLevel(caps[i]);
+                if (drop > worst)
+                {
+                    worst = drop;
+                }
+            }
+
+            return PsycheDefOf.Psyche_OT_Amputation.stages[0].baseMoodEffect * Mathf.Clamp01(worst) * PsycheTuning.WoundScale;
+        }
+
+        // Saving a captive is duty, not the personal stake of pulling back a comrade.
+        public static float SavedLifeUnit(Pawn patient, float bloodLoss)
+        {
+            float factor = PsycheTuning.SavedAllyBloodScaleMin
+                + ((PsycheTuning.SavedAllyBloodScaleMax - PsycheTuning.SavedAllyBloodScaleMin) * Mathf.Clamp01(bloodLoss));
+            if (patient != null && patient.IsPrisonerOfColony)
+            {
+                factor *= PsycheTuning.SavedPrisonerFactor;
+            }
+
+            return PsycheDefOf.Psyche_OT_SavedAlly.stages[0].baseMoodEffect * factor * PsycheTuning.WoundScale;
+        }
+
+        private static void Stamp(Pawn pawn, ThoughtDef def, float unit, bool scaling, int lostPartIndex = -1, int killerId = 0)
         {
             if (pawn == null || def == null || !PsycheUtility.IsTracked(pawn))
             {
@@ -59,7 +105,7 @@ namespace Psyche
             else
             {
                 Thought_Psychlet fresh = (Thought_Psychlet)ThoughtMaker.MakeThought(def);
-                fresh.InitMagnitude(unit);
+                fresh.InitMagnitude(unit, scaling);
                 handler.TryGainMemory(fresh);
                 target = fresh;
             }

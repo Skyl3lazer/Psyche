@@ -17,6 +17,8 @@ namespace Psyche
     public class Thought_Psychlet : Thought_Memory
     {
         private float signedMagnitude;
+        private float initialUnit;
+        private bool scalingIntensity;
         private LimbLossData? limbLoss;
         private bool captured;
         private float mitigationSum;
@@ -24,6 +26,7 @@ namespace Psyche
         private float treatmentLevel;
         private float medicationLevel;
         private float closureLevel;
+        private float closureHeal;
         private float healPulse;
         private int lastTreatedTick = -1;
         private int killerId;
@@ -168,20 +171,35 @@ namespace Psyche
             if (!captured)
             {
                 signedMagnitude = base.MoodOffset() * PsycheTuning.WoundScale;
+                initialUnit = Mathf.Abs(signedMagnitude);
+                // This path only fires for a carrier sized off vanilla's mood, never an authored unit.
+                scalingIntensity = true;
                 captured = true;
             }
         }
 
-        public void InitMagnitude(float signed)
+        public void InitMagnitude(float signed, bool scaling)
         {
             signedMagnitude = signed;
+            initialUnit = Mathf.Abs(signed);
+            scalingIntensity = scaling;
             captured = true;
         }
 
+        private float InitialUnit => initialUnit > 0f ? initialUnit : Mathf.Abs(signedMagnitude);
+
+        private float StackCap =>
+            scalingIntensity
+                ? PsycheTuning.OwnTriggerIntensityCap
+                : Mathf.Min(InitialUnit * PsycheTuning.StackCapFactor, PsycheTuning.OwnTriggerIntensityCap);
+
+        // Clamping the stored magnitude rather than the read value is what makes decay restart from
+        // the capped size instead of coasting down to it.
         public void Intensify(float signedDelta)
         {
             EnsureCaptured();
-            signedMagnitude = Mathf.Clamp(signedMagnitude + signedDelta, -PsycheTuning.OwnTriggerIntensityCap, PsycheTuning.OwnTriggerIntensityCap);
+            float cap = StackCap;
+            signedMagnitude = Mathf.Clamp(signedMagnitude + signedDelta, -cap, cap);
             age = 0;
         }
 
@@ -207,6 +225,8 @@ namespace Psyche
             medicationLevel = Mathf.Min(1f, medicationLevel + (PsycheTuning.MedicationPerDose * potency));
         }
 
+        public float ClosureHeal => closureHeal;
+
         public void Close(float quality)
         {
             if (IsBoon)
@@ -215,7 +235,9 @@ namespace Psyche
             }
 
             closureLevel = Mathf.Max(closureLevel, quality);
-            healPulse += RawMagnitude * quality * PsycheTuning.ClosureHealFrac;
+            float heal = RawMagnitude * quality * PsycheTuning.ClosureHealFrac;
+            closureHeal += heal;
+            healPulse += heal;
         }
 
         public int KillerId => killerId;
@@ -288,12 +310,15 @@ namespace Psyche
         {
             base.ExposeData();
             Scribe_Values.Look(ref signedMagnitude, "psyche_signedMagnitude", 0f);
+            Scribe_Values.Look(ref initialUnit, "psyche_initialUnit", 0f);
+            Scribe_Values.Look(ref scalingIntensity, "psyche_scalingIntensity", false);
             Scribe_Values.Look(ref captured, "psyche_captured", false);
             Scribe_Values.Look(ref mitigationSum, "psyche_mitigationSum", 0f);
             Scribe_Values.Look(ref mitigationSamples, "psyche_mitigationSamples", 0);
             Scribe_Values.Look(ref treatmentLevel, "psyche_treatmentLevel", 0f);
             Scribe_Values.Look(ref medicationLevel, "psyche_medicationLevel", 0f);
             Scribe_Values.Look(ref closureLevel, "psyche_closureLevel", 0f);
+            Scribe_Values.Look(ref closureHeal, "psyche_closureHeal", 0f);
             Scribe_Values.Look(ref killerId, "psyche_killerId", 0);
             Scribe_Values.Look(ref healPulse, "psyche_healPulse", 0f);
             Scribe_Values.Look(ref lastTreatedTick, "psyche_lastTreatedTick", -1);

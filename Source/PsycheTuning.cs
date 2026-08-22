@@ -54,11 +54,13 @@ namespace Psyche
         public static float CaptivityClosureQuality = 0.7f;
 
         public static float OwnTriggerIntensityCap = 40f;
+        public static float StackCapFactor = 1.5f;
         public static float ClarityMinIntensity = 10f;
         public static int GraveWoundRelationOpinion = 20;
         public static float LifeThreateningBleedRate = 0.3f;
         public static float SavedAllyBloodScaleMin = 0.2f;
         public static float SavedAllyBloodScaleMax = 1.0f;
+        public static float SavedPrisonerFactor = 0.4f;
 
         public static float InjuryTreatMagnitudeThreshold = 4f;
         public static float InjuryHealedEpsilon = 0.5f;

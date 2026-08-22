@@ -128,10 +128,12 @@ namespace Psyche
             A("ClosureScarHeal", G.Revenge);
 
             A("OwnTriggerIntensityCap", G.OwnTriggers);
+            A("StackCapFactor", G.OwnTriggers);
             A("GraveWoundRelationOpinion", G.OwnTriggers);
             A("LifeThreateningBleedRate", G.OwnTriggers);
             A("SavedAllyBloodScaleMin", G.OwnTriggers);
             A("SavedAllyBloodScaleMax", G.OwnTriggers);
+            A("SavedPrisonerFactor", G.OwnTriggers);
 
             A("InjuryTreatMagnitudeThreshold", G.Injury);
             A("InjuryHealedEpsilon", G.Injury);

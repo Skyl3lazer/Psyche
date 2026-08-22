@@ -175,10 +175,10 @@ namespace Psyche
 
                     if (!isBoon)
                     {
-                        string treatment = TreatmentLines(lead);
-                        if (!treatment.NullOrEmpty())
+                        string relief = ReliefLines(lead);
+                        if (!relief.NullOrEmpty())
                         {
-                            details += "\n\n" + treatment;
+                            details += "\n\n" + relief;
                         }
                     }
                 }
@@ -218,6 +218,18 @@ namespace Psyche
             }
 
             return lead.MarkPossible ? "Psyche_Tip_PassesInScar".Translate(period) : "Psyche_Tip_PassesIn".Translate(period);
+        }
+
+        private static string ReliefLines(Thought_Psychlet lead)
+        {
+            string treatment = TreatmentLines(lead);
+            if (lead.ClosureHeal < PsycheTuning.InjuryHealedEpsilon)
+            {
+                return treatment;
+            }
+
+            string closure = "Psyche_Tip_ClosureHeal".Translate(lead.ClosureHeal.ToString("##0"));
+            return treatment.NullOrEmpty() ? closure : closure + "\n" + treatment;
         }
 
         private static string TreatmentLines(Thought_Psychlet lead)

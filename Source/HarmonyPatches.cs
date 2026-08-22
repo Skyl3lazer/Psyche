@@ -132,15 +132,28 @@ namespace Psyche
     [HarmonyPatch(typeof(Pawn_HealthTracker), nameof(Pawn_HealthTracker.AddHediff), new[] { typeof(Hediff), typeof(BodyPartRecord), typeof(DamageInfo?), typeof(DamageWorker.DamageResult) })]
     public static class Patch_LimbLost
     {
-        public static void Postfix(Hediff hediff, DamageInfo? dinfo)
+        // The magnitude is the function the pawn lost, so the capacities have to be read on both sides
+        // of the add.
+        private static bool Qualifies(Hediff hediff, DamageInfo? dinfo) =>
+            hediff is Hediff_MissingPart && hediff.pawn != null && !hediff.pawn.Dead && dinfo.HasValue
+            && dinfo.Value.Def != null && dinfo.Value.Def.ExternalViolenceFor(hediff.pawn);
+
+        public static void Prefix(Hediff hediff, DamageInfo? dinfo, out float[]? __state)
         {
-            if (hediff is Hediff_MissingPart && hediff.pawn != null && dinfo.HasValue
-                && dinfo.Value.Def != null && dinfo.Value.Def.ExternalViolenceFor(hediff.pawn))
+            __state = Qualifies(hediff, dinfo) ? PsycheOwnTriggers.CapacitySnapshot(hediff.pawn) : null;
+        }
+
+        public static void Postfix(Hediff hediff, DamageInfo? dinfo, float[]? __state)
+        {
+            if (__state == null || hediff.pawn.Dead)
             {
-                int attackerId = (dinfo.Value.Instigator as Pawn)?.thingIDNumber ?? 0;
-                PsycheOwnTriggers.FireWithPart(hediff.pawn, PsycheDefOf.Psyche_OT_Amputation, hediff.Part?.Index ?? -1, attackerId);
-                PsycheOwnTriggers.FireOnRelations(hediff.pawn, PsycheDefOf.Psyche_OT_AllyWounded);
+                return;
             }
+
+            int attackerId = (dinfo!.Value.Instigator as Pawn)?.thingIDNumber ?? 0;
+            PsycheOwnTriggers.FireScaled(hediff.pawn, PsycheDefOf.Psyche_OT_Amputation,
+                PsycheOwnTriggers.AmputationUnit(hediff.pawn, __state), hediff.Part?.Index ?? -1, attackerId);
+            PsycheOwnTriggers.FireOnRelations(hediff.pawn, PsycheDefOf.Psyche_OT_AllyWounded);
         }
     }
 
@@ -266,18 +279,14 @@ namespace Psyche
             }
         }
 
-        public static void Postfix(Pawn doctor, float __state)
+        public static void Postfix(Pawn doctor, Pawn patient, float __state)
         {
             if (__state < 0f)
             {
                 return;
             }
 
-            float bloodLoss = __state > 1f ? 1f : __state;
-            float factor = PsycheTuning.SavedAllyBloodScaleMin
-                + ((PsycheTuning.SavedAllyBloodScaleMax - PsycheTuning.SavedAllyBloodScaleMin) * bloodLoss);
-            float baseSize = PsycheDefOf.Psyche_OT_SavedAlly.stages[0].baseMoodEffect;
-            PsycheOwnTriggers.Fire(doctor, PsycheDefOf.Psyche_OT_SavedAlly, baseSize * factor * PsycheTuning.WoundScale);
+            PsycheOwnTriggers.FireScaled(doctor, PsycheDefOf.Psyche_OT_SavedAlly, PsycheOwnTriggers.SavedLifeUnit(patient, __state));
         }
     }
 
@@ -404,7 +413,7 @@ namespace Psyche
             ThoughtDef carrier = signed > 0f ? PsycheDefOf.Psyche_Boon : PsycheDefOf.Psyche_Injury;
             Thought_Psychlet companion = (Thought_Psychlet)ThoughtMaker.MakeThought(carrier);
             companion.SetSource(newThought.def, newThought.CurStageIndex);
-            companion.InitMagnitude(signed);
+            companion.InitMagnitude(signed, scaling: true);
             // TryGainMemory overwrites otherPawn from its arg. Omit it and the companion loses the pawn it is about.
             __instance.TryGainMemory(companion, newThought.otherPawn);
             pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
