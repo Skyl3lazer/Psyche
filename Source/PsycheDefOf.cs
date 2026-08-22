@@ -34,6 +34,7 @@ namespace Psyche
         public static JobDef Psyche_SeekTherapy = null!;
         public static JobDef Psyche_AdministerTherapy = null!;
         public static JobDef Psyche_ContemplateClarity = null!;
+        public static PrisonerInteractionModeDef Psyche_GiveTherapy = null!;
 
         public static ResearchProjectDef Psyche_Humoralism = null!;
         public static ResearchProjectDef Psyche_CognitiveBehavioralTherapy = null!;

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <PrisonerInteractionModeDef>
+    <defName>Psyche_GiveTherapy</defName>
+    <label>give therapy</label>
+    <listOrder>50</listOrder>
+    <description>Counselors will hold therapy sessions with this prisoner, treating open psyche injuries and mending psyche scars.</description>
+    <isNonExclusiveInteraction>true</isNonExclusiveInteraction>
+  </PrisonerInteractionModeDef>
+
+</Defs>

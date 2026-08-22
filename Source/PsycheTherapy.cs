@@ -70,9 +70,13 @@ namespace Psyche
         public static bool IsClaimed(Pawn patient) =>
             patient.Map.reservationManager.OnlyReservationsForJobDef(patient, PsycheDefOf.Psyche_AdministerTherapy, requireAtLeastOne: true);
 
+        // Off by default is vanilla's doing: enabled non-exclusive interactions start as an empty list.
+        public static bool TherapyPermitted(Pawn patient) =>
+            !patient.IsPrisonerOfColony || (patient.guest?.IsInteractionEnabled(PsycheDefOf.Psyche_GiveTherapy) ?? false);
+
         public static bool IsTherapyCandidate(Pawn patient)
         {
-            if (patient == null || !PsycheUtility.IsTracked(patient) || !NeedsCare(patient))
+            if (patient == null || !PsycheUtility.IsTracked(patient) || !TherapyPermitted(patient) || !NeedsCare(patient))
             {
                 return false;
             }
