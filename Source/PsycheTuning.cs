@@ -1,4 +1,4 @@
-namespace Psyche
+﻿namespace Psyche
 {
     // Mutable (not const) so the options page can adjust them at runtime.
     public static class PsycheTuning
@@ -68,6 +68,7 @@ namespace Psyche
 
         public static int TherapySessionTicks = 600;
         public static int SeekWaitTicks = 1500;
+        public static int TherapyRendezvousWaitTicks = 2500;
         public static int CounselingCooldownTicks = 60000;
         public static int SeekWanderRadius = 3;
         public static int SeekWanderIntervalMin = 60;

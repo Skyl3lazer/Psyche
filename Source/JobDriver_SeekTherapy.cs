@@ -21,7 +21,7 @@ namespace Psyche
             wait.AddFailCondition(() => !PsycheTherapy.NeedsCare(pawn) || !PsycheTherapy.IsClaimed(pawn));
             wait.tickAction = () =>
             {
-                if (CounselorInSession())
+                if (CounselorArriving())
                 {
                     pawn.pather.StopDead();
                     return;
@@ -42,29 +42,12 @@ namespace Psyche
             yield return wait;
         }
 
-        private bool CounselorInSession()
+        // Holding still once the counselor is nearby keeps their short walk over from becoming a chase.
+        private bool CounselorArriving()
         {
-            Map map = pawn.Map;
-            foreach (IntVec3 c in CellRect.CenteredOn(pawn.Position, 1))
-            {
-                if (!c.InBounds(map))
-                {
-                    continue;
-                }
-
-                List<Thing> things = c.GetThingList(map);
-                for (int i = 0; i < things.Count; i++)
-                {
-                    if (things[i] is Pawn other && other != pawn
-                        && other.CurJobDef == PsycheDefOf.Psyche_AdministerTherapy
-                        && other.CurJob?.GetTarget(TargetIndex.A).Thing == pawn)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
+            Pawn? counselor = PsycheTherapy.Counselor(pawn);
+            return counselor != null && counselor.Spawned && counselor.Map == pawn.Map
+                && counselor.Position.InHorDistOf(pawn.Position, PsycheTuning.SeekWanderRadius + 2);
         }
     }
 }

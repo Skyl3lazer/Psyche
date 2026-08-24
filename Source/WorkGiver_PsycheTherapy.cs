@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -39,7 +39,13 @@ namespace Psyche
                 return false;
             }
 
-            return pawn.CanReserveAndReach(patient, PathEndMode.Touch, forced ? Danger.Deadly : Danger.Some, 1, -1, null, forced);
+            if (!pawn.CanReserveAndReach(patient, PathEndMode.Touch, forced ? Danger.Deadly : Danger.Some, 1, -1, null, forced))
+            {
+                return false;
+            }
+
+            IntVec3 spot = PsycheTherapy.EnsureRendezvous(patient);
+            return spot.IsValid && pawn.CanReach(spot, PathEndMode.Touch, forced ? Danger.Deadly : Danger.Some);
         }
 
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)

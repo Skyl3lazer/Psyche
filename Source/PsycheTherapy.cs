@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -130,6 +130,12 @@ namespace Psyche
 
         public static IntVec3 PickRendezvous(Pawn pawn)
         {
+            Building_Bed? occupied = pawn.CurrentBed();
+            if (occupied != null && RendezvousUsable(pawn, occupied.Position))
+            {
+                return occupied.Position;
+            }
+
             List<IntVec3> candidates = new List<IntVec3>();
 
             Building_Bed? ownedBed = pawn.ownership?.OwnedBed;
@@ -156,14 +162,85 @@ namespace Psyche
             List<IntVec3> valid = new List<IntVec3>();
             for (int i = 0; i < candidates.Count; i++)
             {
-                IntVec3 c = candidates[i];
-                if (c.Standable(pawn.Map) && pawn.CanReach(c, PathEndMode.OnCell, Danger.None))
+                if (RendezvousUsable(pawn, candidates[i]))
                 {
-                    valid.Add(c);
+                    valid.Add(candidates[i]);
                 }
             }
 
             return valid.Count > 0 ? valid.RandomElement() : IntVec3.Invalid;
+        }
+
+        public static bool RendezvousUsable(Pawn patient, IntVec3 cell) =>
+            cell.IsValid && patient.Map != null && cell.InBounds(patient.Map) && cell.Standable(patient.Map)
+            && patient.CanReach(cell, PathEndMode.OnCell, Danger.None);
+
+        // Memoized so the patient and the counselor walk to the same cell across separate think-tree passes.
+        public static IntVec3 EnsureRendezvous(Pawn patient)
+        {
+            Need_Psyche? need = patient.needs?.TryGetNeed<Need_Psyche>();
+            if (need == null)
+            {
+                return IntVec3.Invalid;
+            }
+
+            if (RendezvousUsable(patient, need.TherapyRendezvous))
+            {
+                return need.TherapyRendezvous;
+            }
+
+            need.TherapyRendezvous = PickRendezvous(patient);
+            return need.TherapyRendezvous;
+        }
+
+        public static IntVec3 CurrentRendezvous(Pawn patient) =>
+            patient.needs?.TryGetNeed<Need_Psyche>()?.TherapyRendezvous ?? IntVec3.Invalid;
+
+        public static void ClearRendezvous(Pawn? patient)
+        {
+            Need_Psyche? need = patient?.needs?.TryGetNeed<Need_Psyche>();
+            if (need != null)
+            {
+                need.TherapyRendezvous = IntVec3.Invalid;
+            }
+        }
+
+        public static Pawn? Counselor(Pawn patient)
+        {
+            if (patient.Map == null)
+            {
+                return null;
+            }
+
+            List<ReservationManager.Reservation> reservations = patient.Map.reservationManager.ReservationsReadOnly;
+            for (int i = 0; i < reservations.Count; i++)
+            {
+                ReservationManager.Reservation r = reservations[i];
+                if (r.Target.Thing == patient && r.Job?.def == PsycheDefOf.Psyche_AdministerTherapy)
+                {
+                    return r.Claimant;
+                }
+            }
+
+            return null;
+        }
+
+        // The session may only start where the patient chose to be, never on the move.
+        public static bool AtRendezvous(Pawn patient)
+        {
+            if (!patient.Spawned)
+            {
+                return false;
+            }
+
+            if (patient.InBed())
+            {
+                return true;
+            }
+
+            IntVec3 spot = CurrentRendezvous(patient);
+            return spot.IsValid && patient.CurJobDef == PsycheDefOf.Psyche_SeekTherapy
+                && patient.Position.InHorDistOf(spot, PsycheTuning.SeekWanderRadius + 1);
         }
 
         private static int SocialLevel(Pawn pawn) => pawn.skills?.GetSkill(SkillDefOf.Social)?.Level ?? 0;

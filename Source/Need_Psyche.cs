@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -10,6 +10,7 @@ namespace Psyche
         private float innateMbt;
         private bool innateCached;
         private int lastCounseledTick = -1;
+        private IntVec3 therapyRendezvous = IntVec3.Invalid;
 
         public Need_Psyche(Pawn pawn)
             : base(pawn)
@@ -17,6 +18,12 @@ namespace Psyche
         }
 
         public float InnateMbt => innateMbt;
+
+        public IntVec3 TherapyRendezvous
+        {
+            get => therapyRendezvous;
+            set => therapyRendezvous = value;
+        }
 
         public bool InnateCached => innateCached;
 
@@ -123,6 +130,7 @@ namespace Psyche
             Scribe_Values.Look(ref innateMbt, "innateMbt", 0f);
             Scribe_Values.Look(ref innateCached, "innateCached", false);
             Scribe_Values.Look(ref lastCounseledTick, "lastCounseledTick", -1);
+            Scribe_Values.Look(ref therapyRendezvous, "therapyRendezvous", IntVec3.Invalid);
         }
 
         private void CacheInnate()
