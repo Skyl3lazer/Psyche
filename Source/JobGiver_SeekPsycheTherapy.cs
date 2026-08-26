@@ -9,7 +9,8 @@ namespace Psyche
         protected override Job? TryGiveJob(Pawn pawn)
         {
             if (pawn.Map == null || !PsycheUtility.IsTracked(pawn) || !PsycheTherapy.TherapyPermitted(pawn)
-                || !PsycheTherapy.NeedsCare(pawn) || !PsycheTherapy.IsClaimed(pawn) || NeedsComeFirst(pawn))
+                || !PsycheTherapy.NeedsCare(pawn) || !PsycheTherapy.IsClaimed(pawn) || NeedsComeFirst(pawn)
+                || ShouldStayPut(pawn))
             {
                 return null;
             }
@@ -22,6 +23,10 @@ namespace Psyche
 
             return JobMaker.MakeJob(PsycheDefOf.Psyche_SeekTherapy, spot);
         }
+
+        // The counselor walks to a patient who is lying down, and a player order outranks a wait either way.
+        private static bool ShouldStayPut(Pawn pawn) =>
+            pawn.CurrentBed() != null || pawn.CurJob?.playerForced == true;
 
         // Sitting above the main behavior core means declining what that core would have handled first.
         private static bool NeedsComeFirst(Pawn pawn)
