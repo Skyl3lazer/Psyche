@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
 using RimWorld;
@@ -281,7 +281,8 @@ namespace Psyche
 
         public static void Postfix(Pawn doctor, Pawn patient, float __state)
         {
-            if (__state < 0f)
+            // Only the tend that stops the last bleed is the save.
+            if (__state < 0f || patient.health.hediffSet.BleedRateTotal > 0f)
             {
                 return;
             }
