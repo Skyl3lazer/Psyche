@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- One xpath per group: the operation succeeds as long as one listed def loaded, so DLC entries self-gate. -->
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>/Defs/ThoughtDef[defName="AteKibble"
+      or defName="AteRottenFood"
+      or defName="AteTwistedMeat"
+      or defName="IngestedHemogenPack"
+      or defName="ToxWater"
+      or defName="CryingBaby"
+      or defName="DecreeFailed"
+      or defName="ColonyPrisonerEscaped"
+      or defName="VoidCuriosity"]</xpath>
+    <value>
+      <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+    </value>
+  </Operation>
+
+</Patch>
