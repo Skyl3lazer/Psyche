@@ -80,4 +80,37 @@
       </value>
     </match>
   </Operation>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Dubs Bad Hygiene</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+
+        <li Class="PatchOperationAddModExtension">
+          <xpath>/Defs/ThoughtDef[defName="SoiledSelf"]</xpath>
+          <value>
+            <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+          </value>
+        </li>
+
+        <li Class="PatchOperationAddModExtension">
+          <xpath>/Defs/ThoughtDef[defName="DrankUrine"]</xpath>
+          <value>
+            <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+          </value>
+        </li>
+
+        <li Class="PatchOperationAddModExtension">
+          <xpath>/Defs/ThoughtDef[defName="UsedPrivateBathroom"]</xpath>
+          <value>
+            <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation>
+
 </Patch>
