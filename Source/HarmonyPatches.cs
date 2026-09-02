@@ -268,26 +268,43 @@ namespace Psyche
     [HarmonyPatch(typeof(TendUtility), nameof(TendUtility.DoTend))]
     public static class Patch_AllySaved
     {
-        public static void Prefix(Pawn doctor, Pawn patient, out float __state)
+        // Wounds are tended worst-first, so the tend that stops the last bleed is the least bloody
+        // one of the bout. The danger has to be remembered from the earlier tends.
+        private static readonly HashSet<Pawn> bleedingOut = new HashSet<Pawn>();
+
+        public static void Notify_PawnDied(Pawn pawn)
         {
-            __state = -1f;
-            if (doctor != null && patient != null && patient != doctor
-                && PsycheUtility.IsTracked(doctor) && patient.Downed && !patient.HostileTo(doctor)
-                && patient.health.hediffSet.BleedRateTotal >= PsycheTuning.LifeThreateningBleedRate)
-            {
-                __state = patient.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.BloodLoss)?.Severity ?? 0f;
-            }
+            bleedingOut.Remove(pawn);
         }
 
-        public static void Postfix(Pawn doctor, Pawn patient, float __state)
+        public static void Prefix(Pawn doctor, Pawn patient, out bool __state)
         {
-            // Only the tend that stops the last bleed is the save.
-            if (__state < 0f || patient.health.hediffSet.BleedRateTotal > 0f)
+            __state = false;
+            if (patient == null)
             {
                 return;
             }
 
-            PsycheOwnTriggers.FireScaled(doctor, PsycheDefOf.Psyche_OT_SavedAlly, PsycheOwnTriggers.SavedLifeUnit(patient, __state));
+            if (patient.Downed && patient.health.hediffSet.BleedRateTotal >= PsycheTuning.LifeThreateningBleedRate)
+            {
+                bleedingOut.Add(patient);
+            }
+
+            __state = doctor != null && patient != doctor && PsycheUtility.IsTracked(doctor)
+                && !patient.HostileTo(doctor) && bleedingOut.Contains(patient);
+        }
+
+        public static void Postfix(Pawn doctor, Pawn patient, bool __state)
+        {
+            // Only the tend that stops the last bleed is the save.
+            if (!__state || patient.health.hediffSet.BleedRateTotal > 0f)
+            {
+                return;
+            }
+
+            bleedingOut.Remove(patient);
+            float bloodLoss = patient.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.BloodLoss)?.Severity ?? 0f;
+            PsycheOwnTriggers.FireScaled(doctor, PsycheDefOf.Psyche_OT_SavedAlly, PsycheOwnTriggers.SavedLifeUnit(patient, bloodLoss));
         }
     }
 
@@ -296,6 +313,7 @@ namespace Psyche
     {
         public static void Postfix(Pawn __instance, DamageInfo? dinfo)
         {
+            Patch_AllySaved.Notify_PawnDied(__instance);
             PsycheClosure.OnPawnDied(__instance, dinfo?.Instigator as Pawn);
         }
     }
