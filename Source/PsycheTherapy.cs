@@ -74,9 +74,21 @@ namespace Psyche
         public static bool TherapyPermitted(Pawn patient) =>
             !patient.IsPrisonerOfColony || (patient.guest?.IsInteractionEnabled(PsycheDefOf.Psyche_GiveTherapy) ?? false);
 
+        // Reserving the patient for a session locks out the doctor, so anything a medic owes them wins.
+        public static bool MedicalCarePending(Pawn patient) =>
+            HealthAIUtility.WantsToBeRescued(patient)
+            || HealthAIUtility.ShouldBeTendedNowByPlayer(patient)
+            || patient.health.hediffSet.InLabor()
+            || HealthAIUtility.ShouldHaveSurgeryDoneNow(patient);
+
         public static bool IsTherapyCandidate(Pawn patient)
         {
             if (patient == null || !PsycheUtility.IsTracked(patient) || !TherapyPermitted(patient) || !NeedsCare(patient))
+            {
+                return false;
+            }
+
+            if (MedicalCarePending(patient))
             {
                 return false;
             }
@@ -239,8 +251,13 @@ namespace Psyche
             }
 
             IntVec3 spot = CurrentRendezvous(patient);
-            return spot.IsValid && patient.CurJobDef == PsycheDefOf.Psyche_SeekTherapy
-                && patient.Position.InHorDistOf(spot, PsycheTuning.SeekWanderRadius + 1);
+            if (!spot.IsValid || !patient.Position.InHorDistOf(spot, PsycheTuning.SeekWanderRadius + 1))
+            {
+                return false;
+            }
+
+            // Proximity alone is met while the patient is still walking past on the way in.
+            return patient.jobs?.curDriver is JobDriver_SeekTherapy seek && seek.ReachedRendezvous;
         }
 
         private static int SocialLevel(Pawn pawn) => pawn.skills?.GetSkill(SkillDefOf.Social)?.Level ?? 0;
