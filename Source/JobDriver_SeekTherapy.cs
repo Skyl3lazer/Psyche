@@ -7,8 +7,17 @@ namespace Psyche
     public class JobDriver_SeekTherapy : JobDriver
     {
         private int nextWanderTick;
+        private bool reachedRendezvous;
+
+        public bool ReachedRendezvous => reachedRendezvous;
 
         public override bool TryMakePreToilReservations(bool errorOnFailed) => true;
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Values.Look(ref reachedRendezvous, "reachedRendezvous", false);
+        }
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
@@ -19,6 +28,7 @@ namespace Psyche
             wait.defaultCompleteMode = ToilCompleteMode.Delay;
             wait.defaultDuration = PsycheTuning.SeekWaitTicks;
             wait.AddFailCondition(() => !PsycheTherapy.NeedsCare(pawn) || !PsycheTherapy.IsClaimed(pawn));
+            wait.initAction = () => reachedRendezvous = true;
             wait.tickAction = () =>
             {
                 if (CounselorArriving())
