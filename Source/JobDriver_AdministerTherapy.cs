@@ -37,6 +37,9 @@ namespace Psyche
             Toil session = Toils_General.WaitWith(TargetIndex.A, PsycheTuning.TherapySessionTicks, useProgressBar: true,
                 maintainPosture: true, face: TargetIndex.A);
             session.activeSkill = () => SkillDefOf.Social;
+            // A random roll could land an insult or a pass at the patient in the middle of therapy.
+            session.socialMode = RandomSocialMode.Off;
+            session.AddPreTickIntervalAction(Chatter);
             yield return session;
 
             Toil apply = ToilMaker.MakeToil();
@@ -47,6 +50,19 @@ namespace Psyche
                 PsycheTherapy.ClearRendezvous(Patient);
             };
             yield return apply;
+        }
+
+        // Vanilla's bedside-visit cadence, so the session reads as a conversation rather than a stare.
+        private void Chatter(int delta)
+        {
+            if (!pawn.IsHashIntervalTick(PsycheTuning.TherapyChatterIntervalTicks, delta)
+                || !pawn.interactions.CanInteractNowWith(Patient))
+            {
+                return;
+            }
+
+            pawn.interactions.TryInteractWith(Patient,
+                Rand.Value < 0.5f ? InteractionDefOf.DeepTalk : InteractionDefOf.Chitchat);
         }
 
         // A deadline set in initAction is still zero when the fail conditions first run.

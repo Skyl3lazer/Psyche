@@ -69,6 +69,7 @@
         public static int TherapySessionTicks = 600;
         public static int SeekWaitTicks = 1500;
         public static int TherapyRendezvousWaitTicks = 2500;
+        public static int TherapyChatterIntervalTicks = 200;
         public static int CounselingCooldownTicks = 60000;
         public static int SeekWanderRadius = 3;
         public static int SeekWanderIntervalMin = 60;
