@@ -143,9 +143,13 @@ namespace Psyche
         public static IntVec3 PickRendezvous(Pawn pawn)
         {
             Building_Bed? occupied = pawn.CurrentBed();
-            if (occupied != null && RendezvousUsable(pawn, occupied.Position))
+            if (occupied != null)
             {
-                return occupied.Position;
+                IntVec3 bedside = BedsideCell(pawn, occupied);
+                if (bedside.IsValid)
+                {
+                    return bedside;
+                }
             }
 
             List<IntVec3> candidates = new List<IntVec3>();
@@ -153,14 +157,14 @@ namespace Psyche
             Building_Bed? ownedBed = pawn.ownership?.OwnedBed;
             if (ownedBed != null && ownedBed.Spawned)
             {
-                candidates.Add(ownedBed.Position);
+                candidates.Add(BedsideCell(pawn, ownedBed));
             }
 
             foreach (Building_Bed bed in pawn.Map.listerBuildings.AllBuildingsColonistOfClass<Building_Bed>())
             {
                 if (bed.Medical)
                 {
-                    candidates.Add(bed.Position);
+                    candidates.Add(BedsideCell(pawn, bed));
                     break;
                 }
             }
@@ -181,6 +185,21 @@ namespace Psyche
             }
 
             return valid.Count > 0 ? valid.RandomElement() : IntVec3.Invalid;
+        }
+
+        // Beds are PassThroughOnly, never Standable, so the meeting happens on a free cell beside one.
+        private static IntVec3 BedsideCell(Pawn pawn, Building_Bed bed)
+        {
+            Room? room = bed.GetRoom();
+            foreach (IntVec3 c in GenAdj.CellsAdjacent8Way(bed))
+            {
+                if (c.GetRoom(pawn.Map) == room && RendezvousUsable(pawn, c))
+                {
+                    return c;
+                }
+            }
+
+            return IntVec3.Invalid;
         }
 
         public static bool RendezvousUsable(Pawn patient, IntVec3 cell) =>
