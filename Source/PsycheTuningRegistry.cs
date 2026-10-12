@@ -141,6 +141,8 @@ namespace Psyche
 
             A("TherapySessionTicks", G.Timing);
             A("SeekWaitTicks", G.Timing);
+            A("TherapyRendezvousWaitTicks", G.Timing);
+            A("TherapyChatterIntervalTicks", G.Timing, min: 1f);
             A("CounselingCooldownTicks", G.Timing);
             A("SeekWanderRadius", G.Timing);
             A("SeekWanderIntervalMin", G.Timing);
@@ -181,8 +183,8 @@ namespace Psyche
         private static void P(string name, string group, float min, float max, bool restart = false)
             => Add(name, group, min, max, advanced: false, slider: true, restart);
 
-        private static void A(string name, string group)
-            => Add(name, group, 0f, AdvancedMax, advanced: true, slider: false, restart: false);
+        private static void A(string name, string group, float min = 0f)
+            => Add(name, group, min, AdvancedMax, advanced: true, slider: false, restart: false);
 
         private static void Add(string name, string group, float min, float max, bool advanced, bool slider, bool restart)
         {

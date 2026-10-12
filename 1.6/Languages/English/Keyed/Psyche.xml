@@ -172,6 +172,10 @@
   <Psyche_Tune_TherapySessionTicks_Tip>In game ticks (60 ticks = 1 second, 60000 = 1 day).</Psyche_Tune_TherapySessionTicks_Tip>
   <Psyche_Tune_SeekWaitTicks>Seek wait (ticks)</Psyche_Tune_SeekWaitTicks>
   <Psyche_Tune_SeekWaitTicks_Tip>In game ticks (60 ticks = 1 second, 60000 = 1 day).</Psyche_Tune_SeekWaitTicks_Tip>
+  <Psyche_Tune_TherapyRendezvousWaitTicks>Counselor wait at meeting place (ticks)</Psyche_Tune_TherapyRendezvousWaitTicks>
+  <Psyche_Tune_TherapyRendezvousWaitTicks_Tip>How long a counselor waits at the meeting place for the patient before giving up. In game ticks (60 ticks = 1 second, 60000 = 1 day).</Psyche_Tune_TherapyRendezvousWaitTicks_Tip>
+  <Psyche_Tune_TherapyChatterIntervalTicks>Session chatter interval (ticks)</Psyche_Tune_TherapyChatterIntervalTicks>
+  <Psyche_Tune_TherapyChatterIntervalTicks_Tip>How often counselor and patient exchange a conversation during a session. In game ticks (60 ticks = 1 second).</Psyche_Tune_TherapyChatterIntervalTicks_Tip>
   <Psyche_Tune_CounselingCooldownTicks>Counseling cooldown (ticks)</Psyche_Tune_CounselingCooldownTicks>
   <Psyche_Tune_CounselingCooldownTicks_Tip>In game ticks (60 ticks = 1 second, 60000 = 1 day).</Psyche_Tune_CounselingCooldownTicks_Tip>
   <Psyche_Tune_SeekWanderRadius>Seek wander radius</Psyche_Tune_SeekWanderRadius>
