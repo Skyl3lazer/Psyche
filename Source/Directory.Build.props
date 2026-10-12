@@ -4,7 +4,6 @@
     <Authors>Skyl3lazer</Authors>
     <RootNamespace>Psyche</RootNamespace>
     <AssemblyName>Psyche</AssemblyName>
-    <OutDir>..\1.6\Assemblies</OutDir>
     <BaseIntermediateOutputPath>obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
