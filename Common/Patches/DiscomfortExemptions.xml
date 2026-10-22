@@ -11,6 +11,7 @@
       or defName="CryingBaby"
       or defName="DecreeFailed"
       or defName="ColonyPrisonerEscaped"
+      or defName="DeniedJoining"
       or defName="VoidCuriosity"]</xpath>
     <value>
       <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
