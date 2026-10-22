@@ -7,7 +7,8 @@
       or defName="NewColonyOptimism"
       or defName="NewColonyHope"
       or defName="MyGigglingBaby"
-      or defName="DecreeMet"]</xpath>
+      or defName="DecreeMet"
+      or defName="GotSomeLovin"]</xpath>
     <value>
       <li Class="Psyche.PsycheThoughtExtension"><exemptFromWounds>true</exemptFromWounds></li>
     </value>
