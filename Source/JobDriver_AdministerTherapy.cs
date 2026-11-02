@@ -34,8 +34,10 @@ namespace Psyche
             approach.AddFailCondition(() => !PsycheTherapy.AtRendezvous(Patient));
             yield return approach;
 
-            Toil session = Toils_General.WaitWith(TargetIndex.A, PsycheTuning.TherapySessionTicks, useProgressBar: true,
-                maintainPosture: true, face: TargetIndex.A);
+            Toil session = Toils_General.Wait(PsycheTuning.TherapySessionTicks, TargetIndex.A);
+            session.AddPreInitAction(HoldPatient);
+            session.FailOnCannotTouch(TargetIndex.A, PathEndMode.Touch);
+            session.WithProgressBarToilDelay(TargetIndex.A);
             session.activeSkill = () => SkillDefOf.Social;
             // A random roll could land an insult or a pass at the patient in the middle of therapy.
             session.socialMode = RandomSocialMode.Off;
@@ -50,6 +52,15 @@ namespace Psyche
                 PsycheTherapy.ClearRendezvous(Patient);
             };
             yield return apply;
+        }
+
+        // ForceWait would swap an in-bed patient onto a new lay-down job that drops a rest-until-healed order.
+        private void HoldPatient()
+        {
+            if (!Patient.InBed())
+            {
+                PawnUtility.ForceWait(Patient, PsycheTuning.TherapySessionTicks, maintainPosture: true);
+            }
         }
 
         // Vanilla's bedside-visit cadence, so the session reads as a conversation rather than a stare.

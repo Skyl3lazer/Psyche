@@ -12,7 +12,7 @@
           <defName>Psyche_Scar_Manipulative</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>manipulativeness psyche scar</label>
-          <description>A pattern of gaslighting and love-bombing worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>Gaslighting and love-bombing have become this person's way of bending others. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -35,7 +35,7 @@
           <defName>Psyche_Scar_Naive</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>naivety psyche scar</label>
-          <description>A credulous trust worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>Whatever this person is told, they believe it. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -58,7 +58,7 @@
           <defName>Psyche_Scar_Narcissist</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>narcissism psyche scar</label>
-          <description>An obsessive vanity worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>This person is consumed by their own image and importance. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -81,7 +81,7 @@
           <defName>Psyche_Scar_Grumpy</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>grumpiness psyche scar</label>
-          <description>A chronic irritability worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>Almost everything gets on this person's nerves. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -104,7 +104,7 @@
           <defName>Psyche_Scar_Shy</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>shyness psyche scar</label>
-          <description>A social avoidance worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>Social contact drains this person, who shrinks from it when possible. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -126,8 +126,8 @@
         <HediffDef>
           <defName>Psyche_Scar_NonCommittal</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
-          <label>non-committal psyche scar</label>
-          <description>A fear of commitment worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <label>noncommittal psyche scar</label>
+          <description>This person backs away whenever a relationship starts to become serious. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -150,7 +150,7 @@
           <defName>Psyche_Scar_Emotional</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>emotional psyche scar</label>
-          <description>A profound mood swing worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>Every feeling hits this person at full strength, the good and the bad alike. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -186,7 +186,7 @@
           <defName>Psyche_Scar_Paranoid</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>paranoia psyche scar</label>
-          <description>A catastrophizing worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>Every situation looks like a disaster in the making to this person. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -222,7 +222,7 @@
           <defName>Psyche_Scar_Insane</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>insanity psyche scar</label>
-          <description>An erratic break from steady thought worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>This person's thinking has come loose and lurches in unpredictable directions. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>

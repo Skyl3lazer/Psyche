@@ -215,13 +215,20 @@ namespace Psyche
                 return IntVec3.Invalid;
             }
 
-            if (RendezvousUsable(patient, need.TherapyRendezvous))
+            if (RendezvousUsable(patient, need.TherapyRendezvous) && !AwayFromCurrentBed(patient, need.TherapyRendezvous))
             {
                 return need.TherapyRendezvous;
             }
 
             need.TherapyRendezvous = PickRendezvous(patient);
             return need.TherapyRendezvous;
+        }
+
+        // A patient who lay down after the cell was picked will not walk back to it.
+        private static bool AwayFromCurrentBed(Pawn patient, IntVec3 spot)
+        {
+            Building_Bed? bed = patient.CurrentBed();
+            return bed != null && !spot.AdjacentTo8WayOrInside(bed);
         }
 
         public static IntVec3 CurrentRendezvous(Pawn patient) =>

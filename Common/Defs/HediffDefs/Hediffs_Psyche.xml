@@ -37,7 +37,7 @@
     <defName>Psyche_Scar_Grief</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>grief psyche scar</label>
-    <description>The absence of someone loved, worn permanently into the mind. What death took does not come back, and the missing weight is always there to be felt.</description>
+    <description>The absence of someone loved, worn permanently into the mind. What death took does not come back. The missing weight is always there to be felt.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -70,7 +70,7 @@
     <defName>Psyche_Scar_Apostasy</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>apostasy psyche scar</label>
-    <description>A belief broken by one's own hand. The act cannot be unmade, and the memory of betraying what one holds sacred settles permanently into the mind.</description>
+    <description>A belief broken by one's own hand. The act cannot be unmade. The memory of betraying what one holds sacred settles permanently into the mind.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -526,7 +526,7 @@
     <defName>Psyche_Scar_Pyromaniac</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>pyromania psyche scar</label>
-    <description>A fixation on flame worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+    <description>Flame draws this person's eye and will not let it go. Only the most advanced therapy can lift it entirely.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -562,7 +562,7 @@
     <defName>Psyche_Scar_Psychopath</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>psychopathy psyche scar</label>
-    <description>A disconnection from others that runs to the core. It shields this person from grief, but the same wall holds everyone at arm's length, weakening the bonds they can form.</description>
+    <description>A disconnection from others that runs to the core. It shields this person from grief. That same wall also holds everyone at arm's length, weakening the bonds they can form.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -593,7 +593,7 @@
     <defName>Psyche_Scar_Bloodlust</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>bloodlust psyche scar</label>
-    <description>A hunger for violence carved into the psyche. It is a lasting mark, and only the most advanced therapy can lift it entirely.</description>
+    <description>A fight is where this person now feels most alive. Only the most advanced therapy can lift it entirely.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -616,7 +616,7 @@
     <defName>Psyche_Scar_ChemicalFascination</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>chemical fascination psyche scar</label>
-    <description>A pull toward chemical escape that the mind keeps returning to. It is a lasting mark, and only the most advanced therapy can lift it entirely.</description>
+    <description>This person's mind keeps drifting back to chemical escape, wanting more each time. Only the most advanced therapy can lift it entirely.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -658,7 +658,7 @@
     <defName>Psyche_Scar_ShellShocked</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>shell-shocked psyche scar</label>
-    <description>The violence survived did not leave with the battle. It waits just beneath the surface, ready to return.</description>
+    <description>The violence this person survived did not leave with the battle. It waits just beneath the surface, ready to return.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -679,7 +679,7 @@
     <defName>Psyche_Scar_ProtectiveDread</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>protective dread psyche scar</label>
-    <description>Having watched a loved one broken, the fear of it happening again never fully lets go.</description>
+    <description>This person watched a loved one be broken. The fear of it happening again never fully lets go.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>

@@ -12,7 +12,7 @@
           <defName>Psyche_Scar_AbsentMinded</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>absent-mindedness psyche scar</label>
-          <description>A tendency to drift off mid-task worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>This person often loses track of a task halfway through. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -35,7 +35,7 @@
           <defName>Psyche_Scar_Coward</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>cowardice psyche scar</label>
-          <description>A fight-or-flight bent toward flight worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>When danger comes, this person's first instinct is to run. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -58,7 +58,7 @@
           <defName>Psyche_Scar_Vengeful</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>vengefulness psyche scar</label>
-          <description>A spite that lingers until settled, worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>Every wrong stays with this person until it has been repaid. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -81,7 +81,7 @@
           <defName>Psyche_Scar_WorldWeary</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>world-weariness psyche scar</label>
-          <description>A bleak outlook worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>This person has grown tired of the world and expects little from it. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -104,7 +104,7 @@
           <defName>Psyche_Scar_Desensitized</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>desensitization psyche scar</label>
-          <description>A numbness to death and loss worn permanently into the mind by old trauma. It is total enough that no therapy, however advanced, can ever undo it.</description>
+          <description>Old trauma has left this person numb to death and loss. No therapy, however advanced, can undo it.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -130,7 +130,7 @@
           <defName>Psyche_Scar_Insatiable</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>insatiability psyche scar</label>
-          <description>A compulsive intimacy-seeking worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>This person craves intimacy compulsively and is never satisfied for long. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -153,7 +153,7 @@
           <defName>Psyche_Scar_Prude</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>rigidity psyche scar</label>
-          <description>A rigid self-restraint worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>This person has become rigidly uncomfortable with intimacy and the body. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -176,7 +176,7 @@
           <defName>Psyche_Scar_Stoner</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>stoner psyche scar</label>
-          <description>A dependence on smoke worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>This person reaches for smokeleaf to get through the day. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -199,7 +199,7 @@
           <defName>Psyche_Scar_Lush</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>lush psyche scar</label>
-          <description>A dependence on drink worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>Drink has become this person's answer to every bad day. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -222,7 +222,7 @@
           <defName>Psyche_Scar_Anxious</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>anxiety psyche scar</label>
-          <description>A social anxiety worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>Being around others leaves this person tense and on edge. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -258,7 +258,7 @@
           <defName>Psyche_Scar_Technophobe</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>technophobia psyche scar</label>
-          <description>A trauma-driven aversion to technology worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>Advanced technology unsettles this person, who distrusts it deeply. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -294,7 +294,7 @@
           <defName>Psyche_Scar_Kleptomaniac</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>kleptomania psyche scar</label>
-          <description>A compulsion to steal worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>The urge to take what belongs to others is hard for this person to resist. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -330,7 +330,7 @@
           <defName>Psyche_Scar_Schizoid</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>schizoid psyche scar</label>
-          <description>A bottling-up of feeling worn into the mind, until it breaks loose all at once. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>This person bottles up their feelings until they break loose all at once. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -366,7 +366,7 @@
           <defName>Psyche_Scar_Insomniac</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>insomnia psyche scar</label>
-          <description>A sleep dysregulation worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>Sleep comes hard to this person and rarely leaves them rested. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -402,7 +402,7 @@
           <defName>Psyche_Scar_Workaholic</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>workaholism psyche scar</label>
-          <description>A compulsive overwork worn into the mind, heedless of its cost. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>This person cannot stop working, whatever it costs them. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>

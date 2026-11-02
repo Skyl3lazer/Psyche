@@ -3,7 +3,7 @@
 
   <WorkGiverDef>
     <defName>Psyche_DoTherapy</defName>
-    <label>counsel scarred colonists</label>
+    <label>counsel patients</label>
     <giverClass>Psyche.WorkGiver_PsycheTherapy</giverClass>
     <workType>Psyche_Care</workType>
     <verb>counsel</verb>

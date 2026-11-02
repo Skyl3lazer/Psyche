@@ -7,7 +7,7 @@
     <defName>Psyche_Scar_Wimp</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>wimp psyche scar</label>
-    <description>A collapse under pain worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+    <description>Even modest pain is enough to make this person collapse. Only the most advanced therapy can lift it entirely.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -30,7 +30,7 @@
     <defName>Psyche_Scar_Pessimist</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>pessimism psyche scar</label>
-    <description>A tendency to see the bad side of things worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+    <description>This person has come to expect the worst from every turn of events. Only the most advanced therapy can lift it entirely.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -53,7 +53,7 @@
     <defName>Psyche_Scar_Depressive</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>depressive psyche scar</label>
-    <description>A perennial unhappiness worn into the mind, deeper than simple pessimism. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+    <description>Unhappiness has settled over this person more deeply than simple pessimism. Only the most advanced therapy can lift it entirely.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -76,7 +76,7 @@
     <defName>Psyche_Scar_Recluse</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>reclusiveness psyche scar</label>
-    <description>A discomfort around others worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+    <description>Company wears on this person, who is happiest with few people nearby. Only the most advanced therapy can lift it entirely.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -99,7 +99,7 @@
     <defName>Psyche_Scar_Disturbing</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>disturbing psyche scar</label>
-    <description>A fixation on horrendous ideas worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+    <description>This person's thoughts keep turning to horrors that unsettle everyone around them. Only the most advanced therapy can lift it entirely.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>
@@ -122,7 +122,7 @@
     <defName>Psyche_Scar_VoidFascination</defName>
     <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
     <label>void fascination psyche scar</label>
-    <description>A pull toward unnatural entities worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+    <description>This person feels a steady pull toward unnatural entities and the void behind them. Only the most advanced therapy can lift it entirely.</description>
     <isBad>true</isBad>
     <maxSeverity>1000</maxSeverity>
     <scenarioCanAdd>false</scenarioCanAdd>

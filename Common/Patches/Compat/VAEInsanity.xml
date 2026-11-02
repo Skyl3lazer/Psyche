@@ -25,7 +25,7 @@
           <defName>Psyche_Scar_Inhumanized</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>inhumanized psyche scar</label>
-          <description>A disconnection from human bonds worn permanently into the mind. It is total enough that no therapy, however advanced, can ever undo it.</description>
+          <description>This person has lost the ability to feel bound to other people. No therapy, however advanced, can undo it.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -64,7 +64,7 @@
           <defName>Psyche_Scar_VoidTouched</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>void-touched psyche scar</label>
-          <description>A possession-like transformation worn permanently into the mind. It is total enough that no therapy, however advanced, can ever undo it.</description>
+          <description>Something from the void has reshaped this person's mind from within. No therapy, however advanced, can undo it.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -102,8 +102,8 @@
         <HediffDef>
           <defName>Psyche_Scar_Germaphobe</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
-          <label>germaphobia psyche scar</label>
-          <description>A contamination fear worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <label>contamination-fear psyche scar</label>
+          <description>This person fears contamination from every surface and every touch. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -139,7 +139,7 @@
           <defName>Psyche_Scar_FragileMind</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>fragile-mind psyche scar</label>
-          <description>An emotional fragility worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>This person's composure breaks under strain that others would shrug off. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -175,7 +175,7 @@
           <defName>Psyche_Scar_MoodSwings</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>mood-swings psyche scar</label>
-          <description>A day-scale cycling of mood worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>This person's mood rises and falls on its own from one day to the next. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -211,7 +211,7 @@
           <defName>Psyche_Scar_FearOfAttachment</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
           <label>fear-of-attachment psyche scar</label>
-          <description>A fear of commitment worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <description>This person keeps others at a distance for fear of growing attached. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>
@@ -233,8 +233,8 @@
         <HediffDef>
           <defName>Psyche_Scar_Distractable</defName>
           <hediffClass>Psyche.Hediff_PsycheScar</hediffClass>
-          <label>distractability psyche scar</label>
-          <description>An attention dysregulation worn into the mind. It is a lasting mark on the psyche, and only the most advanced therapy can lift it entirely.</description>
+          <label>distractibility psyche scar</label>
+          <description>This person's attention keeps slipping away from whatever they are doing. Only the most advanced therapy can lift it entirely.</description>
           <isBad>true</isBad>
           <maxSeverity>1000</maxSeverity>
           <scenarioCanAdd>false</scenarioCanAdd>

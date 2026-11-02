@@ -6,7 +6,7 @@
     <labelShort>counsel</labelShort>
     <pawnLabel>counselor</pawnLabel>
     <gerundLabel>counseling</gerundLabel>
-    <description>Provide psyche therapy, sitting with colonists who have mental scars to help mend them over time.</description>
+    <description>Provide psyche therapy, sitting with patients to treat open psyche injuries and mend psyche scars over time.</description>
     <verb>counsel</verb>
     <naturalPriority>190</naturalPriority>
     <relevantSkills>
