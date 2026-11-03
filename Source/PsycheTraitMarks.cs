@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using RimWorld;
 using Verse;
@@ -78,6 +79,50 @@ namespace Psyche
             {
                 pawn.story.traits.RemoveTrait(trait);
             }
+        }
+
+        public static bool KeepsTraitOnCure(Pawn pawn, PsycheTraitMarkExtension ext) =>
+            pawn.story?.traits != null && HasTrait(pawn, ext) && MilderDegree(ext) == null;
+
+        public static void StepDownTrait(Pawn pawn, PsycheTraitMarkExtension ext)
+        {
+            TraitSet? traits = pawn.story?.traits;
+            Trait? trait = traits?.GetTrait(ext.trait);
+            int? milder = MilderDegree(ext);
+            if (traits == null || trait == null || trait.Degree != ext.degree || milder == null)
+            {
+                return;
+            }
+
+            traits.RemoveTrait(trait);
+            traits.GainTrait(new Trait(ext.trait, milder.Value));
+
+            List<Hediff> hediffs = pawn.health.hediffSet.hediffs;
+            for (int i = 0; i < hediffs.Count; i++)
+            {
+                if (hediffs[i] is Hediff_PsycheScar scar
+                    && scar.def.GetModExtension<PsycheTraitMarkExtension>() is { } mark
+                    && mark.trait == ext.trait && mark.degree == milder.Value)
+                {
+                    scar.reduceTraitOnCure = true;
+                }
+            }
+        }
+
+        private static int? MilderDegree(PsycheTraitMarkExtension ext)
+        {
+            int? mildest = null;
+            List<TraitDegreeData> degrees = ext.trait.degreeDatas;
+            for (int i = 0; i < degrees.Count; i++)
+            {
+                int degree = degrees[i].degree;
+                if (Math.Sign(degree) == Math.Sign(ext.degree) && Math.Abs(degree) < Math.Abs(mildest ?? ext.degree))
+                {
+                    mildest = degree;
+                }
+            }
+
+            return mildest;
         }
 
         private static bool HasTrait(Pawn pawn, PsycheTraitMarkExtension ext)

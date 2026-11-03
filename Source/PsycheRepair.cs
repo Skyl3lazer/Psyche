@@ -94,25 +94,41 @@ namespace Psyche
                 scar.NotePeak();
             }
 
-            bool qualifiedForClarity = scar.PeakSeverity >= PsycheTuning.ClarityWindowDeepThreshold;
             bool cured = scar.Severity <= 0f;
             if (cured)
             {
-                float peak = scar.PeakSeverity;
-                PsycheTraitMarkExtension? traitMark = scar.def.GetModExtension<PsycheTraitMarkExtension>();
-                HediffDef? upgradeClarity = scar.def.GetModExtension<PsycheScarExtension>()?.upgradeClarityDef;
-                patient.health.RemoveHediff(scar);
-                if (traitMark != null)
-                {
-                    PsycheTraitMarks.RemoveTraitFor(patient, traitMark);
-                }
-                else if (qualifiedForClarity)
-                {
-                    PsycheClarityWindows.Open(patient, peak, upgradeClarity);
-                }
+                Cure(patient, scar);
             }
 
             return cured;
+        }
+
+        public static void Cure(Pawn patient, Hediff_PsycheScar scar)
+        {
+            PsycheTraitMarkExtension? traitMark = scar.def.GetModExtension<PsycheTraitMarkExtension>();
+            if (traitMark != null && scar.reduceTraitOnCure && PsycheTraitMarks.KeepsTraitOnCure(patient, traitMark))
+            {
+                return;
+            }
+
+            float peak = scar.PeakSeverity;
+            HediffDef? upgradeClarity = scar.def.GetModExtension<PsycheScarExtension>()?.upgradeClarityDef;
+            patient.health.RemoveHediff(scar);
+            if (traitMark != null)
+            {
+                if (scar.reduceTraitOnCure)
+                {
+                    PsycheTraitMarks.StepDownTrait(patient, traitMark);
+                }
+                else
+                {
+                    PsycheTraitMarks.RemoveTraitFor(patient, traitMark);
+                }
+            }
+            else if (peak >= PsycheTuning.ClarityWindowDeepThreshold)
+            {
+                PsycheClarityWindows.Open(patient, peak, upgradeClarity);
+            }
         }
     }
 }

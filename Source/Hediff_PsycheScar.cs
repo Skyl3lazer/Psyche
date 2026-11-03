@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -10,6 +11,7 @@ namespace Psyche
         private int uiKey;
 
         public bool untreatable;
+        public bool reduceTraitOnCure;
 
         public float PeakSeverity => Mathf.Max(peakSeverity, Severity);
 
@@ -18,6 +20,49 @@ namespace Psyche
         public override string LabelInBrackets => string.Empty;
 
         public override bool Visible => PsycheUtility.HasPsyche(pawn) && base.Visible;
+
+        // Keeping a cured mark at 0% stops Reconcile from re-seeding the trait's scar.
+        public override bool ShouldRemove => !reduceTraitOnCure && base.ShouldRemove;
+
+        public override IEnumerable<Gizmo> GetGizmos()
+        {
+            foreach (Gizmo gizmo in base.GetGizmos())
+            {
+                yield return gizmo;
+            }
+
+            PsycheTraitMarkExtension? mark = def.GetModExtension<PsycheTraitMarkExtension>();
+            if (mark == null || untreatable || !PsycheUtility.HasPsyche(pawn))
+            {
+                yield break;
+            }
+
+            string trait = mark.trait.DataAtDegree(mark.degree).GetLabelFor(pawn);
+            string desc = "Psyche_ReduceTraitOnCure_Desc".Translate(trait);
+            if (Severity <= 0f)
+            {
+                desc += "\n\n" + "Psyche_ReduceTraitOnCure_DescCured".Translate();
+            }
+
+            yield return new Command_Toggle
+            {
+                defaultLabel = "Psyche_ReduceTraitOnCure_Label".Translate(trait),
+                defaultDesc = desc,
+                icon = TexCommand.HoldOpen,
+                isActive = () => reduceTraitOnCure,
+                toggleAction = ToggleReduceTraitOnCure,
+            };
+        }
+
+        private void ToggleReduceTraitOnCure()
+        {
+            reduceTraitOnCure = !reduceTraitOnCure;
+            if (!reduceTraitOnCure && Severity <= 0f)
+            {
+                PsycheRepair.Cure(pawn, this);
+                pawn.needs?.TryGetNeed<Need_Psyche>()?.Recompute();
+            }
+        }
 
         public override int UIGroupKey => uiKey != 0 ? uiKey : (uiKey = PsycheUtility.NextUiGroupKey());
 
@@ -46,6 +91,11 @@ namespace Psyche
             if (untreatable)
             {
                 return "Psyche_Tip_Untreatable".Translate();
+            }
+
+            if (Severity <= 0f)
+            {
+                return "Psyche_Tip_TraitKept".Translate();
             }
 
             int tier = PsycheRepair.BestResearchedTier();
@@ -99,6 +149,7 @@ namespace Psyche
             base.ExposeData();
             Scribe_Values.Look(ref peakSeverity, "psyche_peakSeverity", 0f);
             Scribe_Values.Look(ref untreatable, "psyche_untreatable", false);
+            Scribe_Values.Look(ref reduceTraitOnCure, "psyche_reduceTraitOnCure", false);
         }
     }
 }

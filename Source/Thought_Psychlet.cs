@@ -138,7 +138,12 @@ namespace Psyche
                 ? DisplayDef.GetModExtension<PsycheThoughtExtension>()?.exemptFromClarities != true
                     && DisplayDef.durationDays >= PsycheTuning.ClarityMinDurationDays
                     && RawMagnitude >= PsycheTuning.ClarityMinIntensity
-                : true;
+                : ScarChance > 0f;
+
+        public float ScarChance =>
+            PsycheScars.Chance(Upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel), Mathf.Clamp01(closureLevel));
+
+        private float Upkeep => mitigationSamples > 0 ? mitigationSum / mitigationSamples : 0.5f;
 
         public float TreatmentLevel => Mathf.Clamp01(treatmentLevel);
 
@@ -295,9 +300,8 @@ namespace Psyche
                 return;
             }
 
-            float upkeep = mitigationSamples > 0 ? mitigationSum / mitigationSamples : 0.5f;
             HediffDef? scarDef = PsycheThoughtClassification.ResolveScarDef(DisplayDef);
-            PsycheScars.TryForm(pawn, RawMagnitude, upkeep, Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel), Mathf.Clamp01(closureLevel), otherPawn?.thingIDNumber ?? 0, killerId, scarDef, limbLoss?.Parts);
+            PsycheScars.TryForm(pawn, RawMagnitude, Upkeep,Mathf.Clamp01(treatmentLevel), Mathf.Clamp01(medicationLevel), Mathf.Clamp01(closureLevel), otherPawn?.thingIDNumber ?? 0, killerId, scarDef, limbLoss?.Parts);
         }
 
         private float SampleMitigation()

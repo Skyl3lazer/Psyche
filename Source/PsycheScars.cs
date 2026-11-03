@@ -6,9 +6,8 @@ namespace Psyche
 {
     public static class PsycheScars
     {
-        public static void TryForm(Pawn pawn, float magnitude, float upkeep, float treatment, float medication, float closure, int subjectId, int killerId, HediffDef? markDef = null, IEnumerable<int>? lostParts = null)
-        {
-            float chance = Mathf.Clamp(
+        public static float Chance(float upkeep, float treatment, float medication, float closure) =>
+            Mathf.Clamp(
                 PsycheTuning.ScarBaseChance
                     - (upkeep * PsycheTuning.UpkeepChanceReduction)
                     - (treatment * PsycheTuning.TreatmentChanceReduction)
@@ -17,7 +16,9 @@ namespace Psyche
                 PsycheTuning.ScarFloorChance,
                 PsycheTuning.ScarBaseChance);
 
-            if (!Rand.Chance(chance))
+        public static void TryForm(Pawn pawn, float magnitude, float upkeep, float treatment, float medication, float closure, int subjectId, int killerId, HediffDef? markDef = null, IEnumerable<int>? lostParts = null)
+        {
+            if (!Rand.Chance(Chance(upkeep, treatment, medication, closure)))
             {
                 return;
             }

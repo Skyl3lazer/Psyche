@@ -37,12 +37,14 @@
   <Psyche_CaptivityClosure>{0} is free again. The mark of captivity begins to settle.</Psyche_CaptivityClosure>
 
   <Psyche_Label_Contemplating>contemplating</Psyche_Label_Contemplating>
+  <Psyche_Label_WaitingToPass>waiting to pass</Psyche_Label_WaitingToPass>
 
   <Psyche_Tip_PsycheDamage>Psyche damage: -{0}</Psyche_Tip_PsycheDamage>
   <Psyche_Tip_PsycheRestored>Psyche restored: {0}</Psyche_Tip_PsycheRestored>
   <Psyche_Tip_MaxPsyche>Maximum psyche: {0}</Psyche_Tip_MaxPsyche>
   <Psyche_Tip_BreakThreshold>Break threshold: {0}</Psyche_Tip_BreakThreshold>
-  <Psyche_Tip_Contemplating>The injury has faded but not fully settled. It may still leave a scar before it passes.</Psyche_Tip_Contemplating>
+  <Psyche_Tip_Contemplating>The injury has faded but not fully settled. It may still leave a scar when it passes.</Psyche_Tip_Contemplating>
+  <Psyche_Tip_WaitingToPass>The injury has faded and can no longer leave a scar.</Psyche_Tip_WaitingToPass>
 
   <Psyche_Tip_PassesIn>Passes in {0}</Psyche_Tip_PassesIn>
   <Psyche_Tip_PassesInScar>Passes in {0} (may leave a scar)</Psyche_Tip_PassesInScar>
@@ -54,13 +56,18 @@
   <Psyche_Tip_ReadyForTherapy>Ready for therapy</Psyche_Tip_ReadyForTherapy>
   <Psyche_Tip_TreatableAgain>Treatable again in {0}</Psyche_Tip_TreatableAgain>
   <Psyche_Tip_TooMinor>Too minor for therapy</Psyche_Tip_TooMinor>
-  <Psyche_Tip_Faded>Faded (waiting to pass)</Psyche_Tip_Faded>
+  <Psyche_Tip_Faded>Too faded for therapy</Psyche_Tip_Faded>
 
   <Psyche_Tip_Repaired>Repaired {0} from its worst</Psyche_Tip_Repaired>
   <Psyche_Tip_ReadyForRepair>Ready for repair</Psyche_Tip_ReadyForRepair>
   <Psyche_Tip_RepairableAgain>Repairable again in {0}</Psyche_Tip_RepairableAgain>
   <Psyche_Tip_TierFloor>Mended as far as current therapy allows. Research {0} to repair it further.</Psyche_Tip_TierFloor>
   <Psyche_Tip_Untreatable>No therapy, however advanced, can repair this.</Psyche_Tip_Untreatable>
+  <Psyche_Tip_TraitKept>Fully mended. The trait is kept at its mildest.</Psyche_Tip_TraitKept>
+
+  <Psyche_ReduceTraitOnCure_Label>Reduce {0} on cure</Psyche_ReduceTraitOnCure_Label>
+  <Psyche_ReduceTraitOnCure_Desc>When on, fully curing this scar brings {0} down to its mildest form instead of removing it. A trait with no milder form is kept, with its scar left at 0%. When off, the cure removes the trait.</Psyche_ReduceTraitOnCure_Desc>
+  <Psyche_ReduceTraitOnCure_DescCured>This scar is already cured. Turning this off removes the trait now.</Psyche_ReduceTraitOnCure_DescCured>
 
   <Psyche_Setting_ResetAll>Reset all to defaults</Psyche_Setting_ResetAll>
   <Psyche_Setting_ResetAllConfirm>Reset every Psyche tuning value to its default? This clears all of your changes.</Psyche_Setting_ResetAllConfirm>

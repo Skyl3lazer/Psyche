@@ -134,7 +134,8 @@ namespace Psyche
                 }
             }
 
-            bool contemplating = !isBoon && amount <= PsycheTuning.InjuryHealedEpsilon;
+            bool faded = !isBoon && amount <= PsycheTuning.InjuryHealedEpsilon;
+            bool contemplating = faded && lead != null && lead.MarkPossible;
 
             string label = leading.LabelCap;
             if (Group.Count > 1)
@@ -142,9 +143,9 @@ namespace Psyche
                 label = label + " x" + Group.Count;
             }
 
-            if (contemplating)
+            if (faded)
             {
-                label = label + " (" + "Psyche_Label_Contemplating".Translate() + ")";
+                label = label + " (" + (contemplating ? "Psyche_Label_Contemplating" : "Psyche_Label_WaitingToPass").Translate() + ")";
             }
 
             if (Mouse.IsOver(rect))
@@ -155,9 +156,9 @@ namespace Psyche
                 {
                     body = "Psyche_Tip_PsycheRestored".Translate(amount.ToString("##0"));
                 }
-                else if (contemplating)
+                else if (faded)
                 {
-                    body = "Psyche_Tip_Contemplating".Translate();
+                    body = (contemplating ? "Psyche_Tip_Contemplating" : "Psyche_Tip_WaitingToPass").Translate();
                 }
                 else
                 {
